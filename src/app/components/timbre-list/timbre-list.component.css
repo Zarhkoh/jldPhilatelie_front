@@ -1,0 +1,39 @@
+:host {
+  margin: 0 auto;
+}
+.timbreImg {
+  height: 5em;
+  min-width: 4em;
+  border-radius: 2px;
+  color: rgb(85, 85, 85);
+  text-align: center;
+}
+.cdImg {
+  height: 17em;
+  border-radius: 2px;
+  color: rgb(85, 85, 85);
+  text-align: center;
+}
+.epuise {
+  background-color: rgb(182, 182, 182);
+  height: 5em;
+  border-radius: 2px;
+  padding-top: 1.6em;
+  text-align: center;
+  min-width: 4em;
+  margin: 0;
+}
+.timbreCard {
+  background-color: #262c2c;
+  color: white;
+  border-radius: 4px;
+  margin: 0.5em 0 0 0.5em;
+}
+.grille {
+  width: 60em;
+  padding: 1em 0;
+  background-color: #e4e3e3;
+  margin: auto;
+  margin-top: 3em;
+  border-radius: 3px;
+}

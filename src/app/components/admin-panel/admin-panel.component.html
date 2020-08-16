@@ -1,0 +1,113 @@
+<!-- FORM CREATION TIMBRE -->
+<div class="formTimbre">
+  <div class="card-header">
+    <h4 class="mb-0">Ajouter un timbre</h4>
+    <div class=" card card-outline-secondary">
+      <form [formGroup]="timbreForm" class="px-4 py-3 justify-content-between row" (ngSubmit)="addTimbre()">
+
+        <div class="col-6 ">
+          <input type="text" class="form-control" id="numeroInput" placeholder="Numéro" aria-label="Numéro du timbre"
+            formControlName="numero">
+        </div>
+
+        <div class="col-6">
+          <input placeholder="Prix" type="text" step="0.01" min="0" id="prixInput" class="form-control"
+            aria-label="Prix" formControlName="prix">
+        </div>
+
+        <div class="col-6">
+          <input type="number" min="0" placeholder="Quantité" aria-label="quantité" id="quantiteInput"
+            class="form-control" formControlName="quantite">
+        </div>
+
+        <div class="col-6">
+          <select id="typeInput" class="custom-select" formControlName="type">
+            <option value="neuf">Neuf</option>
+            <option value="occas">Occasion</option>
+            <option value="sg">Sans Gomme</option>
+            <option value="cd">Coin Daté</option>
+            <option value="obl">Oblitéré</option>
+          </select>
+        </div>
+        <div class="col-6">
+          <input id="anneeCoinDateInput" *ngIf="timbreForm.value.type == 'cd'" type="number" min="0" max="2999"
+            placeholder="Année coin daté" aria-label="Année coin daté" class="form-control"
+            formControlName="anneeCoinDate">
+        </div>
+        <div class="col-6">
+          <input id="optionalInfosInput" *ngIf="timbreForm.value.type == 'obl'" type="text"
+            placeholder="Informations supp." aria-label="infos supp." class="form-control"
+            formControlName="optionalInfos">
+        </div>
+        <div class="form-group col-12">
+          <input type="url" class="form-control" id="imageInput" aria-label="url de l'image"
+            placeholder="URL de l'image" formControlName="image">
+        </div>
+
+        <button type="submit" id="sendBtn" class=" btn btn-primary">Ajouter</button>
+      </form>
+    </div>
+  </div>
+  <!-- <pre>{{timbreForm|json}}</pre> -->
+
+  <!-- TABLE TIMBRES -->
+  <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>N°</th>
+        <th>Prix</th>
+        <th>Image</th>
+        <th>Quantité</th>
+        <th>État</th>
+        <th>Suppr.</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let timbre of timbreList; index as i">
+        <td>
+          <div class="d-flex">
+            <p class="text-center mb-0 font-weight-bold">{{timbre.numeroTimbre}}</p>
+            <p class="mb-0" *ngIf="timbre.typeTimbre=='occas'">*</p>
+            <p class="mb-0" *ngIf="timbre.typeTimbre=='sg'">SG</p>
+            <p class="mb-0" *ngIf="timbre.typeTimbre=='cd'">({{timbre.anneeCoinDate}})</p>
+            <p class="mb-0" *ngIf="timbre.typeTimbre == 'obl'">{{timbre.optionalInfos}}</p>
+          </div>
+        </td>
+        <td>{{ timbre.prixTimbre }}€</td>
+        <td>
+          <a [href]="timbre.imageTimbreUrl" target="_blank">
+            <img [src]="timbre.imageTimbreUrl" class="mr-2" style="width: 20px">
+          </a>
+        </td>
+        <td (blur)="updateTimbre(timbre)">
+          <div class="d-flex">
+            <button (click)="changeTimbreQte(timbre,'minus')" class="qteBtn" [disabled]=" timbre.quantiteTimbre==0">
+              <p>-</p>
+            </button>
+            <p>{{ timbre.quantiteTimbre }}</p>
+            <button (click)="changeTimbreQte(timbre,'plus')" class="qteBtn">
+              <p>+</p>
+            </button>
+
+          </div>
+        </td>
+        <td>
+          <div>
+            <p class="mb-0" *ngIf="timbre.typeTimbre=='neuf'">Neuf</p>
+            <p class="mb-0" *ngIf="timbre.typeTimbre=='occas'">Occasion</p>
+            <p class="mb-0" *ngIf="timbre.typeTimbre=='sg'">Sans Gomme</p>
+            <p class="mb-0" *ngIf="timbre.typeTimbre=='cd'">Coin Daté</p>
+            <p class="mb-0" *ngIf="timbre.typeTimbre == 'obl'">Oblitéré</p>
+          </div>
+        </td>
+        <td>
+          <button type="button" (click)="deleteTimbreByNumero(timbre)" class="btn btn-outline-danger"><svg width="1em"
+              height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z" />
+            </svg></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

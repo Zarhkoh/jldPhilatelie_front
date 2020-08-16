@@ -1,0 +1,26 @@
+<pre>{{timbreSearch}}</pre>
+<div *ngIf="error!= null && timbreList && timbreList !== null &&timbreList.length ==0" class="alert alert-danger"
+  role="alert">
+  {{error}} </div>
+<div *ngIf="timbreList && timbreList !== null &&timbreList.length > 0" class="grille d-flex">
+  <div class="d-flex flex-wrap">
+    <div class="p-2 timbreCard" *ngFor="let timbre of timbreList">
+      <div class="d-flex justify-content-center">
+        <p class="text-center mb-0 font-weight-bold">{{timbre.numeroTimbre}}</p>
+        <p class="mb-0" *ngIf="timbre.typeTimbre=='occas'">*</p>
+        <p class="mb-0" *ngIf="timbre.typeTimbre=='sg'">SG</p>
+        <p class="mb-0" *ngIf="timbre.typeTimbre=='cd'">({{timbre.anneeCoinDate}})</p>
+        <p class="mb-0" *ngIf="timbre.typeTimbre == 'obl'">{{timbre.optionalInfos}}</p>
+      </div>
+      <div class="mb-0">
+        <p class="align-middle epuise" *ngIf="timbre.quantiteTimbre == 0">EPUISE</p>
+        <a [href]="timbre.imageTimbreUrl" target="_blank">
+          <img class="timbreImg"
+            [ngClass]="{'timbreImg': timbre.typeTimbre != 'cd', 'cdImg': timbre.typeTimbre == 'cd'}"
+            *ngIf="timbre.quantiteTimbre > 0" src="{{timbre.imageTimbreUrl}}">
+        </a>
+      </div>
+      <p class="text-center mb-0">{{timbre.prixTimbre}}€</p>
+    </div>
+  </div>
+</div>

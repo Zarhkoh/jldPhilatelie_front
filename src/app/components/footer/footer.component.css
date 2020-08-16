@@ -1,0 +1,8 @@
+#footerContent {
+  background-color: rgb(63, 63, 63);
+}
+p,
+a {
+  color: white;
+  margin: 0;
+}

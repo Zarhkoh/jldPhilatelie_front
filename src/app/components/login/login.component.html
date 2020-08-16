@@ -1,0 +1,18 @@
+<div class="formPanel">
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <div class="inputs d-flex flex-column align-items-center justify-content-center">
+      <div class="form-group ">
+        <label for="emailInput">Email</label>
+        <input id="emailInput" type="text" class="form-control" formControlName="email">
+      </div>
+      <div class="form-group">
+        <label>Mot de passe</label>
+        <input type="password" class="form-control" formControlName="pwd">
+      </div>
+      <div class=" buttons d-flex">
+        <button id="retourBtn" onclick="window.location='/'" class="font-weight-light btn btn-secondary">Retour</button>
+        <button id="connectBtn" type="submit" class=" font-weight-light btn btn-primary">Connexion</button>
+      </div>
+    </div>
+  </form>
+</div>

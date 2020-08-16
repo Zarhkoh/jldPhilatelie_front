@@ -1,0 +1,10 @@
+app-sidebar {
+  width: 18em;
+}
+app-footer {
+  bottom: 0;
+  width: 100%;
+}
+router-outlet {
+  min-height: 75.6vh;
+}

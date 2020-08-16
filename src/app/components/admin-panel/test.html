@@ -1,0 +1,39 @@
+<div>
+  <div class="card-header">
+    <h4 class="mb-0">Ajouter un timbre</h4>
+    <div class="card card-outline-secondary">
+      <form [formGroup]="timbreForm" class="px-4 py-3 row" (ngSubmit)="addTimbre()">
+
+        <div class="form-group d-flex justify-content-between col-6 ">
+          <input type="text" class="form-control" id="numeroInput" placeholder="Numéro" aria-label="Numéro du timbre"
+            formControlName="numero">
+        </div>
+
+        <div class="form-group d-flex justify-content-between col-6">
+          <input placeholder="Prix" type="text" step="0.01" min="0" id="prixInput" class="form-control"
+            aria-label="Prix" formControlName="prix">
+        </div>
+
+        <div class="form-group col d-flex justify-content-between col-6">
+          <input type="number" min="0" placeholder="Quantité" aria-label="quantité" id="quantiteInput"
+            class="form-control" formControlName="quantite">
+        </div>
+
+        <div class="form-check col-6 d-flex">
+          <input class="form-check-input" type="checkbox" aria-label="le timbre est il étoile?"
+            formControlName="isEtoile" id="defaultCheck1">
+          <label class="form-check-label" for="defaultCheck1">
+            Etoile?
+          </label>
+        </div>
+
+        <div class="form-group col-12 d-flex justify-content-between">
+          <label for="imageInput">Image</label>
+          <input type="url" class="form-control" id="imageInput" aria-label="url de l'image"
+            placeholder="https://jld-philatelie.pagesperso-orange.fr/167.jpg" formControlName="image">
+        </div>
+
+        <button type="submit" id="sendBtn" class=" btn btn-primary">Ajouter</button>
+      </form>
+    </div>
+  </div>

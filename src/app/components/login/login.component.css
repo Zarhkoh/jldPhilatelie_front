@@ -1,0 +1,35 @@
+:host {
+  width: 100%;
+}
+
+.formPanel {
+  padding: 2em 2em 0 2em;
+  margin: 8em auto;
+  width: 26em;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  background-color: rgb(255, 255, 255);
+}
+
+input {
+  width: 15em;
+}
+.buttons {
+  margin-top: 2em;
+}
+
+button {
+  padding: 0.7em 0;
+  width: 13em;
+}
+button:focus {
+  outline: none;
+}
+#retourBtn {
+  border-radius: 0 0 0 0.25rem;
+}
+#connectBtn {
+  background-color: #4592af;
+  border: 1px #4592af solid;
+  border-radius: 0 0 0.25rem 0;
+}

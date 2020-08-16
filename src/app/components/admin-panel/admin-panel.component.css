@@ -1,0 +1,41 @@
+:host {
+  width: 80%;
+  margin: 5em auto;
+}
+
+#numeroInput,
+#prixInput,
+#quantiteInput,
+#typeInput,
+#aneeCoinDateInput {
+  margin-bottom: 0.5em;
+}
+
+.card-header {
+  border: 1px solid rgba(0, 0, 0, 0.125) !important;
+  max-width: 40%;
+  margin: auto;
+  margin-bottom: 2em;
+}
+
+.qteBtn {
+  background-color: #4592af;
+  margin: 0 0.5em;
+  color: white;
+  border-radius: 20px;
+  border: none;
+  height: 1.3em;
+  width: 1.3em;
+}
+
+.qteBtn:disabled {
+  background-color: #5f5f5f;
+}
+
+.qteBtn:focus {
+  outline: none;
+}
+
+.qteBtn p {
+  margin-top: -0.25rem;
+}
