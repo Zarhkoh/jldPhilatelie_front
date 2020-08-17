@@ -1,20 +1,15 @@
+#headerContent {
+  background-color: #226089;
+}
+
 #headerLogo {
   width: 8em;
   margin: 1em;
 }
-#headerContent {
-  z-index: 3;
-  background-color: #226089;
-}
-#welcomeText {
-  margin-top: 0.1rem;
-}
 .widgets {
-  width: 13%;
-  position: absolute;
-  top: 6.5em;
-  right: 1.5em;
+  margin: 1em 0;
 }
+
 .searchBar input {
   border: none;
   font-size: 16px;
@@ -23,19 +18,15 @@
   background-color: #e2e2e2;
   text-align: left;
 }
-.searchBar input:focus {
-  outline: none;
-}
+
 .searchBtn {
-  position: absolute;
-  right: 0em;
+  margin-left: -14%;
   height: 2em;
   border: none;
   border-radius: 0 10px 10px 0;
   color: white;
   background-color: #4592af;
 }
-
 .searchBtn svg {
   margin-top: -0.3em;
 }
@@ -51,24 +42,6 @@
   height: 1.5em;
   width: 1.5em;
 }
-
 .logoutBtn svg {
   margin-top: -0.4em;
-}
-
-.authText {
-  position: absolute;
-  top: -6em;
-  right: 0rem;
-}
-
-/* CSS FOR SAFARI */
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-  .searchBtn {
-    top: 0em;
-    right: 0em;
-  }
-  #searchInput {
-    width: 11em;
-  }
 }

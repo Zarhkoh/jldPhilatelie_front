@@ -1,9 +1,12 @@
-<div id="headerContent">
-  <a href="/">
-    <img id="headerLogo" src="../../../assets/img/logo_white.png">
-  </a>
-  <div class="widgets">
-    <div *ngIf="isAuth()" class="authText d-flex font-weight-bold text-light">
+<div id="headerContent" class="d-flex justify-content-between">
+  <div class="logo">
+    <a href="/">
+      <img id="headerLogo" src="../../../assets/img/logo_white.png">
+    </a>
+  </div>
+  <div [ngClass]="{'justify-content-between': isAuth() , 'justify-content-end': !isAuth()}"
+    class="widgets d-flex flex-column">
+    <div id="loginTxt" *ngIf="isAuth()" class="authText d-flex font-weight-bold text-light">
       <a (click)="router.navigate(['adminPanel'])" id="welcomeText">Bonjour Papa. :)</a>
       <button class="logoutBtn" (click)="logout()">
         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-power" fill="currentColor"
@@ -13,7 +16,7 @@
         </svg>
       </button>
     </div>
-    <div>
+    <div id="searchBar">
       <form [formGroup]="searchForm" (ngSubmit)="searchTimbre()">
         <div *ngIf="!location.isCurrentPathEqualTo('/adminPanel')" class="searchBar">
           <input id="searchInput" formControlName="numero_timbre" type="text" placeholder="N° timbre">
