@@ -1,34 +1,42 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/services/login.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { LoginService } from '../../services/login.service';
 import { Router } from '@angular/router';
 
-
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-admin-register',
+  templateUrl: './admin-register.component.html',
+  styleUrls: ['./admin-register.component.css']
 })
-export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
+export class AdminRegisterComponent implements OnInit {
+
 
   constructor(private loginService: LoginService, private formBuilder: FormBuilder, private router: Router) {
-    if (this.loginService.isAuthenticated()) {
-      this.router.navigate(['/adminPanel']);
-    }
   }
-
+  registerForm: FormGroup;
+  pwdMatch;
   ngOnInit(): void {
-    this.loginForm = this.formBuilder.group({
+    this.registerForm = this.formBuilder.group({
       email: [],
-      pwd: []
+      pwd: [],
+      pwdConf: [],
+      prenom: ['Jean-Louis']
     });
   }
 
-  login() {
-    if (this.loginForm) {
+  checkPasswords() {
+    if (this.registerForm.value.pwd === this.registerForm.value.pwdConf) {
+      this.pwdMatch = true;
+    } else {
+      this.pwdMatch = false;
+    }
+  }
+
+  register() {
+    console.log("OK: " + this.registerForm + "PWDMATCH: " + this.pwdMatch);
+    if (this.registerForm && this.pwdMatch) {
       this.loginService
-        .login(this.loginForm.value)
+        .register(this.registerForm.value)
         .subscribe(data => this.handleSuccess(data), error => this.handleError(error));
     }
   }

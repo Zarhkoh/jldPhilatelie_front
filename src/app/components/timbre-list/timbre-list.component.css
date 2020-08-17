@@ -37,3 +37,10 @@
   margin-top: 3em;
   border-radius: 3px;
 }
+#loading {
+  width: 20%;
+  margin: 5em auto;
+}
+#loading img {
+  width: 4em;
+}

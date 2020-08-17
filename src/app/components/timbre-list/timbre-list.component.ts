@@ -15,10 +15,12 @@ export class TimbreListComponent implements OnInit {
   timbreSearch;
   timbreType;
   error;
+  loading: Boolean;
   constructor(private timbreService: TimbreService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
+    this.loading = false;
     this.route.queryParams.subscribe(params => {
       this.timbreStart = params['start'];
       this.timbreEnd = params['end'];
@@ -41,12 +43,16 @@ export class TimbreListComponent implements OnInit {
   }
 
   getAllTimbres() {
-    this.timbreService.getAllTimbres().subscribe(data => this.timbreList = data as Timbre[]);
+    this.loading = true;
+    this.timbreService.getAllTimbres().subscribe(data => {
+      this.timbreList = data as Timbre[];
+      this.loading = false;
+    });
   }
 
   getTimbreByNumber(number) {
     if (Number(number) && number % 1 === 0 && number > 0) {
-      console.log('timbreByNumberCalled');
+      this.loading = true;
       this.timbreService.getTimbreByNumero(number).subscribe(data => {
         this.timbreList = [];
         if (data != null) {
@@ -55,6 +61,7 @@ export class TimbreListComponent implements OnInit {
         if (this.timbreList && this.timbreList != null && this.timbreList.length == 0) {
           this.error = 'Le timbre n°' + number + ' n\'est pas enregistré sur ce site.';
         }
+        this.loading = false;
       });
     } else {
       console.log("SEARCH PARAM: ", number);
@@ -64,6 +71,7 @@ export class TimbreListComponent implements OnInit {
 
   getTimbreType(type) {
     try {
+      this.loading = true;
       this.timbreService.getTimbresByType(type).subscribe(data => {
         this.timbreList = data as Timbre[];
         this.timbreList.sort(this.timbreService.sortByNumer);
@@ -72,6 +80,7 @@ export class TimbreListComponent implements OnInit {
           console.log("pas de timbre pour la catégorie " + type);
           this.error = 'Aucun timbre n\'existe pour cette catégorie';
         }
+        this.loading = false;
       });
 
     } catch (error) {
@@ -83,6 +92,7 @@ export class TimbreListComponent implements OnInit {
   }
 
   getTimbreRange(start, end) {
+    this.loading = true;
     console.log('timbreRangeCalled');
     if ((Number(start) && Number(end)) && (start > 0 && end > 0) && (start % 1 === 0 && end % 1 === 0)) {
 
@@ -93,6 +103,7 @@ export class TimbreListComponent implements OnInit {
           if (this.timbreList && this.timbreList != null && this.timbreList.length == 0) {
             this.error = 'Aucun timbre n\'existe entre ' + start + ' et ' + end;
           }
+          this.loading = false;
         });
       } catch (e) {
         this.error = e;

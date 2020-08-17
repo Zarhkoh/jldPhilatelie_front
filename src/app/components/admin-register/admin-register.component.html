@@ -1,0 +1,24 @@
+<h3>Créer un compte Administrateur</h3>
+
+<div class="formPanel">
+  <form [formGroup]="registerForm" (ngSubmit)="register()">
+    <div class="inputs d-flex flex-column align-items-center justify-content-center">
+      <div class="form-group ">
+        <label for="emailInput">Email</label>
+        <input required id="emailInput" type="text" class="form-control" formControlName="email">
+      </div>
+      <div class="form-group">
+        <label>Mot de passe</label>
+        <input required type="password" class="form-control" formControlName="pwd">
+      </div>
+      <div class="form-group">
+        <label>Confirmation Mot de passe</label>
+        <input required type="password" class="form-control" formControlName="pwdConf" (change)="checkPasswords()">
+      </div>
+      <div class=" buttons d-flex">
+        <button id="retourBtn" onclick="window.location='/'" class="font-weight-light btn btn-secondary">Retour</button>
+        <button id="connectBtn" type="submit" class=" font-weight-light btn btn-primary">Inscription</button>
+      </div>
+    </div>
+  </form>
+</div>
