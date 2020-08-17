@@ -15,6 +15,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 import { JwtModule } from '@auth0/angular-jwt';
+import { AdminRegisterComponent } from './components/admin-register/admin-register.component';
 
 
 
@@ -28,7 +29,8 @@ import { JwtModule } from '@auth0/angular-jwt';
     SidebarComponent,
     NavbarComponent,
     LoginComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
+    AdminRegisterComponent
   ],
   imports: [
     JwtModule.forRoot({

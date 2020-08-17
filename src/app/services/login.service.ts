@@ -9,7 +9,7 @@ import { JwtModule } from '@auth0/angular-jwt';
   providedIn: 'root'
 })
 export class LoginService {
-  url = 'http://localhost:3000';
+  url = 'http://jld-philatelieapi.navillus.kim';
 
   constructor(private http: HttpClient) { }
 
@@ -20,6 +20,10 @@ export class LoginService {
   logout() {
     localStorage.removeItem('token');
     return !localStorage.getItem('token');
+  }
+
+  register(account) {
+    return this.http.post(`${this.url}/register`, account);
   }
 
   public isAuthenticated(): boolean {

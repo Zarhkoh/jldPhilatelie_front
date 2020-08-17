@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class TimbreService {
-  url = 'http://localhost:3000';
+  url = 'http://jld-philatelieapi.navillus.kim/';
 
   constructor(private http: HttpClient) { }
 

@@ -5,12 +5,14 @@ import { TimbreListComponent } from './components/timbre-list/timbre-list.compon
 import { LoginComponent } from './components/login/login.component';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
+import { AdminRegisterComponent } from './components/admin-register/admin-register.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'timbres', component: TimbreListComponent },
   { path: 'admin', component: LoginComponent },
-  { path: 'adminPanel', canActivate: [AuthGuard], component: AdminPanelComponent }
+  { path: 'adminPanel', canActivate: [AuthGuard], component: AdminPanelComponent },
+  { path: 'register', component: AdminRegisterComponent }
 
 
 ];
