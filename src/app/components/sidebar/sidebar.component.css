@@ -4,8 +4,37 @@
   color: white;
   border-bottom: 1px #4592af solid;
 }
-.sidebar {
+:host {
   background-color: #e4e3e3;
   height: 100%;
+}
+.sidebar {
   width: 18em;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (max-width: 576px) {
+}
+
+/*  Medium devices (tablets, 768px and up) */
+@media (max-width: 768px) {
+  :host {
+    height: 100vh;
+  }
+  .sidebar {
+    width: 10em;
+    transition: 1s ease;
+  }
+  .hidden {
+    margin-left: -10em;
+    transition: 1s ease;
+  }
+}
+
+/*  Large devices (desktops, 992px and up) */
+@media (max-width: 992px) {
+}
+
+/*  Extra large devices (large desktops, 1200px and up) */
+@media (max-width: 1200px) {
 }
