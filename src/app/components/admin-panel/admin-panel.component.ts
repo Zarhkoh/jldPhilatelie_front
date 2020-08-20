@@ -45,7 +45,6 @@ export class AdminPanelComponent implements OnInit {
   }
 
   deleteTimbreByNumero(timbre) {
-    console.log("on delete " + timbre + "de la bdd");
     this.timbreService.deleteTimbreByNumero(timbre.numeroTimbre).subscribe(data => {
       if (data === 1) {
         this.timbreList.splice(this.timbreList.indexOf(timbre), 1);
@@ -55,17 +54,14 @@ export class AdminPanelComponent implements OnInit {
 
   changeTimbreQte(timbre, operation) {
     if (operation === "plus") {
-      console.log("+1 sur ", timbre.numeroTimbre);
       timbre.quantiteTimbre += 1;
     } else if (operation === "minus") {
-      console.log("-1 sur ", timbre.numeroTimbre);
       timbre.quantiteTimbre -= 1;
     }
     this.updateTimbre(timbre);
   }
 
   updateTimbre(timbre) {
-    console.log(timbre);
     this.timbreService.updateTimbre(timbre).subscribe(data => console.log("RETOUR: ", data));
   }
   // EN FAIRE UN PIPE
