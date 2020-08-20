@@ -15,6 +15,7 @@ export class AdminRegisterComponent implements OnInit {
   }
   registerForm: FormGroup;
   pwdMatch;
+  error;
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
       email: [],
@@ -35,9 +36,14 @@ export class AdminRegisterComponent implements OnInit {
   register() {
     console.log("OK: " + this.registerForm + "PWDMATCH: " + this.pwdMatch);
     if (this.registerForm && this.pwdMatch) {
-      this.loginService
-        .register(this.registerForm.value)
-        .subscribe(data => this.handleSuccess(data), error => this.handleError(error));
+      try {
+        this.loginService
+          .register(this.registerForm.value)
+          .subscribe(data => this.handleSuccess(data), error => this.handleError(error));
+      } catch (error) {
+        this.error = error
+        console.log(error);
+      }
     }
   }
 
@@ -45,12 +51,10 @@ export class AdminRegisterComponent implements OnInit {
     console.log(data.token);
     localStorage.setItem('token', data.token);
     this.router.navigate(['/adminPanel']);
-    // this.presentSuccessToast("Connexion réussie !");
   }
 
   handleError(error) {
-    // this.presentErrorToast("Identifiants incorrects!");
-    console.error('Identifiant inccorrect', error);
+    console.error('problem: ', error);
   }
 
 }
