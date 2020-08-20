@@ -12,6 +12,8 @@
         <label>Mot de passe</label>
         <input type="password" class="form-control" formControlName="pwd">
       </div>
+      <p *ngIf="error !== null" class="m-0 erreur">{{error}}</p>
+
       <div class=" buttons d-flex">
         <button id="retourBtn" onclick="window.location='/'" class="font-weight-light btn btn-secondary">Retour</button>
         <button id="connectBtn" type="submit" class=" font-weight-light btn btn-primary">Connexion</button>

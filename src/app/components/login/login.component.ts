@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-
+  error: string;
   constructor(private loginService: LoginService, private formBuilder: FormBuilder, private router: Router) {
     if (this.loginService.isAuthenticated()) {
       this.router.navigate(['/adminPanel']);
@@ -34,15 +34,17 @@ export class LoginComponent implements OnInit {
   }
 
   handleSuccess(data) {
-    console.log(data.token);
     localStorage.setItem('token', data.token);
     this.router.navigate(['/adminPanel']);
     // this.presentSuccessToast("Connexion réussie !");
   }
 
   handleError(error) {
-    // this.presentErrorToast("Identifiants incorrects!");
-    console.error('Identifiant inccorrect', error);
+    if (error.status == '403') {
+      this.error = 'Combinaison email/mot de passe invalide.';
+    } else {
+      this.error = error.message;
+    }
   }
 
 }
