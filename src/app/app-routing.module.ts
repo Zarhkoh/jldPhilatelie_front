@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'timbres', component: TimbreListComponent },
   { path: 'admin', component: LoginComponent },
-  { path: 'adminPanel', canActivate: [AuthGuard], component: AdminPanelComponent },
+  { path: 'adminpanel', canActivate: [AuthGuard], component: AdminPanelComponent },
   { path: 'register', component: AdminRegisterComponent }
 
 
