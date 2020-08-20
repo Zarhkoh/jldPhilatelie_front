@@ -1,5 +1,44 @@
 :host {
-  margin: 0 auto;
+  width: 100%;
+}
+
+#loading {
+  width: 20%;
+  margin: 5em auto;
+}
+.alert {
+  margin: 3% auto;
+}
+
+#loading img {
+  width: 4em;
+}
+
+.grille {
+  width: 85%;
+  margin: 5% auto;
+  border-radius: 3px;
+}
+.liste {
+  background-color: #e4e3e3;
+  padding: 0.5em 0.5em 0.5em 0;
+}
+
+.timbreCard {
+  background-color: #262c2c;
+  color: white;
+  border-radius: 4px;
+  margin: 0.5em 0 0 0.5em;
+}
+
+.epuise {
+  background-color: rgb(182, 182, 182);
+  height: 5em;
+  border-radius: 2px;
+  padding-top: 1.6em;
+  text-align: center;
+  min-width: 4em;
+  margin: 0;
 }
 .timbreImg {
   height: 5em;
@@ -13,34 +52,4 @@
   border-radius: 2px;
   color: rgb(85, 85, 85);
   text-align: center;
-}
-.epuise {
-  background-color: rgb(182, 182, 182);
-  height: 5em;
-  border-radius: 2px;
-  padding-top: 1.6em;
-  text-align: center;
-  min-width: 4em;
-  margin: 0;
-}
-.timbreCard {
-  background-color: #262c2c;
-  color: white;
-  border-radius: 4px;
-  margin: 0.5em 0 0 0.5em;
-}
-.grille {
-  width: 60em;
-  padding: 1em 0;
-  background-color: #e4e3e3;
-  margin: auto;
-  margin-top: 3em;
-  border-radius: 3px;
-}
-#loading {
-  width: 20%;
-  margin: 5em auto;
-}
-#loading img {
-  width: 4em;
 }
