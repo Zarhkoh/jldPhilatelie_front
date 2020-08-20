@@ -1,5 +1,6 @@
 <h3>Créer un compte Administrateur</h3>
-
+<div *ngIf="error!= null" class=" mt-4 alert alert-danger" role="alert">
+  {{error |json}} </div>
 <div class="formPanel">
   <form [formGroup]="registerForm" (ngSubmit)="register()">
     <div class="inputs d-flex flex-column align-items-center justify-content-center">
