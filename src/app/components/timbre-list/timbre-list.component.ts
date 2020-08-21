@@ -13,28 +13,31 @@ export class TimbreListComponent implements OnInit {
   timbreStart;
   timbreEnd;
   timbreSearch;
-  timbreType;
+  timbreCat;
   error;
+  dispoFilter: Boolean;
+  neufFilter: Boolean;
+  occasFilter: Boolean;
   loading: Boolean;
   constructor(private timbreService: TimbreService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.loading = false;
+    this.dispoFilter = false;
     this.route.queryParams.subscribe(params => {
       this.timbreStart = params['start'];
       this.timbreEnd = params['end'];
       this.timbreSearch = params['search'];
-      this.timbreType = params['type'];
+      this.timbreCat = params['category'];
       if (this.timbreSearch) {
         console.log('CHANGEMENT SEEARCH: ' + this.timbreSearch);
         this.getTimbreByNumber(this.timbreSearch);
       } else if (this.timbreStart && this.timbreEnd) {
         console.log(this.timbreStart, this.timbreEnd);
         this.getTimbreRange(this.timbreStart, this.timbreEnd);
-      } else if (this.timbreType) {
-        console.log("cherche timbre par type " + this.timbreType);
-        this.getTimbreType(this.timbreType);
+      } else if (this.timbreCat) {
+        this.getTimbreCat(this.timbreCat);
       }
       else {
         this.error = 'On dirait que vous jouez avec l\'URL. Utilisez la barre de recherchee ou le menu latéral. ;)'
@@ -69,15 +72,18 @@ export class TimbreListComponent implements OnInit {
     }
   }
 
-  getTimbreType(type) {
+  get filteredlist() {
+    return this.timbreList.filter(x => x.age > 18);
+  }
+
+  getTimbreCat(cat) {
     try {
       this.loading = true;
-      this.timbreService.getTimbresByType(type).subscribe(data => {
+      this.timbreService.getTimbresByCat(cat).subscribe(data => {
         this.timbreList = data as Timbre[];
         this.timbreList.sort(this.timbreService.sortByNumer);
         console.log(this.timbreList);
         if (this.timbreList && this.timbreList != null && this.timbreList.length == 0) {
-          console.log("pas de timbre pour la catégorie " + type);
           this.error = 'Aucun timbre n\'existe pour cette catégorie';
         }
         this.loading = false;

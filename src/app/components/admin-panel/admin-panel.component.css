@@ -3,6 +3,11 @@
   margin: 5em auto;
 }
 
+.btn-primary {
+  width: 100%;
+  background-color: #4492af;
+  border-color: #4492af;
+}
 #numeroInput,
 #prixInput,
 #quantiteInput,
@@ -13,11 +18,15 @@
 
 .card-header {
   border: 1px solid rgba(0, 0, 0, 0.125) !important;
-  max-width: 40%;
+  max-width: 50%;
   margin: auto;
   margin-bottom: 2em;
 }
-
+.col-4,
+.col-6,
+.col-8 {
+  padding: 0;
+}
 .qteBtn {
   background-color: #4592af;
   margin: 0 0.5em;
@@ -26,6 +35,10 @@
   border: none;
   height: 1.3em;
   width: 1.3em;
+}
+
+a img {
+  width: 5.5%;
 }
 
 .qteBtn:disabled {
@@ -38,4 +51,17 @@
 
 .qteBtn p {
   margin-top: -0.25rem;
+}
+
+/* CSS BTN GRP */
+.btn-group .active {
+  background-color: #4592af;
+  border-color: #2992b9;
+}
+.btn-group .active:focus {
+  box-shadow: none;
+}
+
+.form-content {
+  width: 100%;
 }

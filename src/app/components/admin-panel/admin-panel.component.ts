@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { TimbreService } from 'src/app/services/timbre.service';
 import { Timbre } from 'src/app/models/timbre';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ThrowStmt } from '@angular/compiler';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
   selector: 'app-admin-panel',
@@ -23,9 +21,11 @@ export class AdminPanelComponent implements OnInit {
       prix: [],
       quantite: [],
       image: [],
-      type: ['neuf'],
+      categorie: [],
+      etat: ['neuf'],
       anneeCoinDate: [],
-      optionalInfos: []
+      optionalInfos: [],
+      tasType: []
     });
   }
 
@@ -69,4 +69,7 @@ export class AdminPanelComponent implements OnInit {
     this.timbreList.sort(this.timbreService.sortByNumer);
   }
 
+  setCat(cat) {
+    this.timbreForm.controls['categorie'].setValue(cat);
+  }
 }

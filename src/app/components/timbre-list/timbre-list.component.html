@@ -1,24 +1,28 @@
 <div *ngIf="loading" id="loading">
   <img src="../../../assets/img/loading.gif">
 </div>
-<div *ngIf="error!= null && timbreList && timbreList !== null &&timbreList.length ==0" class=" mt-4 alert alert-danger"
-  role="alert">
-  {{error}} </div>
+<div class="d-flex" *ngIf="error!= null && timbreList && timbreList !== null &&timbreList.length ==0">
+  <p class="d-inline-block alert alert-danger">{{error}}</p>
+</div>
+
 <div *ngIf="timbreList && timbreList !== null &&timbreList.length > 0" class="grille d-flex">
-  <div class="d-flex flex-wrap">
+  <!-- <input type="checkbox" ng-model="dispoFilter"> -->
+  <div class="liste d-flex flex-wrap">
     <div class="p-2 timbreCard" *ngFor="let timbre of timbreList">
+
       <div class="d-flex justify-content-center">
-        <p class="text-center mb-0 font-weight-bold">{{timbre.numeroTimbre}}</p>
-        <p class="mb-0" *ngIf="timbre.typeTimbre=='occas'">*</p>
-        <p class="mb-0" *ngIf="timbre.typeTimbre=='sg'">SG</p>
-        <p class="mb-0" *ngIf="timbre.typeTimbre=='cd'">({{timbre.anneeCoinDate}})</p>
-        <p class="mb-0" *ngIf="timbre.typeTimbre == 'obl'">{{timbre.optionalInfos}}</p>
+        <p class="mb-0 font-weight-bold" *ngIf="timbre.catTimbre=='tas'">{{timbre.tasType}}</p>
+        <p *ngIf="timbre.numeroTimbre !== 0" class="text-center mb-0 font-weight-bold">{{timbre.numeroTimbre}}</p>
+        <p class="mb-0" *ngIf="timbre.etatTimbre=='occas'">*</p>
+        <p class="mb-0" *ngIf="timbre.etatTimbre=='sg'">SG</p>
+        <p class="mb-0" *ngIf="timbre.catTimbre=='cd'">({{timbre.anneeCoinDate}})</p>
+        <p class="mb-0" *ngIf="timbre.catTimbre == 'obl' || timbre.catTimbre == 'spe'">{{timbre.optionalInfos}}</p>
       </div>
       <div class="mb-0">
-        <p class="align-middle epuise" *ngIf="timbre.quantiteTimbre == 0">EPUISE</p>
+        <p class="align-middle epuise" *ngIf="timbre.quantiteTimbre == 0">EPUISÉ</p>
         <a [href]="timbre.imageTimbreUrl" target="_blank">
           <img class="timbreImg"
-            [ngClass]="{'timbreImg': timbre.typeTimbre != 'cd', 'cdImg': timbre.typeTimbre == 'cd'}"
+            [ngClass]="{'timbreImg': timbre.catTimbre != 'cd' && timbre.catTimbre !=='spe', 'cdImg': timbre.catTimbre == 'cd','speImg': timbre.catTimbre == 'spe'}"
             *ngIf="timbre.quantiteTimbre > 0" src="{{timbre.imageTimbreUrl}}">
         </a>
       </div>

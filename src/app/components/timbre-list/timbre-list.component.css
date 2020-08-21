@@ -53,3 +53,10 @@
   color: rgb(85, 85, 85);
   text-align: center;
 }
+
+.speImg {
+  height: 12em;
+  border-radius: 2px;
+  color: rgb(85, 85, 85);
+  text-align: center;
+}
