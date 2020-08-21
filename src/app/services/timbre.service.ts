@@ -6,7 +6,9 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class TimbreService {
-  url = 'http://jld-philatelieapi.navillus.kim/';
+  // url = 'http://jld-philatelieapi.navillus.kim/';
+  url = 'http://localhost:3000';
+
 
   constructor(private http: HttpClient) { }
 
@@ -37,11 +39,11 @@ export class TimbreService {
     return this.http.get(this.url + "/timbresByRange", { params });
   }
 
-  getTimbresByType(timbreType) {
+  getTimbresByCat(timbreCat) {
     const params = {
-      type: timbreType,
+      categorie: timbreCat,
     };
-    return this.http.get(this.url + "/timbresByType", { params });
+    return this.http.get(this.url + "/timbresByCat", { params });
   }
 
   addTimbre(newTimbre) {
