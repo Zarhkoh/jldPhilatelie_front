@@ -17,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AdminRegisterComponent } from './components/admin-register/admin-register.component';
+import { FourOFourComponent } from './components/four-o-four/four-o-four.component';
 
 
 export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
@@ -43,7 +44,8 @@ export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
     NavbarComponent,
     LoginComponent,
     AdminPanelComponent,
-    AdminRegisterComponent
+    AdminRegisterComponent,
+    FourOFourComponent
   ],
   imports: [
     JwtModule.forRoot({
