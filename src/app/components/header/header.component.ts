@@ -32,12 +32,9 @@ export class HeaderComponent implements OnInit {
   }
 
   searchTimbre() {
-    console.log(this.searchForm.value.numero_timbre);
     if (this.searchForm != null) {
-      console.log(this.searchForm.value);
       this.router.navigate(['/timbres'], { queryParams: { search: this.searchForm.value.numero_timbre } });
     } else {
-      console.log("PAS BON");
     }
   }
 

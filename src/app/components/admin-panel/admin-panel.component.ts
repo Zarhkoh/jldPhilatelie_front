@@ -37,9 +37,7 @@ export class AdminPanelComponent implements OnInit {
   }
 
   addTimbre() {
-    console.log("ajout du timbre:", this.timbreForm.value);
     this.timbreService.addTimbre(this.timbreForm.value).subscribe(data => {
-      console.log(data);
       this.ngOnInit();
     });
   }
@@ -62,7 +60,7 @@ export class AdminPanelComponent implements OnInit {
   }
 
   updateTimbre(timbre) {
-    this.timbreService.updateTimbre(timbre).subscribe(data => console.log("RETOUR: ", data));
+    this.timbreService.updateTimbre(timbre).subscribe(data => console.log("timbre update"));
   }
   // EN FAIRE UN PIPE
   sortListByTimbreNumber() {

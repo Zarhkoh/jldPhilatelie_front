@@ -31,10 +31,8 @@ export class TimbreListComponent implements OnInit {
       this.timbreSearch = params['search'];
       this.timbreCat = params['category'];
       if (this.timbreSearch) {
-        console.log('CHANGEMENT SEEARCH: ' + this.timbreSearch);
         this.getTimbreByNumber(this.timbreSearch);
       } else if (this.timbreStart && this.timbreEnd) {
-        console.log(this.timbreStart, this.timbreEnd);
         this.getTimbreRange(this.timbreStart, this.timbreEnd);
       } else if (this.timbreCat) {
         this.getTimbreCat(this.timbreCat);
@@ -67,7 +65,6 @@ export class TimbreListComponent implements OnInit {
         this.loading = false;
       });
     } else {
-      console.log("SEARCH PARAM: ", number);
       this.error = 'La recherche doit comporter un chiffre entier et positif.';
     }
   }
@@ -82,7 +79,6 @@ export class TimbreListComponent implements OnInit {
       this.timbreService.getTimbresByCat(cat).subscribe(data => {
         this.timbreList = data as Timbre[];
         this.timbreList.sort(this.timbreService.sortByNumer);
-        console.log(this.timbreList);
         if (this.timbreList && this.timbreList != null && this.timbreList.length == 0) {
           this.error = 'Aucun timbre n\'existe pour cette catégorie';
         }
@@ -90,8 +86,6 @@ export class TimbreListComponent implements OnInit {
       });
 
     } catch (error) {
-      console.log("ERROR TYPE: ", error);
-
       this.error = error;
 
     }
@@ -99,7 +93,6 @@ export class TimbreListComponent implements OnInit {
 
   getTimbreRange(start, end) {
     this.loading = true;
-    console.log('timbreRangeCalled');
     if ((Number(start) && Number(end)) && (start > 0 && end > 0) && (start % 1 === 0 && end % 1 === 0)) {
 
       try {
