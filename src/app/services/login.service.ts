@@ -9,7 +9,7 @@ import { JwtModule } from '@auth0/angular-jwt';
   providedIn: 'root'
 })
 export class LoginService {
-  url = 'http://jld-philatelieapi.navillus.kim';
+  url = 'https://jld-philatelieapi.navillus.kim';
 
   constructor(private http: HttpClient) { }
 

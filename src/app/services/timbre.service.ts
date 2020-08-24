@@ -6,14 +6,13 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class TimbreService {
-  url = 'http://jld-philatelieapi.navillus.kim/';
+  url = 'https://jld-philatelieapi.navillus.kim/';
   // url = 'http://localhost:3000';
 
 
   constructor(private http: HttpClient) { }
 
   getAllTimbres() {
-    console.log('call service timbre getalltimbres()');
     return this.http.get(this.url + '/timbres');
   }
 
