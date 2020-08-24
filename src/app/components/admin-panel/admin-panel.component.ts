@@ -42,8 +42,8 @@ export class AdminPanelComponent implements OnInit {
     });
   }
 
-  deleteTimbreByNumero(timbre) {
-    this.timbreService.deleteTimbreByNumero(timbre.numeroTimbre).subscribe(data => {
+  deleteTimbreById(timbre) {
+    this.timbreService.deleteTimbreById(timbre.timbreId).subscribe(data => {
       if (data === 1) {
         this.timbreList.splice(this.timbreList.indexOf(timbre), 1);
       }

@@ -23,11 +23,11 @@ export class TimbreService {
     return this.http.get(this.url + "/timbreByNumeroTimbre", { params });
   }
 
-  deleteTimbreByNumero(numeroTimbre) {
+  deleteTimbreById(id) {
     const params = {
-      numero_timbre: numeroTimbre
+      timbreId: id
     };
-    return this.http.get(this.url + "/deleteTimbreByNumeroTimbre", { params });
+    return this.http.get(this.url + "/deleteTimbreById", { params });
   }
 
   getTimbresByRange(debut, fin) {
