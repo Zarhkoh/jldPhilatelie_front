@@ -97,7 +97,8 @@ button:focus {
   background-color: rgb(173, 173, 173);
 }
 .custom-control-input:checked ~ .custom-control-label::before {
-  background-color: greenyellow;
+  background-color: rgb(138, 194, 85);
+  border-color: rgb(138, 194, 85);
 }
 
 .custom-control-input ~ .custom-control-label::after {

@@ -71,7 +71,10 @@ export class TimbreListComponent implements OnInit {
   }
 
   get filteredList() {
+    // Reset de la liste
     this.filteredTimbreList = this.timbreList;
+
+    // Trier la liste
     switch (this.sortFilter) {
       case "NumDesc": {
         this.filteredTimbreList.sort(this.sortByNumDesc);
@@ -90,6 +93,7 @@ export class TimbreListComponent implements OnInit {
         break;
       }
     }
+    // Application des filtres selon état
     switch (this.etatFilter) {
       case "alt": {
         this.filteredTimbreList = this.timbreList.filter(timbre => timbre.etatTimbre === 'occas');
@@ -103,11 +107,15 @@ export class TimbreListComponent implements OnInit {
         break;
       }
     }
+    // Application du filtre de quantité
     if (this.dispoFilter) {
-      this.filteredTimbreList = this.timbreList.filter(timbre => timbre.quantiteTimbre > 0);
+      this.filteredTimbreList = this.filteredTimbreList.filter(timbre => timbre.quantiteTimbre > 0);
+    }
+    // Affichage de l'erreur si la liste est vide
+    if (this.filteredTimbreList.length === 0) {
+      this.error = "Pas de timbre disponible pour cette catégorie";
     }
     return this.filteredTimbreList;
-
   }
 
 
