@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   error: string;
   constructor(private loginService: LoginService, private formBuilder: FormBuilder, private router: Router) {
     if (this.loginService.isAuthenticated()) {
-      this.router.navigate(['/adminPanel']);
+      this.router.navigate(['/adminpanel']);
     }
   }
 
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
 
   handleSuccess(data) {
     localStorage.setItem('token', data.token);
-    this.router.navigate(['/adminPanel']);
+    this.router.navigate(['/adminpanel']);
     // this.presentSuccessToast("Connexion réussie !");
   }
 
