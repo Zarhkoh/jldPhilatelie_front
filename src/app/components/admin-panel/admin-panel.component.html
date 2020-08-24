@@ -56,7 +56,7 @@
           </div>
           <!-- INFOS SUPP POUR OBL/SPE/TAS -->
           <div
-            *ngIf="timbreForm.value.categorie == 'obl' || timbreForm.value.categorie == 'spe'|| timbreForm.value.categorie == 'tas'"
+            *ngIf="timbreForm.value.categorie == 'classic' || timbreForm.value.categorie == 'obl' || timbreForm.value.categorie == 'spe'|| timbreForm.value.categorie == 'tas'"
             class="col-4">
             <input id="optionalInfosInput" type="text" placeholder="Infos supp. (a,b..)" aria-label="infos supp."
               class="form-control" formControlName="optionalInfos">
@@ -109,10 +109,11 @@
         <td>
           <div class="d-flex">
             <p class="text-center mb-0 font-weight-bold">{{timbre.numeroTimbre}}</p>
-            <p class="mb-0" *ngIf="timbre.typeTimbre=='occas'">*</p>
-            <p class="mb-0" *ngIf="timbre.typeTimbre=='sg'">SG</p>
-            <p class="mb-0" *ngIf="timbre.typeTimbre=='cd'">({{timbre.anneeCoinDate}})</p>
-            <p class="mb-0" *ngIf="timbre.typeTimbre == 'obl'">{{timbre.optionalInfos}}</p>
+            <p class="text-center mb-0 font-weight-bold">{{timbre.optionalInfos}}</p>
+            <p class="mb-0" *ngIf="timbre.etatTimbre=='occas'">*</p>
+            <p class="mb-0" *ngIf="timbre.etatTimbre=='sg'">SG</p>
+            <p class="mb-0" *ngIf="timbre.etatTimbre=='cd'">({{timbre.anneeCoinDate}})</p>
+            <p class="mb-0" *ngIf="timbre.etatTimbre == 'obl'">{{timbre.optionalInfos}}</p>
           </div>
         </td>
         <td>{{ timbre.prixTimbre }}€</td>
@@ -141,7 +142,7 @@
           </div>
         </td>
         <td>
-          <button type="button" (click)="deleteTimbreByNumero(timbre)" class="btn btn-outline-danger"><svg width="1em"
+          <button type="button" (click)="deleteTimbreById(timbre)" class="btn btn-outline-danger"><svg width="1em"
               height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor"
               xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd"
