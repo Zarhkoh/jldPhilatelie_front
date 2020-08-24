@@ -13,7 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AdminRegisterComponent } from './components/admin-register/admin-register.component';
@@ -59,7 +59,8 @@ export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [{
     provide: UrlSerializer,
