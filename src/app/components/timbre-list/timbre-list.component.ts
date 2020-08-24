@@ -10,21 +10,25 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class TimbreListComponent implements OnInit {
   timbreList = [];
+  filteredTimbreList = [];
   timbreStart;
   timbreEnd;
   timbreSearch;
   timbreCat;
   error;
   dispoFilter: Boolean;
-  neufFilter: Boolean;
-  occasFilter: Boolean;
+  etatFilter;
+  sortFilter;
   loading: Boolean;
+
   constructor(private timbreService: TimbreService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.loading = false;
-    this.dispoFilter = false;
+    // Setup le rangement de la liste a num ascendant
+    this.sortFilter = 'NumAsc';
+
     this.route.queryParams.subscribe(params => {
       this.timbreStart = params['start'];
       this.timbreEnd = params['end'];
@@ -55,11 +59,8 @@ export class TimbreListComponent implements OnInit {
     if (Number(number) && number % 1 === 0 && number > 0) {
       this.loading = true;
       this.timbreService.getTimbreByNumero(number).subscribe(data => {
-        this.timbreList = [];
-        if (data != null) {
-          this.timbreList.push(data);
-        }
-        if (this.timbreList && this.timbreList != null && this.timbreList.length == 0) {
+        this.timbreList = data as Timbre[];
+        if (this.timbreList.length === 0) {
           this.error = 'Le timbre n°' + number + ' n\'est pas enregistré sur ce site.';
         }
         this.loading = false;
@@ -69,9 +70,46 @@ export class TimbreListComponent implements OnInit {
     }
   }
 
-  get filteredlist() {
-    return this.timbreList.filter(x => x.age > 18);
+  get filteredList() {
+    this.filteredTimbreList = this.timbreList;
+    switch (this.sortFilter) {
+      case "NumDesc": {
+        this.filteredTimbreList.sort(this.sortByNumDesc);
+        break;
+      }
+      case "PriceAsc": {
+        this.filteredTimbreList.sort(this.sortByPriceAsc);
+        break;
+      }
+      case "PriceDesc": {
+        this.filteredTimbreList.sort(this.sortByPriceDesc);
+        break;
+      }
+      default: {
+        this.filteredTimbreList.sort(this.sortByNumAsc);
+        break;
+      }
+    }
+    switch (this.etatFilter) {
+      case "alt": {
+        this.filteredTimbreList = this.timbreList.filter(timbre => timbre.etatTimbre === 'occas');
+        break;
+      }
+      case "sg": {
+        this.filteredTimbreList = this.timbreList.filter(timbre => timbre.etatTimbre === 'sg');
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+    if (this.dispoFilter) {
+      this.filteredTimbreList = this.timbreList.filter(timbre => timbre.quantiteTimbre > 0);
+    }
+    return this.filteredTimbreList;
+
   }
+
 
   getTimbreCat(cat) {
     try {
@@ -98,6 +136,7 @@ export class TimbreListComponent implements OnInit {
       try {
         this.timbreService.getTimbresByRange(start, end).subscribe(data => {
           this.timbreList = data as Timbre[];
+          this.filteredTimbreList = this.timbreList;
           this.timbreList.sort(this.timbreService.sortByNumer);
           if (this.timbreList && this.timbreList != null && this.timbreList.length == 0) {
             this.error = 'Aucun timbre n\'existe entre ' + start + ' et ' + end;
@@ -111,4 +150,18 @@ export class TimbreListComponent implements OnInit {
       this.error = 'Les paramètres doivent être des chiffres entiers positifs.';
     }
   }
+
+  sortByNumAsc(a, b) {
+    return a.numeroTimbre - b.numeroTimbre;
+  }
+  sortByNumDesc(a, b) {
+    return b.numeroTimbre - a.numeroTimbre;
+  }
+  sortByPriceAsc(a, b) {
+    return a.prixTimbre - b.prixTimbre;
+  }
+  sortByPriceDesc(a, b) {
+    return b.prixTimbre - a.prixTimbre;
+  }
+
 }

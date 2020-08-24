@@ -2,6 +2,16 @@
   width: 100%;
 }
 
+.filters {
+  padding: 0.5% 0;
+  font-size: 0.8em;
+  margin: 2% auto 0;
+  color: white;
+  width: 85%;
+  background-color: #4592af;
+  border-radius: 4px;
+}
+
 #loading {
   width: 20%;
   margin: 5em auto;
@@ -16,7 +26,7 @@
 
 .grille {
   width: 85%;
-  margin: 5% auto;
+  margin: 1% auto;
   border-radius: 3px;
 }
 .liste {
@@ -59,4 +69,49 @@
   border-radius: 2px;
   color: rgb(85, 85, 85);
   text-align: center;
+}
+
+button:focus {
+  outline: none;
+}
+
+.filterBtn {
+  background-color: #4492af;
+  color: white;
+  border-radius: 15px;
+  border: 1px solid #3a7d96;
+}
+
+.btnActive {
+  background-color: #3c7f97;
+  border: 1px solid #285768bb;
+  -webkit-box-shadow: inset 0px 0px 3px #285768bb;
+  -moz-box-shadow: inset 0px 0px 3px #285768bb;
+  box-shadow: inset 0px 0px 3px #285768bb;
+}
+.custom-select {
+  width: 70%;
+}
+
+.custom-control-input ~ .custom-control-label::before {
+  background-color: rgb(173, 173, 173);
+}
+.custom-control-input:checked ~ .custom-control-label::before {
+  background-color: greenyellow;
+}
+
+.custom-control-input ~ .custom-control-label::after {
+  background-color: rgb(255, 255, 255);
+}
+label {
+  margin-bottom: 0;
+}
+
+#btnGroup2,
+#btnGroup3 {
+  border-left: 1px rgb(92, 92, 92) solid;
+}
+
+#filtreInput {
+  font-size: 0.8em;
 }
