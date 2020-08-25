@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-sidebar',
@@ -22,12 +23,11 @@ export class SidebarComponent implements OnInit {
     { "start": 3201, "end": 4000 }
   ];
 
-  constructor() {
+  constructor(public location: Location) {
 
   }
 
   ngOnInit(): void {
-
   }
 
 }
