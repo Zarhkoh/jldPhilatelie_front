@@ -1,6 +1,6 @@
 <div id="headerContent" class="d-flex justify-content-between">
   <div class="logo">
-    <a href="/">
+    <a routerLink="/">
       <img id="headerLogo" src="../../../assets/img/logo_white.png">
     </a>
   </div>
@@ -8,7 +8,7 @@
     [ngClass]="{'justify-content-between': isAuth() , 'justify-content-end': !isAuth(), 'widthAdjustment' : router.url == '/adminpanel'}"
     class="widgets d-flex flex-column">
     <div id="loginTxt" *ngIf="isAuth()" class="authText d-flex align-self-end font-weight-bold text-light">
-      <a (click)="router.navigate(['adminpanel'])" id="welcomeText">Bonjour Papa. :)</a>
+      <a routerLink="/adminpanel" id="welcomeText">Bonjour Papa. :)</a>
       <button class="logoutBtn" (click)="logout()">
         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-power" fill="currentColor"
           xmlns="http://www.w3.org/2000/svg">
