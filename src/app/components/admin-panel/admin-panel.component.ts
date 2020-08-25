@@ -11,10 +11,12 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class AdminPanelComponent implements OnInit {
   timbreList = [];
   test;
+  loading: Boolean;
   timbreForm: FormGroup;
   constructor(private timbreService: TimbreService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.loading = false;
     this.getAllTimbres();
     this.timbreForm = this.formBuilder.group({
       numero: [],
@@ -30,8 +32,10 @@ export class AdminPanelComponent implements OnInit {
   }
 
   getAllTimbres() {
+    this.loading = true;
     this.timbreService.getAllTimbres().subscribe(data => {
       this.timbreList = data as Timbre[];
+      this.loading = false;
     });
 
   }

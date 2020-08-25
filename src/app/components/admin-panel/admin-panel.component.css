@@ -1,6 +1,6 @@
 :host {
-  width: 80%;
-  margin: 5em auto;
+  width: 100%;
+  margin: auto;
 }
 
 .btn-primary {
@@ -18,7 +18,7 @@
 
 .card-header {
   border: 1px solid rgba(0, 0, 0, 0.125) !important;
-  max-width: 50%;
+  max-width: 40%;
   margin: auto;
   margin-bottom: 2em;
 }
@@ -64,4 +64,21 @@ a img {
 
 .form-content {
   width: 100%;
+}
+
+#loading {
+  width: 5%;
+  margin: 5em auto;
+}
+#loading img {
+  width: 100%;
+}
+
+.home-button {
+  width: 18em;
+}
+
+table {
+  max-width: 70%;
+  margin: auto;
 }
