@@ -49,3 +49,12 @@
 .widthAdjustment {
   width: 14.4%;
 }
+
+#welcomeText {
+  color: white;
+  text-decoration: none;
+}
+#welcomeText:hover {
+  color: white;
+  text-decoration: none;
+}
