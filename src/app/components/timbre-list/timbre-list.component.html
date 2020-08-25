@@ -40,7 +40,8 @@
 
 <div *ngIf="timbreList && timbreList !== null &&timbreList.length > 0" class="grille">
   <div *ngIf="filteredList.length > 0" class="liste d-flex flex-wrap">
-    <div class="p-2 timbreCard d-flex flex-column justify-content-between" *ngFor="let timbre of filteredList">
+    <div [ngClass]="{'low-opacity': timbre.quantiteTimbre ===0}"
+      class="p-2 timbreCard d-flex flex-column justify-content-between" *ngFor="let timbre of filteredList">
       <div class="d-flex justify-content-center">
         <p class="mb-0 font-weight-bold" *ngIf="timbre.catTimbre=='tas'">{{timbre.tasType}}</p>
         <p *ngIf="timbre.numeroTimbre !== 0" class="text-center mb-0 font-weight-bold">{{timbre.numeroTimbre}}</p>
@@ -49,14 +50,20 @@
         <p class="mb-0" *ngIf="timbre.catTimbre=='cd'">({{timbre.anneeCoinDate}})</p>
         <p class="mb-0" *ngIf="timbre.catTimbre == 'obl' || timbre.catTimbre == 'spe'">{{timbre.optionalInfos}}</p>
       </div>
-      <div class="mb-0">
-        <!-- <p class="align-middle epuise" *ngIf="timbre.quantiteTimbre == 0">EPUISÉ</p> -->
-        <a [href]="timbre.imageTimbreUrl" target="_blank">
-          <img
-            [ngClass]="{'timbreImg': timbre.catTimbre != 'cd' && timbre.catTimbre !=='spe', 'cdImg': timbre.catTimbre == 'cd','speImg': timbre.catTimbre == 'spe', 'sold-out':timbre.quantiteTimbre == 0}"
-            src="{{timbre.imageTimbreUrl}}">
-        </a>
-      </div>
+      <a [href]="timbre.imageTimbreUrl" target="_blank">
+        <div
+          [ngClass]="{'timbreImg': timbre.catTimbre != 'cd' && timbre.catTimbre !=='spe', 'cdImg': timbre.catTimbre == 'cd','speImg': timbre.catTimbre == 'spe'}"
+          [ngStyle]="{ 'background-image': 'url(' + timbre.imageTimbreUrl + ')'}"
+          class="d-flex align-items-stretch img-container mb-0">
+          <div *ngIf="timbre.quantiteTimbre == 0" class="sold-out-container d-flex align-items-center">
+            <p class="epuise">ÉPUISÉ</p>
+          </div>
+          <!-- <img
+            [ngClass]="{'timbreImg': timbre.catTimbre != 'cd' && timbre.catTimbre !=='spe', 'cdImg': timbre.catTimbre == 'cd','speImg': timbre.catTimbre == 'spe'}"
+            src="{{timbre.imageTimbreUrl}}"> -->
+        </div>
+      </a>
+
       <p class="text-center mb-0">{{timbre.prixTimbre}}€</p>
     </div>
   </div>

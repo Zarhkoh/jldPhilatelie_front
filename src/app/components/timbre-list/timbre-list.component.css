@@ -41,17 +41,17 @@
   margin: 0.5em 0 0 0.5em;
 }
 
-/* .epuise {
-  background-color: rgb(182, 182, 182);
-  height: 5em;
-  border-radius: 2px;
-  padding-top: 1.6em;
-  text-align: center;
-  min-width: 4em;
-  margin: 0;
-} */
+/* CSS TIMBRES IMAGES */
+
+.img-container {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .timbreImg {
   width: 4em;
+  height: 5em;
   border-radius: 2px;
   color: rgb(85, 85, 85);
   text-align: center;
@@ -68,6 +68,24 @@
   border-radius: 2px;
   color: rgb(85, 85, 85);
   text-align: center;
+}
+
+/* CSS SI EPUISE */
+.low-opacity {
+  opacity: 45%;
+}
+
+.sold-out-container {
+  border-radius: 2px;
+}
+.epuise {
+  padding: 1%;
+  color: white;
+  text-align: center;
+  min-width: 4em;
+  margin: 0;
+  border: 1px white solid;
+  border-radius: 2px;
 }
 
 button:focus {
@@ -114,4 +132,8 @@ label {
 
 #filtreInput {
   font-size: 0.8em;
+}
+
+a:hover {
+  text-decoration: none;
 }
