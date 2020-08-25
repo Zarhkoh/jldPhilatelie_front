@@ -16,10 +16,12 @@
   </div>
   <div class="text-center font-weight-bold sidebarTitle">TIMBRES NEUFS</div>
   <div class="list-group text-center">
-    <a *ngFor="let limit of limits" [routerLink]="'/timbres'" [queryParams]="{start:limit.start,end: limit.end}"
+    <a *ngFor="let limit of limits" routerLink="/timbres" [queryParams]="{start:limit.start,end: limit.end}"
       class="list-group-item list-group-item-action">{{limit.start}} à {{limit.end}}</a>
-    <a routerLink="/timbres?category=spe" class="list-group-item list-group-item-action">Spéciaux</a>
-    <a routerLink="/timbres?category=tas" class="list-group-item list-group-item-action">Taxe Av Serv</a>
+    <a routerLink="/timbres" [queryParams]="{category:'spe'}"
+      class="list-group-item list-group-item-action">Spéciaux</a>
+    <a routerLink="/timbres" [queryParams]="{category:'tas'}" class="list-group-item list-group-item-action">Taxe Av
+      Serv</a>
 
   </div>
   <div class="text-center font-weight-bold sidebarTitle">DIVERS</div>
