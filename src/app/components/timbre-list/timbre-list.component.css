@@ -41,7 +41,7 @@
   margin: 0.5em 0 0 0.5em;
 }
 
-.epuise {
+/* .epuise {
   background-color: rgb(182, 182, 182);
   height: 5em;
   border-radius: 2px;
@@ -49,10 +49,9 @@
   text-align: center;
   min-width: 4em;
   margin: 0;
-}
+} */
 .timbreImg {
-  height: 5em;
-  min-width: 4em;
+  width: 4em;
   border-radius: 2px;
   color: rgb(85, 85, 85);
   text-align: center;
