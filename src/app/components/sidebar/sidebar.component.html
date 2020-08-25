@@ -1,16 +1,33 @@
 <div class="sidebar">
-  <div class="sidebar-heading text-center font-weight-bold sidebarTitle">TIMBRES NEUFS</div>
+  <div [ngClass]="{'hidden-return-home':this.location.isCurrentPathEqualTo('/')}"
+    class=" home-btn overflow-hidden text-center">
+    <a routerLink="/" class="list-group-item list-group-item-action">
+      <div class="d-flex justify-content-center">
+        <p class="m-0">&lsaquo;</p>
+        <svg width="1.6em" height="1.3em" viewBox="0 0 16 16" class="bi bi-house-door-fill" fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M6.5 10.995V14.5a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .146-.354l6-6a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 .146.354v7a.5.5 0 0 1-.5.5h-4a.5.5 0 0 1-.5-.5V11c0-.25-.25-.5-.5-.5H7c-.25 0-.5.25-.5.495z" />
+          <path fill-rule="evenodd" d="M13 2.5V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
+        </svg>
+        <p class="m-0">Retour à l'accueil</p>
+      </div>
+    </a>
+  </div>
+  <div class="text-center font-weight-bold sidebarTitle">TIMBRES NEUFS</div>
   <div class="list-group text-center">
-    <a *ngFor="let limit of limits" href="/timbres?start={{limit.start}}&end={{limit.end}}"
+    <a *ngFor="let limit of limits" [routerLink]="'/timbres'" [queryParams]="{start:limit.start,end: limit.end}"
       class="list-group-item list-group-item-action">{{limit.start}} à {{limit.end}}</a>
-    <a href="/timbres?category=spe" class="list-group-item list-group-item-action">Spéciaux</a>
-    <a href="/timbres?category=tas" class="list-group-item list-group-item-action">Taxe Av Serv</a>
+    <a routerLink="/timbres?category=spe" class="list-group-item list-group-item-action">Spéciaux</a>
+    <a routerLink="/timbres?category=tas" class="list-group-item list-group-item-action">Taxe Av Serv</a>
 
   </div>
-  <div class="sidebar-heading text-center font-weight-bold sidebarTitle">DIVERS</div>
+  <div class="text-center font-weight-bold sidebarTitle">DIVERS</div>
   <div class="list-group text-center">
-    <a href="/timbres?category=cd" class="list-group-item list-group-item-action">Coins datés</a>
-    <a href="/timbres?category=obl" class="list-group-item list-group-item-action">Oblitérés</a>
-    <a href="#" class="list-group-item list-group-item-action">Sites à visiter</a>
+    <a routerLink="/timbres" [queryParams]="{category:'cd'}" class="list-group-item list-group-item-action">Coins
+      datés</a>
+    <a routerLink="/timbres" [queryParams]="{category:'obl'}"
+      class="list-group-item list-group-item-action">Oblitérés</a>
+    <a routerLink="#" class="list-group-item list-group-item-action">Sites à visiter</a>
   </div>
 </div>
