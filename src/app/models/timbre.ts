@@ -1,8 +1,12 @@
 export class Timbre {
-  numeroTimbre: string;
+  timbreId: number;
+  categorieTimbre: string;
+  numeroTimbre: number;
   prixTimbre: number;
   imageTimbreUrl: string;
   quantiteTimbre: number;
-  typeTimbre: string;
+  etatTimbre: string;
+  optionalInfos: string;
   anneeCoinDate: number;
+  tasType: string;
 }
