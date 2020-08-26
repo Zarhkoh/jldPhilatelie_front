@@ -65,7 +65,7 @@
               formControlName="numero">
           </div>
           <!-- ANNEE POUR CD -->
-          <div *ngIf="timbreForm.value. categorie == 'cd'" class="col-4">
+          <div *ngIf="timbreForm.value.categorie == 'cd'" class="col-4">
             <input id="anneeCoinDateInput" type="number" min="0" max="2999" placeholder="Année coin daté"
               aria-label="Année coin daté" class="form-control" formControlName="anneeCoinDate">
           </div>
@@ -86,12 +86,13 @@
             <input type="number" min="0" placeholder="Quantité" aria-label="quantité" id="quantiteInput"
               class="form-control" formControlName="quantite">
           </div>
+
+          <!-- URL IMG -->
           <div class="col-8">
-            <input type="url" class="form-control" id="imageInput" aria-label="url de l'image"
+            <input type="url" class="form-control" id="urlInput" aria-label="url de l'image"
               placeholder="URL de l'image" formControlName="image">
           </div>
           <button type="submit" id="sendBtn" class=" btn btn-primary">Ajouter</button>
-
         </div>
 
       </form>
@@ -102,45 +103,79 @@
   <div *ngIf="loading" id="loading">
     <img src="../../../assets/img/loading.gif">
   </div>
+
   <!-- TABLE TIMBRES -->
-  <table *ngIf="timbreList.length>0" class="table table-bordered table-striped">
+  <table *ngIf="timbreList.length>0" class=" mb-5 table table-bordered table-striped">
     <thead class="thead-dark">
-      <tr>
+      <tr class="text-center">
         <th>Catégorie</th>
         <th>N°</th>
         <th>Prix</th>
         <th>Image</th>
         <th>Quantité</th>
         <th>État</th>
+        <th>Infos supp.</th>
+        <th>Année Coin Daté</th>
+        <th>Edit</th>
         <th>Suppr.</th>
       </tr>
     </thead>
     <tbody *ngIf="!loading">
       <tr *ngFor="let timbre of timbreList; index as i">
+        <!-- TABLE TIMBRE CATEGORIE -->
         <td>
-          <p class="mb-0" *ngIf="timbre.catTimbre=='classic'">Classique</p>
-          <p class="mb-0" *ngIf="timbre.catTimbre == 'spe'">Spécial</p>
-          <p class="mb-0" *ngIf="timbre.catTimbre == 'tas'">Taxe Av Serv</p>
-          <p class="mb-0" *ngIf="timbre.catTimbre == 'cd'">Coin Daté</p>
-          <p class="mb-0" *ngIf="timbre.catTimbre == 'obl'">Oblitéré</p>
+          <div *ngIf="editableTimbreId !== timbre.timbreId">
+            <p class="mb-0" *ngIf="timbre.catTimbre=='classic'">Classique</p>
+            <p class="mb-0" *ngIf="timbre.catTimbre == 'spe'">Spécial</p>
+            <p class="mb-0" *ngIf="timbre.catTimbre == 'tas'">Taxe Av Serv</p>
+            <p class="mb-0" *ngIf="timbre.catTimbre == 'cd'">Coin Daté</p>
+            <p class="mb-0" *ngIf="timbre.catTimbre == 'obl'">Oblitéré</p>
+          </div>
+          <div *ngIf="editableTimbreId === timbre.timbreId">
+            <select class="custom-select" [(ngModel)]="timbreForEdition.catTimbre">
+              <option value="classic">Classique</option>
+              <option value="spe">Spécial</option>
+              <option value="tas">Taxe Av Serv</option>
+              <option value="cd">Coin Daté</option>
+              <option value="obl">Oblitéré</option>
+            </select>
+          </div>
         </td>
-
+        <!-- TABLE TIMBRE NUMERO -->
         <td>
-          <div class="d-flex">
-            <p class="text-center mb-0 font-weight-bold">{{timbre.numeroTimbre}}</p>
+          <div class="d-flex" *ngIf="editableTimbreId !== timbre.timbreId">
+            <p class="text-center mb-0 font-weight-bold">
+              {{timbre.numeroTimbre}}</p>
             <p class="text-center mb-0 font-weight-bold">{{timbre.optionalInfos}}</p>
             <p class="mb-0" *ngIf="timbre.etatTimbre=='occas'">*</p>
             <p class="mb-0" *ngIf="timbre.etatTimbre=='sg'">SG</p>
             <p class="mb-0" *ngIf="timbre.etatTimbre=='cd'">({{timbre.anneeCoinDate}})</p>
             <p class="mb-0" *ngIf="timbre.etatTimbre == 'obl'">{{timbre.optionalInfos}}</p>
           </div>
+          <div>
+            <input type="text" class="form-control table-input" [(ngModel)]="timbreForEdition.numeroTimbre"
+              *ngIf="editableTimbreId === timbre.timbreId" />
+          </div>
         </td>
-        <td>{{ timbre.prixTimbre }}€</td>
+        <!-- TABLE TIMBRE PRIX -->
         <td>
-          <a [href]="timbre.imageTimbreUrl" target="_blank">
-            <img [src]="timbre.imageTimbreUrl" class="">
-          </a>
+          <input *ngIf="editableTimbreId === timbre.timbreId" placeholder="Prix" type="number" step="0.01" min="0"
+            class="table-input form-control" aria-label="Prix" [(ngModel)]="timbreForEdition.prixTimbre">
+          <div *ngIf="editableTimbreId !== timbre.timbreId">{{ timbre.prixTimbre }}€</div>
         </td>
+        <!-- TABLE IMG URL -->
+        <td class="px-0" style="width:20%">
+          <div *ngIf="editableTimbreId !== timbre.timbreId">
+            <a [href]="timbre.imageTimbreUrl" target="_blank">
+              <img [src]="timbre.imageTimbreUrl" class="">
+            </a>
+          </div>
+          <div>
+            <input *ngIf="editableTimbreId === timbre.timbreId" placeholder="URL" type="url"
+              class="form-control table-input" [(ngModel)]="timbreForEdition.imageTimbreUrl">
+          </div>
+        </td>
+        <!--TABLE TIMBRE QUANTITÉ -->
         <td (blur)="updateTimbre(timbre)">
           <div class="d-flex">
             <button (click)="changeTimbreQte(timbre,'minus')" class="qteBtn" [disabled]=" timbre.quantiteTimbre==0">
@@ -150,15 +185,65 @@
             <button (click)="changeTimbreQte(timbre,'plus')" class="qteBtn">
               <p>+</p>
             </button>
+          </div>
+        </td>
+        <!--TABLE  TIMBRE ÉTAT -->
+        <td>
+          <div *ngIf="editableTimbreId !== timbre.timbreId">
+            <p class="mb-0" *ngIf="timbre.etatTimbre=='neuf'">Neuf</p>
+            <p class="mb-0" *ngIf="timbre.etatTimbre=='occas'">Charnière</p>
+            <p class="mb-0" *ngIf="timbre.etatTimbre=='sg'">Sans Gomme</p>
+          </div>
 
+          <div *ngIf="editableTimbreId === timbre.timbreId">
+            <select style="width:6em;" class="custom-select" [(ngModel)]="timbreForEdition.etatTimbre">
+              <option value="neuf">Neuf</option>
+              <option value="occas">Charnière</option>
+              <option value="sg">Sans Gomme</option>
+            </select>
+          </div>
+
+        </td>
+
+        <!-- TABLE TIMBRE OPTIONAL INFOS -->
+        <td style="width: 10%;">
+          <div *ngIf="editableTimbreId !== timbre.timbreId">
+            <p>{{timbre.optionalInfos}}</p>
+          </div>
+          <div *ngIf="editableTimbreId === timbre.timbreId">
+            <input placeholder="Infos supp" type="text" class="form-control table-input" aria-label="InfosSuppEdition"
+              [(ngModel)]="timbreForEdition.optionalInfos">
+          </div>
+        </td>
+        <!-- ANNEE COINS DATÉS -->
+        <td style="width: 10%;">
+          <div *ngIf="editableTimbreId !== timbre.timbreId">
+            <p>{{timbre.anneeCoinDate}}</p>
+          </div>
+          <div *ngIf="editableTimbreId === timbre.timbreId">
+            <input placeholder="Année" type="number" min="0" max="2999" class="form-control table-input"
+              aria-label="anneeCoinDateEdition" [(ngModel)]="timbreForEdition.anneeCoinDate">
           </div>
         </td>
         <td>
-          <div>
-            <p class="mb-0" *ngIf="timbre.etatTimbre=='neuf'">Neuf</p>
-            <p class="mb-0" *ngIf="timbre.etatTimbre=='occas'">Occasion</p>
-            <p class="mb-0" *ngIf="timbre.etatTimbre=='sg'">Sans Gomme</p>
+          <button *ngIf="editableTimbreId !== timbre.timbreId" class="btn btn-outline-info"
+            (click)="allowTimbreEdition(timbre)"><svg width="1em" height="1em" viewBox="0 0 16 16"
+              class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+              <path fill-rule="evenodd"
+                d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+            </svg></button>
+          <div class="d-flex" *ngIf="editableTimbreId === timbre.timbreId">
+            <button id="editionValidation" class="btn btn-outline-success" (click)="updateTimbre(timbreForEdition)"><svg
+                width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                  d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+              </svg></button>
+            <button id="editionCancel" class="btn btn-outline-danger" (click)="abortEdition()">X</button>
           </div>
+
         </td>
         <td>
           <button type="button" (click)="deleteTimbreById(timbre)" class="btn btn-outline-danger"><svg width="1em"

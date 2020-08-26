@@ -12,7 +12,8 @@
 #prixInput,
 #quantiteInput,
 #typeInput,
-#aneeCoinDateInput {
+#aneeCoinDateInput,
+#urlInput {
   margin-bottom: 0.5em;
 }
 
@@ -38,7 +39,7 @@
 }
 
 a img {
-  width: 5.5%;
+  height: 2.5em;
 }
 
 .qteBtn:disabled {
@@ -79,6 +80,10 @@ a img {
 }
 
 table {
-  max-width: 70%;
+  max-width: 90%;
   margin: auto;
+}
+
+.table-input {
+  padding: 0 5px;
 }
