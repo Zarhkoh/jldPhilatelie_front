@@ -4,6 +4,7 @@ import { TimbreService } from 'src/app/services/timbre.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,7 @@ import { LoginService } from 'src/app/services/login.service';
 export class HeaderComponent implements OnInit {
 
   searchForm: FormGroup
-  constructor(public router: Router, public location: Location, private timbreService: TimbreService, private loginService: LoginService, private formBuilder: FormBuilder) { }
+  constructor(public toastService: ToastService, public router: Router, public location: Location, private timbreService: TimbreService, private loginService: LoginService, private formBuilder: FormBuilder) { }
 
 
   ngOnInit(): void {
@@ -24,6 +25,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     if (this.loginService.logout()) {
+      this.toastService.showSuccess("Vous êtes maintenant déconnecté.");
       this.router.navigate(['/']);
     }
   }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 import { Router } from '@angular/router';
+import { ToastService } from 'src/app/services/toast.service';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   error: string;
-  constructor(private loginService: LoginService, private formBuilder: FormBuilder, private router: Router) {
+  constructor(private toastService: ToastService, private loginService: LoginService, private formBuilder: FormBuilder, private router: Router) {
     if (this.loginService.isAuthenticated()) {
       this.router.navigate(['/adminpanel']);
     }
@@ -35,6 +36,7 @@ export class LoginComponent implements OnInit {
 
   handleSuccess(data) {
     localStorage.setItem('token', data.token);
+    this.toastService.showSuccess("Vous êtes maintenant connecté.");
     this.router.navigate(['/adminpanel']);
     // this.presentSuccessToast("Connexion réussie !");
   }
