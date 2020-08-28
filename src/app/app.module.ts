@@ -19,6 +19,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AdminRegisterComponent } from './components/admin-register/admin-register.component';
 import { FourOFourComponent } from './components/four-o-four/four-o-four.component';
 import { ToastComponent } from './components/toast/toast.component';
+import { ArrowToTopComponent } from './components/arrow-to-top/arrow-to-top.component';
 
 
 export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
@@ -47,7 +48,8 @@ export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
     AdminPanelComponent,
     AdminRegisterComponent,
     FourOFourComponent,
-    ToastComponent
+    ToastComponent,
+    ArrowToTopComponent
   ],
   imports: [
     JwtModule.forRoot({
