@@ -59,7 +59,16 @@ export class TimbreService {
     return this.http.post(this.url + "/updateTimbre", { params });
   }
 
-  sortByNumer(a, b) {
+  sortByNumAsc(a, b) {
     return a.numeroTimbre - b.numeroTimbre;
+  }
+  sortByNumDesc(a, b) {
+    return b.numeroTimbre - a.numeroTimbre;
+  }
+  sortByPriceAsc(a, b) {
+    return a.prixTimbre - b.prixTimbre;
+  }
+  sortByPriceDesc(a, b) {
+    return b.prixTimbre - a.prixTimbre;
   }
 }

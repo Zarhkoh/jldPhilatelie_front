@@ -77,19 +77,19 @@ export class TimbreListComponent implements OnInit {
     // Trier la liste
     switch (this.sortFilter) {
       case "NumDesc": {
-        this.filteredTimbreList.sort(this.sortByNumDesc);
+        this.filteredTimbreList.sort(this.timbreService.sortByNumDesc);
         break;
       }
       case "PriceAsc": {
-        this.filteredTimbreList.sort(this.sortByPriceAsc);
+        this.filteredTimbreList.sort(this.timbreService.sortByPriceAsc);
         break;
       }
       case "PriceDesc": {
-        this.filteredTimbreList.sort(this.sortByPriceDesc);
+        this.filteredTimbreList.sort(this.timbreService.sortByPriceDesc);
         break;
       }
       default: {
-        this.filteredTimbreList.sort(this.sortByNumAsc);
+        this.filteredTimbreList.sort(this.timbreService.sortByNumAsc);
         break;
       }
     }
@@ -124,7 +124,7 @@ export class TimbreListComponent implements OnInit {
       this.loading = true;
       this.timbreService.getTimbresByCat(cat).subscribe(data => {
         this.timbreList = data as Timbre[];
-        this.timbreList.sort(this.timbreService.sortByNumer);
+        this.timbreList.sort(this.timbreService.sortByNumAsc);
         if (this.timbreList && this.timbreList != null && this.timbreList.length == 0) {
           this.error = 'Aucun timbre n\'existe pour cette catégorie';
         }
@@ -145,7 +145,7 @@ export class TimbreListComponent implements OnInit {
         this.timbreService.getTimbresByRange(start, end).subscribe(data => {
           this.timbreList = data as Timbre[];
           this.filteredTimbreList = this.timbreList;
-          this.timbreList.sort(this.timbreService.sortByNumer);
+          this.timbreList.sort(this.timbreService.sortByNumAsc);
           if (this.timbreList && this.timbreList != null && this.timbreList.length == 0) {
             this.error = 'Aucun timbre n\'existe entre ' + start + ' et ' + end;
           }
@@ -158,18 +158,4 @@ export class TimbreListComponent implements OnInit {
       this.error = 'Les paramètres doivent être des chiffres entiers positifs.';
     }
   }
-
-  sortByNumAsc(a, b) {
-    return a.numeroTimbre - b.numeroTimbre;
-  }
-  sortByNumDesc(a, b) {
-    return b.numeroTimbre - a.numeroTimbre;
-  }
-  sortByPriceAsc(a, b) {
-    return a.prixTimbre - b.prixTimbre;
-  }
-  sortByPriceDesc(a, b) {
-    return b.prixTimbre - a.prixTimbre;
-  }
-
 }
