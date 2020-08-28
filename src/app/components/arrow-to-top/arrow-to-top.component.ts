@@ -12,7 +12,6 @@ export class ArrowToTopComponent implements OnInit {
   }
   @HostListener('window:scroll', [])
   onWindowScroll() {
-    console.log(scrollY);
     if (scrollY < 170) {
       this.arrowDisplay = false;
     } else {
