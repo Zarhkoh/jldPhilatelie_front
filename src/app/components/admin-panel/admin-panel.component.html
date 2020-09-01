@@ -87,10 +87,9 @@
               class="form-control" formControlName="quantite">
           </div>
 
-          <!-- URL IMG -->
-          <div class="col-8">
-            <input type="url" class="form-control" id="urlInput" aria-label="url de l'image"
-              placeholder="URL de l'image" formControlName="image">
+          <!-- IMG -->
+          <div>
+            <input (change)="setImageFile(imageInput)" #imageInput type="file" accept="image/*" />
           </div>
           <button type="submit" id="sendBtn" class=" btn btn-primary">Ajouter</button>
         </div>

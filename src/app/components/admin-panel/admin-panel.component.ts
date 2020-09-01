@@ -3,6 +3,8 @@ import { TimbreService } from 'src/app/services/timbre.service';
 import { Timbre } from 'src/app/models/timbre';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastService } from 'src/app/services/toast.service';
+import { FileUploadService } from 'src/app/services/file-upload.service';
+
 
 @Component({
   selector: 'app-admin-panel',
@@ -11,22 +13,30 @@ import { ToastService } from 'src/app/services/toast.service';
 })
 export class AdminPanelComponent implements OnInit {
   timbreList = [];
-  test;
+  selectedImage;
+  imageFile;
   loading: boolean;
   timbreForm: FormGroup;
   editableTimbreId: number;
   timbreForEdition;
-  constructor(private toastService: ToastService, private timbreService: TimbreService, private formBuilder: FormBuilder) { }
+  reader;
+  responseImageUploadUrl;
+  constructor(private fileUploadService: FileUploadService, private toastService: ToastService, private timbreService: TimbreService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.reader = new FileReader();
     this.editableTimbreId = 0;
     this.loading = false;
     this.getAllTimbres();
+    this.setupForm();
+  }
+
+  setupForm() {
     this.timbreForm = this.formBuilder.group({
       numero: [],
       prix: [],
-      quantite: [],
       image: [],
+      quantite: [],
       categorie: [],
       etat: ['neuf'],
       anneeCoinDate: [],
@@ -34,22 +44,32 @@ export class AdminPanelComponent implements OnInit {
       tasType: []
     });
   }
-
   getAllTimbres() {
     this.loading = true;
     this.timbreService.getAllTimbres().subscribe(data => {
       this.timbreList = data as Timbre[];
       this.loading = false;
     });
+  }
+
+  async addTimbre() {
+    try {
+      this.responseImageUploadUrl = await this.uploadImg();
+      this.timbreForm.patchValue({ image: this.responseImageUploadUrl.url });
+      this.timbreService.addTimbre(this.timbreForm.value).subscribe(data => {
+        this.toastService.showSuccess(`Timbre n°${this.timbreForm.value.numero} créé`);
+        this.setupForm();
+        this.getAllTimbres();
+      });
+    } catch (error) {
+      this.toastService.showDanger(error);
+      return;
+    }
 
   }
 
-  addTimbre() {
-    this.timbreService.addTimbre(this.timbreForm.value).subscribe(data => {
-      this.toastService.showSuccess(`Timbre n°${this.timbreForm.value.numero} créé`);
-      this.timbreForm.reset();
-      this.getAllTimbres();
-    });
+  async uploadImg() {
+    return await this.fileUploadService.upload(this.selectedImage, this.imageFile.name.split('.').slice(0, -1)[0]);
   }
 
   deleteTimbreById(timbre) {
@@ -62,9 +82,9 @@ export class AdminPanelComponent implements OnInit {
   }
 
   changeTimbreQte(timbre, operation) {
-    if (operation === "plus") {
+    if (operation === 'plus') {
       timbre.quantiteTimbre += 1;
-    } else if (operation === "minus") {
+    } else if (operation === 'minus') {
       timbre.quantiteTimbre -= 1;
     }
     this.updateTimbre(timbre);
@@ -76,10 +96,6 @@ export class AdminPanelComponent implements OnInit {
       this.editableTimbreId = 0;
       this.toastService.showSuccess('Timbre n°' + timbre.numeroTimbre + ' mis à jour.');
     }), error => console.log(error);
-  }
-  // EN FAIRE UN PIPE
-  sortListByTimbreNumber() {
-    this.timbreList.sort(this.timbreService.sortByNumAsc);
   }
 
   setCat(cat) {
@@ -105,4 +121,11 @@ export class AdminPanelComponent implements OnInit {
     this.editableTimbreId = 0;
   }
 
+  setImageFile(imageInput: any) {
+    this.imageFile = imageInput.files[0];
+    this.reader.addEventListener('load', (event: any) => {
+      this.selectedImage = event.target.result;
+    });
+    this.reader.readAsDataURL(this.imageFile);
+  }
 }
