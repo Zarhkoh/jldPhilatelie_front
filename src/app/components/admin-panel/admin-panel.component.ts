@@ -79,7 +79,7 @@ export class AdminPanelComponent implements OnInit {
   }
   // EN FAIRE UN PIPE
   sortListByTimbreNumber() {
-    this.timbreList.sort(this.timbreService.sortByNumer);
+    this.timbreList.sort(this.timbreService.sortByNumAsc);
   }
 
   setCat(cat) {
