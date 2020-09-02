@@ -50,7 +50,7 @@
         <p class="mb-0" *ngIf="timbre.catTimbre=='cd'">({{timbre.anneeCoinDate}})</p>
         <p class="mb-0" *ngIf="timbre.catTimbre == 'obl' || timbre.catTimbre == 'spe'">{{timbre.optionalInfos}}</p>
       </div>
-      <a [href]="timbre.imageTimbreUrl" target="_blank">
+      <button class="invisible-button" (click)="showDialog(timbre)">
         <div
           [ngClass]="{'timbreImg': timbre.catTimbre != 'cd' && timbre.catTimbre !=='spe', 'cdImg': timbre.catTimbre == 'cd','speImg': timbre.catTimbre == 'spe'}"
           [ngStyle]="{ 'background-image': 'url(' + timbre.imageTimbreUrl + ')'}"
@@ -62,9 +62,16 @@
             [ngClass]="{'timbreImg': timbre.catTimbre != 'cd' && timbre.catTimbre !=='spe', 'cdImg': timbre.catTimbre == 'cd','speImg': timbre.catTimbre == 'spe'}"
             src="{{timbre.imageTimbreUrl}}"> -->
         </div>
-      </a>
+      </button>
 
       <p class="text-center mb-0">{{timbre.prixTimbre}}€</p>
     </div>
   </div>
 </div>
+
+<p-dialog [dismissableMask]="true" [modal]="true" header="Timbre N°{{selectedTimbre.numeroTimbre}}"
+  [(visible)]="display">
+  <div class="d-flex justify-content-center">
+    <img class="focusedStampImg" src="{{selectedTimbre.imageTimbreUrl}}">
+  </div>
+</p-dialog>

@@ -9,6 +9,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./timbre-list.component.css']
 })
 export class TimbreListComponent implements OnInit {
+  display: boolean = false;
+  selectedTimbre = new Timbre;
   timbreList = [];
   filteredTimbreList = [];
   timbreStart;
@@ -16,10 +18,10 @@ export class TimbreListComponent implements OnInit {
   timbreSearch;
   timbreCat;
   error;
-  dispoFilter: Boolean;
+  dispoFilter: boolean;
   etatFilter;
   sortFilter;
-  loading: Boolean;
+  loading: boolean;
 
   constructor(private timbreService: TimbreService, private route: ActivatedRoute) {
   }
@@ -157,5 +159,9 @@ export class TimbreListComponent implements OnInit {
     } else {
       this.error = 'Les paramètres doivent être des chiffres entiers positifs.';
     }
+  }
+  showDialog(timbre) {
+    this.display = true;
+    this.selectedTimbre = timbre as Timbre;
   }
 }

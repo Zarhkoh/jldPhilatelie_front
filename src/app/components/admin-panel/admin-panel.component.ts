@@ -6,12 +6,16 @@ import { ToastService } from 'src/app/services/toast.service';
 import { FileUploadService } from 'src/app/services/file-upload.service';
 
 
+
 @Component({
   selector: 'app-admin-panel',
   templateUrl: './admin-panel.component.html',
   styleUrls: ['./admin-panel.component.css']
 })
 export class AdminPanelComponent implements OnInit {
+  display: boolean = false;
+  selectedTimbre = new Timbre;
+  cols;
   timbreList = [];
   selectedImage;
   imageFile;
@@ -127,5 +131,10 @@ export class AdminPanelComponent implements OnInit {
       this.selectedImage = event.target.result;
     });
     this.reader.readAsDataURL(this.imageFile);
+  }
+
+  showDialog(timbre) {
+    this.display = true;
+    this.selectedTimbre = timbre as Timbre;
   }
 }
