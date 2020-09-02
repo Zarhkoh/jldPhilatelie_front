@@ -137,3 +137,25 @@ label {
 a:hover {
   text-decoration: none;
 }
+.invisible-button {
+  border: none;
+  background: none;
+}
+
+/* MODAL CSS */
+::ng-deep .p-dialog {
+  background: #262c2c;
+  border-radius: 5px;
+}
+::ng-deep .p-dialog .p-dialog-header,
+::ng-deep .p-dialog .p-dialog-content {
+  color: white;
+  background: none;
+}
+::ng-deep .p-dialog .p-dialog-header {
+  padding: 0.5rem 0.5rem 0 0.8rem;
+}
+
+.focusedStampImg {
+  max-height: 20rem;
+}
