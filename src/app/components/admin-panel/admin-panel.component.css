@@ -19,6 +19,7 @@
 
 .card-header {
   border: 1px solid rgba(0, 0, 0, 0.125) !important;
+  border-radius: 5px;
   max-width: 40%;
   margin: auto;
   margin-bottom: 2em;
@@ -38,7 +39,7 @@
   width: 1.3em;
 }
 
-a img {
+button img {
   height: 2.5em;
 }
 
@@ -46,7 +47,7 @@ a img {
   background-color: #5f5f5f;
 }
 
-.qteBtn:focus {
+button:focus {
   outline: none;
 }
 
@@ -79,11 +80,43 @@ a img {
   width: 18em;
 }
 
-table {
-  max-width: 90%;
-  margin: auto;
-}
-
 .table-input {
   padding: 0 5px;
+}
+
+.table {
+  width: 92%;
+  margin: 0 auto 5em auto;
+  border: 1px solid rgba(0, 0, 0, 0.125) !important;
+  border-radius: 5px;
+}
+.tHeader {
+  padding: 0 !important;
+  background-color: rgb(56, 56, 56) !important;
+}
+.tabHead {
+  outline: none;
+  color: white !important;
+  background-color: rgb(56, 56, 56) !important;
+}
+
+td {
+  border-right: 1px solid rgba(0, 0, 0, 0.125) !important;
+  padding: 0 !important;
+  vertical-align: middle !important;
+}
+
+.invisible-button {
+  border: none;
+  background: none;
+}
+
+::ng-deep .p-dialog .p-dialog-header,
+::ng-deep .p-dialog .p-dialog-content {
+  color: white;
+  background: #262c2c;
+}
+
+.focusedStampImg {
+  max-height: 20rem;
 }
