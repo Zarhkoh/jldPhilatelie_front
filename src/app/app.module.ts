@@ -20,6 +20,11 @@ import { AdminRegisterComponent } from './components/admin-register/admin-regist
 import { FourOFourComponent } from './components/four-o-four/four-o-four.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { ArrowToTopComponent } from './components/arrow-to-top/arrow-to-top.component';
+import { TableModule } from 'primeng/table';
+import { DialogModule } from 'primeng/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 
 
 export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
@@ -49,8 +54,7 @@ export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
     AdminRegisterComponent,
     FourOFourComponent,
     ToastComponent,
-    ArrowToTopComponent
-  ],
+    ArrowToTopComponent],
   imports: [
     JwtModule.forRoot({
       config: {
@@ -64,7 +68,11 @@ export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
     HttpClientModule,
     NgbModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    TableModule,
+    DialogModule,
+    BrowserAnimationsModule
+
   ],
   providers: [{
     provide: UrlSerializer,
