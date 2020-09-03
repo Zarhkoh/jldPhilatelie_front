@@ -1,0 +1,55 @@
+::ng-deep .p-sidebar {
+  padding: 0;
+  background-color: rgb(255, 255, 255);
+  color: #495057;
+}
+::ng-deep .p-sidebar-content {
+  height: 100%;
+}
+::ng-deep .p-sidebar-close {
+  z-index: 1;
+}
+::ng-deep .p-datatable-flex-scrollable {
+  max-height: 93.6%;
+}
+.basketTable {
+  background-color: red;
+}
+.header {
+  height: 4.4%;
+  background-color: #f8f9fa;
+}
+
+.deleteBtn {
+  padding: 0 0.5rem;
+  border-radius: 20px;
+}
+.deleteBtn p {
+  margin: -1px 0 1px 0;
+}
+.img {
+  max-height: 2rem;
+}
+.invisible-button {
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.buttons {
+  height: 6.4%;
+}
+.basketBtn {
+  width: 50%;
+  border: none;
+  color: white;
+  height: 100%;
+}
+
+#cancelBtn {
+  background-color: #6c757d;
+}
+
+#okBtn {
+  background-color: #4492af;
+}

@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { ToastService } from 'src/app/services/toast.service';
+import { BasketService } from 'src/app/services/basket.service';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +15,7 @@ import { ToastService } from 'src/app/services/toast.service';
 export class HeaderComponent implements OnInit {
 
   searchForm: FormGroup
-  constructor(public toastService: ToastService, public router: Router, public location: Location, private timbreService: TimbreService, private loginService: LoginService, private formBuilder: FormBuilder) { }
+  constructor(private basketService: BasketService, public toastService: ToastService, public router: Router, public location: Location, private timbreService: TimbreService, private loginService: LoginService, private formBuilder: FormBuilder) { }
 
 
   ngOnInit(): void {
@@ -40,4 +41,11 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  displayBasket() {
+    this.basketService.displayBasket = !this.basketService.displayBasket;
+  }
+
+  get basketItemNumber() {
+    return this.basketService.timbreList.length;
+  }
 }

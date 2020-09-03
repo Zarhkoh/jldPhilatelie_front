@@ -1,0 +1,48 @@
+<p-sidebar [(visible)]="display" position="right">
+  <p-table [value]="basketList" [scrollable]="true" scrollHeight="flex">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Image</th>
+        <th>Numéro</th>
+        <th>Prix</th>
+        <th style="width:15%"></th>
+      </tr>
+    </ng-template>
+    <ng-template class="overflow-auto" pTemplate="body" let-timbre>
+      <tr>
+        <td>
+          <div class="d-flex justify-content-center">
+            <button (click)="showDialog(timbre)" class="invisible-button">
+              <img class="img" [src]="timbre.imageTimbreUrl">
+            </button>
+          </div>
+        </td>
+        <td>{{timbre.numeroTimbre}}</td>
+        <td>{{timbre.prixTimbre}}</td>
+        <td><button type="button" (click)="deleteTimbreFromBasket(timbre)" class="deleteBtn btn btn-outline-danger">
+            <p>x</p>
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+    <!-- <ng-template pTemplate="summary">
+      <div class="d-flex justify-content-between">
+        <div *ngIf="basketList.length !== 1">{{basketList.length}} Articles</div>
+        <div *ngIf="basketList.length === 1">{{basketList.length}} Article</div>
+        <div>Total: {{basketTotal| number:'1.2-2'}}€</div>
+      </div>
+    </ng-template> -->
+  </p-table>
+  <div class="d-flex buttons">
+    <button id="cancelBtn" (click)="emptyBasket()" type="button" class="basketBtn">Vider le panier</button>
+    <button id="okBtn" (click)="mailContructionTest()" type="button" class="basketBtn">Envoyer pour
+      devis</button>
+  </div>
+</p-sidebar>
+
+<p-dialog [dismissableMask]="true" [modal]="true" header="Timbre N°{{selectedTimbre.numeroTimbre}}"
+  [(visible)]="displayModal">
+  <div class="d-flex justify-content-center">
+    <img class="focusedStampImg" src="{{selectedTimbre.imageTimbreUrl}}">
+  </div>
+</p-dialog>

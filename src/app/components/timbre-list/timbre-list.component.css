@@ -159,3 +159,22 @@ a:hover {
 .focusedStampImg {
   max-height: 20rem;
 }
+
+.addBasketButton {
+  background-color: #4492af;
+  color: white;
+  margin-top: 0.8rem;
+  border-radius: 3px;
+  border: 1px solid white;
+}
+.addBasketButton svg {
+  margin-bottom: 0.3rem;
+}
+.addBasketButton span {
+  padding-left: 0.4rem;
+  margin-left: 0.4rem;
+  border-left: 1px solid white;
+}
+.addBasketButton:hover {
+  background-color: rgb(233, 233, 233);
+}

@@ -23,6 +23,9 @@ import { ArrowToTopComponent } from './components/arrow-to-top/arrow-to-top.comp
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BasketComponent } from './components/basket/basket.component';
+import { SidebarModule } from 'primeng/sidebar';
+
 
 
 
@@ -54,7 +57,8 @@ export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
     AdminRegisterComponent,
     FourOFourComponent,
     ToastComponent,
-    ArrowToTopComponent],
+    ArrowToTopComponent,
+    BasketComponent],
   imports: [
     JwtModule.forRoot({
       config: {
@@ -71,7 +75,8 @@ export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
     FormsModule,
     TableModule,
     DialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SidebarModule
 
   ],
   providers: [{

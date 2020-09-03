@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TimbreService } from '../../services/timbre.service';
 import { Timbre } from '../../models/timbre';
 import { ActivatedRoute } from '@angular/router';
+import { BasketService } from 'src/app/services/basket.service';
 
 @Component({
   selector: 'app-timbre-list',
@@ -23,7 +24,7 @@ export class TimbreListComponent implements OnInit {
   sortFilter;
   loading: boolean;
 
-  constructor(private timbreService: TimbreService, private route: ActivatedRoute) {
+  constructor(private basketService: BasketService, private timbreService: TimbreService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -163,5 +164,9 @@ export class TimbreListComponent implements OnInit {
   showDialog(timbre) {
     this.display = true;
     this.selectedTimbre = timbre as Timbre;
+  }
+
+  addToBasket(timbre) {
+    this.basketService.addTimbreToBasket(timbre);
   }
 }

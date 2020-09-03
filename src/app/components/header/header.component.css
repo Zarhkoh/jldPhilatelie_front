@@ -58,3 +58,11 @@
   color: white;
   text-decoration: none;
 }
+#basket-button {
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+#basket-button p {
+  margin: 0.3rem 0 1rem 0.4rem;
+}
