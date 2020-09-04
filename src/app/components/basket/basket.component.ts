@@ -25,13 +25,20 @@ export class BasketComponent implements OnInit {
     this.basketService.emptyBasket();
     this.basketList = [];
   }
+  adjustQuantity(timbre, operator) {
+    this.basketService.adjustQuantity(timbre, operator);
+  }
 
   get basketTotal() {
     let sum = 0;
     this.basketList.forEach(timbre => {
-      sum += Number(timbre.prixTimbre);
+      sum += Number(timbre.prixTimbre * timbre.quantite);
     });
     return sum;
+  }
+
+  get basketItemsNumber() {
+    return this.basketService.totalArticlesNumber;
   }
 
   get display(): boolean {
@@ -60,7 +67,8 @@ export class BasketComponent implements OnInit {
     }
     let message = '.%0D%0D%5BMessage%20optionnel%5D';
     this.basketList.forEach((timbre, index, array) => {
-      if (timbre.catTimbre != 'classic') {
+      numerosTimbre += timbre.quantite + 'x ';
+      if (timbre.catTimbre !== 'classic') {
         numerosTimbre += timbre.catTimbre + " "
       }
       numerosTimbre += timbre.numeroTimbre;

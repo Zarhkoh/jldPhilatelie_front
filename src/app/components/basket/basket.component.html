@@ -2,37 +2,56 @@
   <p-table [value]="basketList" [scrollable]="true" scrollHeight="flex">
     <ng-template pTemplate="header">
       <tr>
+        <th>Qté.</th>
         <th>Image</th>
         <th>Numéro</th>
         <th>Prix</th>
-        <th style="width:15%"></th>
+        <th></th>
       </tr>
     </ng-template>
     <ng-template class="overflow-auto" pTemplate="body" let-timbre>
       <tr>
         <td>
-          <div class="d-flex justify-content-center">
+          <div class=" qtés d-flex justify-content-between">
+            <button [disabled]="1>=timbre.quantite" class="qteBtn d-flex align-items-center" type="button"
+              (click)='adjustQuantity(timbre, "-")'><span>-</span></button>
+            <div class="qte">{{timbre.quantite}}</div>
+            <button class="qteBtn d-flex align-items-center" type="button"
+              (click)='adjustQuantity(timbre,"+")'><span>+</span></button>
+          </div>
+        </td>
+
+        <td>
+          <div class="d-flex">
             <button (click)="showDialog(timbre)" class="invisible-button">
               <img class="img" [src]="timbre.imageTimbreUrl">
             </button>
           </div>
         </td>
-        <td>{{timbre.numeroTimbre}}</td>
-        <td>{{timbre.prixTimbre}}</td>
+        <td>
+          <div class="d-flex justify-content-center">
+            <p class="mb-0 font-weight-bold" *ngIf="timbre.catTimbre=='tas'">{{timbre.tasType}}</p>
+            <p *ngIf="timbre.numeroTimbre !== 0" class="text-center mb-0 font-weight-bold">{{timbre.numeroTimbre}}</p>
+            <p class="mb-0" *ngIf="timbre.etatTimbre=='occas'">*</p>
+            <p class="mb-0" *ngIf="timbre.etatTimbre=='sg'">SG</p>
+            <p class="mb-0" *ngIf="timbre.catTimbre=='cd'">({{timbre.anneeCoinDate}})</p>
+            <p class="mb-0" *ngIf="timbre.catTimbre == 'obl' || timbre.catTimbre == 'spe'">{{timbre.optionalInfos}}</p>
+          </div>
+        </td>
+        <td>{{timbre.prixTimbre}}€</td>
         <td><button type="button" (click)="deleteTimbreFromBasket(timbre)" class="deleteBtn btn btn-outline-danger">
             <p>x</p>
           </button>
         </td>
       </tr>
     </ng-template>
-    <!-- <ng-template pTemplate="summary">
-      <div class="d-flex justify-content-between">
-        <div *ngIf="basketList.length !== 1">{{basketList.length}} Articles</div>
-        <div *ngIf="basketList.length === 1">{{basketList.length}} Article</div>
-        <div>Total: {{basketTotal| number:'1.2-2'}}€</div>
-      </div>
-    </ng-template> -->
+
   </p-table>
+  <div class=" ml-4 d-flex justify-content-between tableFooter">
+    <div *ngIf="basketItemsNumber !== 1">{{basketItemsNumber}} Articles</div>
+    <div *ngIf="basketItemsNumber === 1">{{basketItemsNumber}} Article</div>
+    <div class="mr-4">Total: {{basketTotal| number:'1.2-2'}}€</div>
+  </div>
   <div class="d-flex buttons">
     <button id="cancelBtn" (click)="emptyBasket()" type="button" class="basketBtn">Vider le panier</button>
     <button id="okBtn" (click)="mailContructionTest()" type="button" class="basketBtn">Envoyer pour

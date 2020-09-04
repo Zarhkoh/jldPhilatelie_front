@@ -45,7 +45,7 @@ export class HeaderComponent implements OnInit {
     this.basketService.displayBasket = !this.basketService.displayBasket;
   }
 
-  get basketItemNumber() {
-    return this.basketService.timbreList.length;
+  get basketItemsNumber() {
+    return this.basketService.totalArticlesNumber;
   }
 }

@@ -3,6 +3,10 @@
   background-color: rgb(255, 255, 255);
   color: #495057;
 }
+
+::ng-deep .p-sidebar-right {
+  width: 25rem !important;
+}
 ::ng-deep .p-sidebar-content {
   height: 100%;
 }
@@ -10,7 +14,7 @@
   z-index: 1;
 }
 ::ng-deep .p-datatable-flex-scrollable {
-  max-height: 93.6%;
+  max-height: 90.3%;
 }
 .basketTable {
   background-color: red;
@@ -52,4 +56,30 @@
 
 #okBtn {
   background-color: #4492af;
+}
+
+.tableFooter {
+  height: 3.5%;
+}
+
+.qtés {
+  width: 4em;
+}
+
+.qteBtn {
+  color: white;
+  border: none;
+  background: #4492af;
+  height: 1.35em;
+}
+.qteBtn:focus {
+  outline: none;
+}
+
+.qteBtn:disabled {
+  background: #7a7a7a;
+}
+
+.qteBtn span {
+  align-self: center;
 }
