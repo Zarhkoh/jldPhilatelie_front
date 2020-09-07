@@ -26,7 +26,7 @@ export class BasketComponent implements OnInit {
 
   emptyBasket() {
     this.basketService.emptyBasket();
-    this.basketList = [];
+    this.getBasketList();
     this.displayEmptyBasket = false;
   }
   adjustQuantity(timbre, operator) {
@@ -63,7 +63,7 @@ export class BasketComponent implements OnInit {
   mailContructionTest() {
     let adresse = 'mailto:jld_philatelie@laposte.net';
     let sujet = '?subject=Devis%20avant%20commande';
-    let corps = '&body=Liste%20des%20timbres%20demandés:'
+    let corps = '&body=Liste%20des%20timbres%20demandés:';
     let numerosTimbre = '';
     let totalTimbre = '%0DNombre%20total:%20' + this.basketList.length + '%20timbre';
     if (this.basketList.length > 1) {
