@@ -15,11 +15,9 @@ import { BasketService } from 'src/app/services/basket.service';
 export class HeaderComponent implements OnInit {
 
   searchForm: FormGroup
-  basketQty;
   constructor(private basketService: BasketService, public toastService: ToastService, public router: Router, public location: Location, private timbreService: TimbreService, private loginService: LoginService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.basketQty();
     this.searchForm = this.formBuilder.group({
       numero_timbre: [],
     });
@@ -47,7 +45,6 @@ export class HeaderComponent implements OnInit {
   }
 
   get basketItemsNumber() {
-    this.basketQty = this.basketService.totalArticlesNumber;
-    return this.basketQty;
+    return this.basketService.totalArticlesNumber;
   }
 }
