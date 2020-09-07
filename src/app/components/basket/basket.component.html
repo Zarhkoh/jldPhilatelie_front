@@ -20,10 +20,9 @@
               (click)='adjustQuantity(timbre,"+")'><span>+</span></button>
           </div>
         </td>
-
         <td>
           <div class="d-flex">
-            <button (click)="showDialog(timbre)" class="invisible-button">
+            <button (click)="showTimbreImgDialog(timbre)" class="invisible-button">
               <img class="img" [src]="timbre.imageTimbreUrl">
             </button>
           </div>
@@ -53,15 +52,35 @@
     <div class="mr-4">Total: {{basketTotal| number:'1.2-2'}}€</div>
   </div>
   <div class="d-flex buttons">
-    <button id="cancelBtn" (click)="emptyBasket()" type="button" class="basketBtn">Vider le panier</button>
-    <button id="okBtn" (click)="mailContructionTest()" type="button" class="basketBtn">Envoyer pour
+    <button id="cancelBtn" [disabled]="basketList.length===0" (click)="displayEmptyBasket=true" type="button"
+      class="basketBtn">Vider le
+      panier</button>
+    <button id="okBtn" [disabled]="basketList.length===0" (click)="mailContructionTest()" type="button"
+      class="basketBtn">Envoyer pour
       devis</button>
   </div>
 </p-sidebar>
 
 <p-dialog [dismissableMask]="true" [modal]="true" header="Timbre N°{{selectedTimbre.numeroTimbre}}"
-  [(visible)]="displayModal">
+  [(visible)]="displayTimbreModal">
   <div class="d-flex justify-content-center">
     <img class="focusedStampImg" src="{{selectedTimbre.imageTimbreUrl}}">
   </div>
+</p-dialog>
+
+
+<p-dialog id="test" [(visible)]="displayEmptyBasket">
+  <p-header>
+    Suppression panier
+  </p-header>
+  <div class="px-4 py-4">
+    Souhaitez-vous vraiment vider votre panier?
+  </div>
+
+  <p-footer>
+    <div class="d-flex">
+      <button id="cancelEmptyBtn" (click)="displayEmptyBasket = false" type="button" class="basketBtn">Non</button>
+      <button id="okEmptyBtn" (click)="emptyBasket()" type="button" class="basketBtn">Oui</button>
+    </div>
+  </p-footer>
 </p-dialog>
