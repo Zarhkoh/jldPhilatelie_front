@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BasketService } from 'src/app/services/basket.service';
 import { Timbre } from 'src/app/models/timbre';
+
 @Component({
   selector: 'app-basket',
   templateUrl: './basket.component.html',
@@ -9,21 +10,24 @@ import { Timbre } from 'src/app/models/timbre';
 export class BasketComponent implements OnInit {
   basketList = [];
   mailLink;
-  displayModal: boolean = false;
+  displayTimbreModal: boolean = false;
+  displayEmptyBasket: boolean = false;
+
   selectedTimbre = new Timbre;
   constructor(private basketService: BasketService) { }
 
   getBasketList() {
-    console.log("basket updated");
     this.basketList = this.basketService.getBasket();
   }
 
   deleteTimbreFromBasket(timbre) {
     this.basketService.deleteTimbreFromBasket(timbre);
   }
+
   emptyBasket() {
     this.basketService.emptyBasket();
     this.basketList = [];
+    this.displayEmptyBasket = false;
   }
   adjustQuantity(timbre, operator) {
     this.basketService.adjustQuantity(timbre, operator);
@@ -51,8 +55,8 @@ export class BasketComponent implements OnInit {
   ngOnInit(): void {
     this.getBasketList();
   }
-  showDialog(timbre) {
-    this.displayModal = true;
+  showTimbreImgDialog(timbre) {
+    this.displayTimbreModal = true;
     this.selectedTimbre = timbre;
   }
 

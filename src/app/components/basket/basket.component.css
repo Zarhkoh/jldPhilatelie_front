@@ -1,9 +1,6 @@
 ::ng-deep .p-sidebar {
   padding: 0;
-  background-color: rgb(255, 255, 255);
-  color: #495057;
 }
-
 ::ng-deep .p-sidebar-right {
   width: 25rem !important;
 }
@@ -16,17 +13,41 @@
 ::ng-deep .p-datatable-flex-scrollable {
   max-height: 90.3%;
 }
-.basketTable {
-  background-color: red;
+::ng-deep #test .p-dialog-header,
+::ng-deep #test .p-dialog-content {
+  background: white !important;
+  color: #383838;
 }
+::ng-deep #test .p-dialog-content,
+::ng-deep #test .p-dialog-footer {
+  padding: 0;
+}
+#cancelEmptyBtn,
+#okEmptyBtn {
+  height: 2.5em;
+  width: 50%;
+  margin: 0;
+}
+#cancelEmptyBtn {
+  border-radius: 0 0 0 3px;
+  background-color: #6c757d;
+}
+#okEmptyBtn {
+  border-radius: 0 0 3px 0;
+  background-color: #4392af;
+}
+
 .header {
   height: 4.4%;
   background-color: #f8f9fa;
 }
-
 .deleteBtn {
+  border: none;
   padding: 0 0.5rem;
   border-radius: 20px;
+}
+button:focus {
+  outline: none;
 }
 .deleteBtn p {
   margin: -1px 0 1px 0;
