@@ -1,4 +1,4 @@
-<div id="headerContent" class="d-flex justify-content-between">
+<div id="headerContent" class="d-flex justify-content-between align-items-end">
   <div class="logo">
     <a routerLink="/">
       <img id="headerLogo" src="../../../assets/img/logo_white.png">
@@ -17,7 +17,7 @@
         </svg>
       </button>
     </div>
-    <div><button class="d-flex" (click)="displayBasket()" id="basket-button" type="button">
+    <div class="buttonDiv"><button class="mb-2 d-flex" (click)="displayBasket()" id="basket-button" type="button">
         <svg *ngIf="basketItemsNumber === 0" width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-bag-dash"
           fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd"
