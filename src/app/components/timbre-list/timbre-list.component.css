@@ -163,6 +163,7 @@ a:hover {
 .addBasketButton {
   background-color: #4492af;
   color: white;
+  width: 12.8em;
   margin-top: 0.8rem;
   border-radius: 3px;
   border: 1px solid white;
@@ -176,5 +177,12 @@ a:hover {
   border-left: 1px solid white;
 }
 .addBasketButton:hover {
-  background-color: rgb(233, 233, 233);
+  background-color: #3b7e96;
+}
+
+.confirmBasketBtn {
+  background-color: rgb(76, 161, 76);
+}
+.confirmBasketBtn:hover {
+  background-color: rgb(76, 161, 76);
 }
