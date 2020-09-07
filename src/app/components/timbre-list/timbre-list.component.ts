@@ -23,7 +23,7 @@ export class TimbreListComponent implements OnInit {
   etatFilter;
   sortFilter;
   loading: boolean;
-
+  basketConfirmation;
   constructor(private basketService: BasketService, private timbreService: TimbreService, private route: ActivatedRoute) {
   }
 
@@ -167,6 +167,18 @@ export class TimbreListComponent implements OnInit {
   }
 
   addToBasket(timbre) {
-    this.basketService.addTimbreToBasket(timbre);
+    try {
+      this.basketService.addTimbreToBasket(timbre);
+    } catch (error) {
+    }
+    this.displayBasketConfirmation();
+
+  }
+
+  displayBasketConfirmation() {
+    this.basketConfirmation = true;
+    setTimeout(() => {
+      this.basketConfirmation = false;
+    }, 1500);
   }
 }
