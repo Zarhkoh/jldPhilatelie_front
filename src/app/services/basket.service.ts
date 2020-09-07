@@ -13,26 +13,29 @@ export class BasketService {
   }
   addTimbreToBasket(timbre) {
     let foundMatchInBasket;
-    const savedTimbre = {
-      "catTimbre": timbre.catTimbre,
-      "numeroTimbre": timbre.numeroTimbre,
-      "optionalInfos": timbre.optionalInfos,
-      "etatTimbre": timbre.etatTimbre,
-      "prixTimbre": timbre.prixTimbre,
-      "imageTimbreUrl": timbre.imageTimbreUrl,
-      "quantite": 1
-    };
-    foundMatchInBasket = this.timbreList.find(t => t.catTimbre + t.numeroTimbre + t.optionalInfos + t.etatTimbre == savedTimbre.catTimbre + savedTimbre.numeroTimbre + savedTimbre.optionalInfos + savedTimbre.etatTimbre);
+    try {
+      const savedTimbre = {
+        "catTimbre": timbre.catTimbre,
+        "numeroTimbre": timbre.numeroTimbre,
+        "optionalInfos": timbre.optionalInfos,
+        "etatTimbre": timbre.etatTimbre,
+        "prixTimbre": timbre.prixTimbre,
+        "imageTimbreUrl": timbre.imageTimbreUrl,
+        "quantite": 1
+      };
+      foundMatchInBasket = this.timbreList.find(t => t.catTimbre + t.numeroTimbre + t.optionalInfos + t.etatTimbre == savedTimbre.catTimbre + savedTimbre.numeroTimbre + savedTimbre.optionalInfos + savedTimbre.etatTimbre);
 
-    if (foundMatchInBasket) {
-      console.log('"trouvé, +1"');
-      this.timbreList[this.timbreList.indexOf(foundMatchInBasket)].quantite += 1;
-    } else {
-      console.log('pas trouvé, création');
-
-      this.timbreList.push(savedTimbre);
+      if (foundMatchInBasket) {
+        this.timbreList[this.timbreList.indexOf(foundMatchInBasket)].quantite += 1;
+      } else {
+        this.timbreList.push(savedTimbre);
+      }
+      this.refreshLocalStorageBasket();
+    } catch (error) {
+      return error;
     }
-    this.refreshLocalStorageBasket();
+    return true;
+
   }
 
   getBasket() {
