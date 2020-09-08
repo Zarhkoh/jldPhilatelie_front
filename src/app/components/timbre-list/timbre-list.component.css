@@ -176,10 +176,15 @@ a:hover {
   margin-left: 0.4rem;
   border-left: 1px solid white;
 }
-.addBasketButton:hover {
+.addBasketButton:enabled:hover {
   background-color: #3b7e96;
 }
-
+.addBasketButton:disabled {
+  opacity: 30%;
+}
+.addBasketButton:disabled:hover {
+  opacity: 30%;
+}
 .confirmBasketBtn {
   background-color: rgb(76, 161, 76);
 }

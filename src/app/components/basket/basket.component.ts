@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BasketService } from 'src/app/services/basket.service';
 import { Timbre } from 'src/app/models/timbre';
+import { TimbreService } from 'src/app/services/timbre.service';
 
 @Component({
   selector: 'app-basket',
@@ -12,16 +13,24 @@ export class BasketComponent implements OnInit {
   mailLink;
   displayTimbreModal: boolean = false;
   displayEmptyBasket: boolean = false;
+  displayDevisModal: boolean = false;
+  displayBasketList: boolean = false;
+  basketDevisList = '';
 
   selectedTimbre = new Timbre;
-  constructor(private basketService: BasketService) { }
+  constructor(private basketService: BasketService, private timbreService: TimbreService) { }
 
   getBasketList() {
     this.basketList = this.basketService.getBasket();
   }
 
   deleteTimbreFromBasket(timbre) {
-    this.basketService.deleteTimbreFromBasket(timbre);
+    try {
+      this.basketService.deleteTimbreFromBasket(timbre);
+    } catch (error) {
+      console.log(error);
+
+    }
   }
 
   emptyBasket() {
@@ -29,6 +38,7 @@ export class BasketComponent implements OnInit {
     this.getBasketList();
     this.displayEmptyBasket = false;
   }
+
   adjustQuantity(timbre, operator) {
     this.basketService.adjustQuantity(timbre, operator);
   }
@@ -59,8 +69,46 @@ export class BasketComponent implements OnInit {
     this.displayTimbreModal = true;
     this.selectedTimbre = timbre;
   }
+  copyInputMessage(inputElement) {
+    inputElement.focus();
+    inputElement.select();
+    document.execCommand('copy');
+    inputElement.setSelectionRange(0, 0);
+    console.log('copié');
+  };
 
-  mailContructionTest() {
+  constructBasketList() {
+    this.basketList.forEach((timbre, index, array) => {
+      this.basketDevisList += `${timbre.quantite}x `;
+      if (timbre.catTimbre !== 'classic') {
+        this.basketDevisList += timbre.catTimbre + ' ';
+      }
+      this.basketDevisList += `${timbre.numeroTimbre}`;
+      if (timbre.optionalInfos) {
+        this.basketDevisList += timbre.optionalInfos;
+      }
+      if (timbre.etatTimbre === 'occas') {
+        this.basketDevisList += '*';
+      } else if (timbre.etatTimbre === 'sg') {
+        this.basketDevisList += 'sg';
+      }
+      if (index !== array.length - 1) {
+        this.basketDevisList += ', ';
+      } else {
+        this.basketDevisList += '.';
+      }
+    });
+    this.basketDevisList += ` \nQuantité totale: ${this.basketList.length} timbres.`;
+    this.showBasketList();
+  }
+
+  showBasketList() {
+    this.displayDevisModal = false;
+    this.display = false;
+    this.displayBasketList = true;
+  }
+
+  mailContruction() {
     let adresse = 'mailto:jld_philatelie@laposte.net';
     let sujet = '?subject=Devis%20avant%20commande';
     let corps = '&body=Liste%20des%20timbres%20demandés:';
@@ -91,5 +139,21 @@ export class BasketComponent implements OnInit {
       }
     });
     window.location.href = adresse + sujet + corps + numerosTimbre + totalTimbre + message;
+    this.cleanAfterDevis();
+  }
+
+  cleanAfterDevis() {
+    this.basketList.forEach(timbre => {
+      try {
+        this.timbreService.decrementTimbreQuantity(timbre.timbreId, timbre.quantite).subscribe(
+          data => { this.deleteTimbreFromBasket(timbre); },
+          error => { console.log(error); throw new Error(error); });
+      } catch (error) {
+        console.log(error);
+      }
+    });
+    this.display = false;
+    this.displayBasketList = false;
+    this.displayDevisModal = false;
   }
 }

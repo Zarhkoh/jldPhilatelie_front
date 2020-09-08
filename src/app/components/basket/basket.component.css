@@ -13,28 +13,40 @@
 ::ng-deep .p-datatable-flex-scrollable {
   max-height: 90.3%;
 }
-::ng-deep #test .p-dialog-header,
-::ng-deep #test .p-dialog-content {
+::ng-deep #SendMailModal .p-dialog-header,
+::ng-deep #SendMailModal .p-dialog-content,
+::ng-deep #ShowBasketListModal .p-dialog-header,
+::ng-deep #ShowBasketListModal .p-dialog-content,
+::ng-deep #EmptyBasketModal .p-dialog-header,
+::ng-deep #EmptyBasketModal .p-dialog-content {
   background: white !important;
   color: #383838;
 }
-::ng-deep #test .p-dialog-content,
-::ng-deep #test .p-dialog-footer {
+::ng-deep .textModal .p-dialog-content,
+::ng-deep .textModal .p-dialog-footer {
   padding: 0;
 }
 #cancelEmptyBtn,
-#okEmptyBtn {
+#okEmptyBtn,
+#openMailBtn,
+#getListBtn {
   height: 2.5em;
   width: 50%;
   margin: 0;
 }
+
 #cancelEmptyBtn {
   border-radius: 0 0 0 3px;
   background-color: #6c757d;
 }
-#okEmptyBtn {
+#okEmptyBtn,
+#openMailBtn {
   border-radius: 0 0 3px 0;
   background-color: #4392af;
+}
+#getListBtn {
+  border-radius: 0 0 0 3px;
+  background-color: #236088;
 }
 
 .header {
@@ -103,4 +115,33 @@ button:focus {
 
 .qteBtn span {
   align-self: center;
+}
+
+.listForManualMail {
+  background-color: #f1f1f1;
+  width: 35em;
+  border-radius: 3px;
+}
+
+#closeBasketListModal {
+  border: none;
+  color: white;
+  border-radius: 3px;
+  background: #4492af;
+}
+
+#copyBtn {
+  padding: 0;
+  border-radius: 3px;
+}
+
+#copyBtnDiv:disabled {
+  background: none;
+}
+
+textarea {
+  width: 100%;
+  resize: none;
+  border: none;
+  background: none !important;
 }

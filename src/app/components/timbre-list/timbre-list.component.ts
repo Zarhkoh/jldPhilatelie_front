@@ -14,6 +14,7 @@ export class TimbreListComponent implements OnInit {
   selectedTimbre = new Timbre;
   timbreList = [];
   filteredTimbreList = [];
+  basketList = [];
   timbreStart;
   timbreEnd;
   timbreSearch;
@@ -31,7 +32,7 @@ export class TimbreListComponent implements OnInit {
     this.loading = false;
     // Setup le rangement de la liste a num ascendant
     this.sortFilter = 'NumAsc';
-
+    this.basketList = this.basketService.timbreList;
     this.route.queryParams.subscribe(params => {
       this.timbreStart = params['start'];
       this.timbreEnd = params['end'];
@@ -50,6 +51,14 @@ export class TimbreListComponent implements OnInit {
     });
   }
 
+  adjustQtyWithBasket() {
+    console.log('on adjust');
+    this.basketList.forEach(element => {
+      console.log(element)
+      let timbre = this.timbreList.find(t => t.timbreId === element.timbreId).quantiteTimbre -= element.quantite;
+    });
+  }
+
   getAllTimbres() {
     this.loading = true;
     this.timbreService.getAllTimbres().subscribe(data => {
@@ -64,7 +73,7 @@ export class TimbreListComponent implements OnInit {
       this.timbreService.getTimbreByNumero(number).subscribe(data => {
         this.timbreList = data as Timbre[];
         if (this.timbreList.length === 0) {
-          this.error = 'Le timbre n°' + number + ' n\'est pas enregistré sur ce site.';
+          this.error = 'Le timbre n°' + number + ' n\'est pas disponible sur ce site.';
         }
         this.loading = false;
       });
@@ -121,12 +130,12 @@ export class TimbreListComponent implements OnInit {
     return this.filteredTimbreList;
   }
 
-
   getTimbreCat(cat) {
     try {
       this.loading = true;
       this.timbreService.getTimbresByCat(cat).subscribe(data => {
         this.timbreList = data as Timbre[];
+        this.adjustQtyWithBasket();
         this.timbreList.sort(this.timbreService.sortByNumAsc);
         if (this.timbreList && this.timbreList != null && this.timbreList.length == 0) {
           this.error = 'Aucun timbre n\'existe pour cette catégorie';
@@ -143,10 +152,10 @@ export class TimbreListComponent implements OnInit {
   getTimbreRange(start, end) {
     this.loading = true;
     if ((Number(start) && Number(end)) && (start > 0 && end > 0) && (start % 1 === 0 && end % 1 === 0)) {
-
       try {
         this.timbreService.getTimbresByRange(start, end).subscribe(data => {
           this.timbreList = data as Timbre[];
+          this.adjustQtyWithBasket();
           this.filteredTimbreList = this.timbreList;
           this.timbreList.sort(this.timbreService.sortByNumAsc);
           if (this.timbreList && this.timbreList != null && this.timbreList.length == 0) {
@@ -167,16 +176,22 @@ export class TimbreListComponent implements OnInit {
   }
 
   addToBasket(timbre) {
-    try {
-      this.basketService.addTimbreToBasket(timbre);
-    } catch (error) {
+    if (timbre.quantiteTimbre == 0) {
+      throw new Error('000');
     }
-    this.displayBasketConfirmation();
-
+    else {
+      try {
+        this.basketService.addTimbreToBasket(timbre);
+        this.timbreList[this.timbreList.indexOf(timbre)].quantiteTimbre -= 1;
+      } catch (error) {
+      }
+      this.displayBasketConfirmation();
+    }
   }
 
   displayBasketConfirmation() {
     this.basketConfirmation = true;
+    this.basketList = this.basketService.timbreList;
     setTimeout(() => {
       this.basketConfirmation = false;
     }, 1500);

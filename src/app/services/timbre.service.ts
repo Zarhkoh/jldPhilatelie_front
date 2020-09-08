@@ -6,8 +6,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class TimbreService {
-  url = 'https://jld-philatelieapi.navillus.kim/';
-  // url = 'http://localhost:3000';
+  // url = 'https://jld-philatelieapi.navillus.kim/';
+  url = 'http://localhost:3000';
 
 
   constructor(private http: HttpClient) { }
@@ -21,6 +21,13 @@ export class TimbreService {
       numero_timbre: numeroTimbre
     };
     return this.http.get(this.url + "/timbreByNumeroTimbre", { params });
+  }
+
+  getTimbreById(id) {
+    const params = {
+      numero_timbre: id
+    };
+    return this.http.get(this.url + "/timbreByIdTimbre", { params });
   }
 
   deleteTimbreById(id) {
@@ -57,6 +64,21 @@ export class TimbreService {
       newTimbre
     };
     return this.http.post(this.url + "/updateTimbre", { params });
+  }
+
+  incrementTimbreQuantity(id, qty) {
+    const params = {
+      id_timbre: id,
+      quantity: qty
+    };
+    return this.http.get(this.url + "/incrementTimbreQuantity", { params });
+  }
+  decrementTimbreQuantity(id, qty) {
+    const params = {
+      id_timbre: id,
+      quantity: qty
+    };
+    return this.http.get(this.url + "/decrementTimbreQuantity", { params });
   }
 
   sortByNumAsc(a, b) {
