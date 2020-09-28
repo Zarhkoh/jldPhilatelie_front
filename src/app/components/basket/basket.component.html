@@ -3,7 +3,7 @@
     <ng-template pTemplate="header">
       <tr>
         <th>Qté.</th>
-        <th>Image</th>
+        <!-- <th>Image</th> -->
         <th>Numéro</th>
         <th>Prix</th>
         <th></th>
@@ -20,13 +20,13 @@
               (click)='adjustQuantity(timbre,"plus")'><span>+</span></button>
           </div>
         </td>
-        <td>
+        <!-- <td>
           <div class="d-flex">
             <button (click)="showTimbreImgDialog(timbre)" class="invisible-button">
               <img class="img" [src]="timbre.imageTimbreUrl">
             </button>
           </div>
-        </td>
+        </td> -->
         <td>
           <div class="d-flex justify-content-center">
             <p class="mb-0 font-weight-bold" *ngIf="timbre.catTimbre=='tas'">{{timbre.tasType}}</p>
@@ -55,20 +55,23 @@
     <button id="cancelBtn" [disabled]="basketList.length===0" (click)="displayEmptyBasket=true" type="button"
       class="basketBtn">Vider le
       panier</button>
-    <button id="okBtn" [disabled]="basketList.length===0" (click)="displayDevisModal= true" type="button"
+    <!-- <button id="okBtn" [disabled]="basketList.length===0" (click)="displayDevisModal= true" type="button"
       class="basketBtn">Envoyer pour
+      devis</button> -->
+    <button id="okBtn" [disabled]="basketList.length===0" routerLink="/devis" type="button" class="basketBtn">Envoyer
+      pour
       devis</button>
   </div>
 </p-sidebar>
 
 
 <!-- Modal pour l'affichage de l'image du timbre -->
-<p-dialog [dismissableMask]="true" [modal]="true" header="Timbre N°{{selectedTimbre.numeroTimbre}}"
+<!-- <p-dialog [dismissableMask]="true" [modal]="true" header="Timbre N°{{selectedTimbre.numeroTimbre}}"
   [(visible)]="displayTimbreModal">
   <div class="d-flex justify-content-center">
     <img class="focusedStampImg" src="{{selectedTimbre.imageTimbreUrl}}">
   </div>
-</p-dialog>
+</p-dialog> -->
 
 
 <!-- Modal confirmation vidage panier -->
@@ -89,7 +92,7 @@
 </p-dialog>
 
 <!-- Modal envoi devis -->
-<p-dialog id="SendMailModal" class="textModal" [(visible)]="displayDevisModal">
+<!-- <p-dialog id="SendMailModal" class="textModal" [(visible)]="displayDevisModal">
   <p-header>
     Envoi devis
   </p-header>
@@ -111,23 +114,22 @@
       <button id="openMailBtn" (click)="mailContruction()" type="button" class="basketBtn">Ouvrir dans Mails</button>
     </div>
   </p-footer>
-</p-dialog>
-
+</p-dialog> -->
 
 <!-- MODAL LISTE POUR ENVOI MANUEL -->
-<p-dialog modal="true" closable="false" id="ShowBasketListModal" [(visible)]="displayBasketList">
+<!-- <p-dialog modal="true" closable="false" id="ShowBasketListModal" [(visible)]="displayBasketList">
   <p-header>
     Envoi devis manuel
   </p-header>
   <div class="px-4">
     <p class="mb-0">Intégrez cette liste dans votre mail:</p>
     <div class="listForManualMail d-flex justify-content-between font-weight-lighter">
-      {{basketDevisList}}
+      {{basketDevisList}} -->
 
-      <!-- <textarea pInputTextarea autoResize="autoResize" #devisList class="text-wrap mb-0">{{basketDevisList}}</textarea> -->
-      <!-- <div id="copyBtnDiv"><button id="copyBtn" (click)="copyInputMessage(devisList)" class="btn btn-sm"
+<!-- <textarea pInputTextarea autoResize="autoResize" #devisList class="text-wrap mb-0">{{basketDevisList}}</textarea> -->
+<!-- <div id="copyBtnDiv"><button id="copyBtn" (click)="copyInputMessage(devisList)" class="btn btn-sm"
           type="button">Copier</button></div> -->
-    </div>
+<!-- </div>
     <p><span class="font-weight-bolder">Attention:</span> Copiez bien cette liste ! Votre panier va être réinitialisé et
       ne contiendra
       plus vos timbres.</p>
@@ -136,4 +138,4 @@
   <p-footer class="d-flex justify-content-center">
     <button id="closeBasketListModal" (click)="cleanAfterDevis()" type="button">Terminer</button>
   </p-footer>
-</p-dialog>
+</p-dialog> -->

@@ -189,5 +189,5 @@ a:hover {
   background-color: rgb(76, 161, 76);
 }
 .confirmBasketBtn:hover {
-  background-color: rgb(76, 161, 76);
+  background-color: rgb(76, 161, 76) !important;
 }

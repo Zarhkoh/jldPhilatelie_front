@@ -67,11 +67,11 @@ button:focus {
 .img {
   max-height: 2rem;
 }
-.invisible-button {
+/* .invisible-button {
   padding: 0;
   border: none;
   background: none;
-}
+} */
 
 .buttons {
   height: 6.4%;

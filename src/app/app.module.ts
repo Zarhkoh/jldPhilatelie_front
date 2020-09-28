@@ -22,9 +22,16 @@ import { ToastComponent } from './components/toast/toast.component';
 import { ArrowToTopComponent } from './components/arrow-to-top/arrow-to-top.component';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BasketComponent } from './components/basket/basket.component';
 import { SidebarModule } from 'primeng/sidebar';
+import { DevisConfirmationComponent } from './components/devis-confirmation/devis-confirmation.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { LoadingComponent } from './components/loading/loading.component';
+import { MerciComponent } from './components/merci/merci.component';
+
 
 
 
@@ -58,7 +65,10 @@ export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
     FourOFourComponent,
     ToastComponent,
     ArrowToTopComponent,
-    BasketComponent],
+    BasketComponent,
+    DevisConfirmationComponent,
+    LoadingComponent,
+    MerciComponent],
   imports: [
     JwtModule.forRoot({
       config: {
@@ -76,7 +86,10 @@ export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
     TableModule,
     DialogModule,
     BrowserAnimationsModule,
-    SidebarModule
+    SidebarModule,
+    InputTextModule,
+    InputTextareaModule,
+    DropdownModule
 
   ],
   providers: [{

@@ -21,7 +21,6 @@ export class UserInformationsService {
         visitorIp: JSON.parse(ipJson).ip,
         visitorLastVisit: new Date()
       };
-      console.log('ui service: ', params);
       return this.http.post(this.url + "/newVisit", { params }).toPromise();
     });
 
