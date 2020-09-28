@@ -6,7 +6,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UserInformationsService {
   constructor(private http: HttpClient) { }
-  url = 'http://localhost:3000';
+  url = 'https://jld-philatelieapi.navillus.kim/';
+  // url = 'http://localhost:3000';
+
 
   async getIPAddress() {
     return await this.http.get('https://api.ipify.org/?format=json').toPromise();
