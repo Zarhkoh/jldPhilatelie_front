@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TimbreService } from './timbre.service';
+import { CONFIG } from 'src/CONFIG';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class BasketService {
-  url = 'https://jld-philatelieapi.navillus.kim/';
-  // url = 'http://localhost:3000';
+  url = CONFIG.service_url;
 
   displayBasket: boolean = false;
   timbreList = [];
