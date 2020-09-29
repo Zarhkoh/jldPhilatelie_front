@@ -6,8 +6,8 @@ import { TimbreService } from './timbre.service';
   providedIn: 'root'
 })
 export class BasketService {
-  // url = 'https://jld-philatelieapi.navillus.kim/';
-  url = 'http://localhost:3000';
+  url = 'https://jld-philatelieapi.navillus.kim/';
+  // url = 'http://localhost:3000';
 
   displayBasket: boolean = false;
   timbreList = [];
