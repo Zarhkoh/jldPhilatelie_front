@@ -50,39 +50,37 @@
     </div>
 
     <div class="col-5">
-      <form name="devisForm">
-        <!-- SOUS TOTAL -->
-        <div id="total-articles" class="d-flex justify-content-between">
-          <span>Total articles </span>
-          <span>{{totalArticles|number:'1.2'}}€</span>
+      <!-- SOUS TOTAL -->
+      <div id="total-articles" class="d-flex justify-content-between">
+        <span>Total articles </span>
+        <span>{{totalArticles|number:'1.2'}}€</span>
+      </div>
+      <!-- CHOIX LIVRAISON -->
+      <div id="livraison" class="d-flex justify-content-between">
+        <span class="align-self-center">Livraison <span style="color:red">*</span></span>
+        <p-dropdown [options]="livraisons" [(ngModel)]="livraison"></p-dropdown>
+      </div>
+      <!-- INPUT EMAIL -->
+      <div id="email" class="d-flex justify-content-between">
+        <span class="align-self-center">Email <span style="color:red">*</span></span>
+        <input name="email" required placeholder="adresse@email.fr" id="emailInput" type="email" pInputText
+          [(ngModel)]="email">
+      </div>
+      <div id="optionalMessage">
+        <div>
+          <span>Ajouter un commentaire</span>
+          <input class="align-self-center ml-4" type="checkbox" [(ngModel)]="addMessage">
         </div>
-        <!-- CHOIX LIVRAISON -->
-        <div id="livraison" class="d-flex justify-content-between">
-          <span class="align-self-center">Livraison <span style="color:red">*</span></span>
-          <p-dropdown [options]="livraisons" [(ngModel)]="livraison"></p-dropdown>
+        <textarea *ngIf="addMessage" placeholder="Votre message" [rows]="5" id="msgInput" pInputTextarea
+          [(ngModel)]="message"></textarea>
+      </div>
+      <div id="total">
+        <div class="d-flex justify-content-between">
+          <span class="font-weight-bold align-self-center">Total</span>
+          <span class="font-weight-bold" id="totalPrice">{{totalArticles+livraison.prix|number:'1.2'}}€</span>
         </div>
-        <!-- INPUT EMAIL -->
-        <div id="email" class="d-flex justify-content-between">
-          <span class="align-self-center">Email <span style="color:red">*</span></span>
-          <input name="email" required placeholder="adresse@email.fr" id="emailInput" type="email" pInputText
-            [(ngModel)]="email">
-        </div>
-        <div id="optionalMessage">
-          <div>
-            <span>Ajouter un commentaire</span>
-            <input class="align-self-center ml-4" type="checkbox" [(ngModel)]="addMessage">
-          </div>
-          <textarea *ngIf="addMessage" placeholder="Votre message" [rows]="5" id="msgInput" pInputTextarea
-            [(ngModel)]="message"></textarea>
-        </div>
-        <div id="total">
-          <div class="d-flex justify-content-between">
-            <span class="font-weight-bold align-self-center">Total</span>
-            <span class="font-weight-bold" id="totalPrice">{{totalArticles+livraison.prix|number:'1.2'}}€</span>
-          </div>
-          <button disabled="" id="sendBtn" type="button" (click)='sendDevis()'>ENVOYER LE DEVIS</button>
-        </div>
-      </form>
+        <button disabled="" id="sendBtn" type="button" (click)='sendDevis()'>ENVOYER LE DEVIS</button>
+      </div>
     </div>
   </div>
 </div>
