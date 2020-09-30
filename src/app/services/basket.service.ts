@@ -13,6 +13,7 @@ export class BasketService {
   displayBasket: boolean = false;
   timbreList = [];
   constructor(private http: HttpClient, private timbreService: TimbreService) {
+    this.checkBasketValidity();
     this.getBasket();
   }
   addTimbreToBasket(timbre) {
@@ -26,7 +27,8 @@ export class BasketService {
         "etatTimbre": timbre.etatTimbre,
         "prixTimbre": timbre.prixTimbre,
         "imageTimbreUrl": timbre.imageTimbreUrl,
-        "quantite": 1
+        "quantite": 1,
+        "maxQuantite": timbre.quantiteTimbre
       };
       foundMatchInBasket = this.timbreList.find(t => t.catTimbre + t.numeroTimbre + t.optionalInfos + t.etatTimbre == savedTimbre.catTimbre + savedTimbre.numeroTimbre + savedTimbre.optionalInfos + savedTimbre.etatTimbre);
 
@@ -44,8 +46,10 @@ export class BasketService {
   }
 
   getBasket() {
-    this.timbreList = JSON.parse(localStorage.getItem('basket'));
-    if (this.timbreList === null) {
+    try {
+      const actualLS = JSON.parse(localStorage.getItem('basket'));
+      this.timbreList = actualLS.timbres;
+    } catch (error) {
       this.timbreList = [];
     }
     return (this.timbreList);
@@ -63,7 +67,8 @@ export class BasketService {
   }
 
   refreshLocalStorageBasket() {
-    localStorage.setItem('basket', JSON.stringify(this.timbreList));
+    const lsList = { timbres: this.timbreList, expire: new Date().getTime() };
+    localStorage.setItem('basket', JSON.stringify(lsList));
   }
 
   get totalArticlesNumber() {
@@ -94,5 +99,15 @@ export class BasketService {
       envoi: livraison
     };
     return this.http.post(this.url + "/sendDevis", { params });
+  }
+
+  checkBasketValidity() {
+    console.log('on check la validité du panier');
+    if (localStorage.getItem('basket')) {
+      const diffInHours = new Date().getTime() - JSON.parse(localStorage.getItem('basket')).expire;
+      if (diffInHours > (2 * 1000 * 60 * 60)) {
+        this.emptyBasket();
+      }
+    }
   }
 }
