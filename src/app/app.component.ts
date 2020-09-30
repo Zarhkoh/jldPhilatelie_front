@@ -37,7 +37,6 @@ export class AppComponent {
     this.addVisit(window.navigator.userAgent);
   }
   addVisit(browser) {
-    console.log("appComponent: ", browser);
     this.userInformationsService.addVisit(browser);
   }
 
