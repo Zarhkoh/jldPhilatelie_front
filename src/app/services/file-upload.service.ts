@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEventType } from '@angular/common/http';
-import { CONFIG } from './../CONFIG';
+import { CONFIG } from 'src/CONFIG';
 import * as sha1 from 'js-sha1';
 
 

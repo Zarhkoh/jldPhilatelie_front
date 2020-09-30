@@ -38,7 +38,6 @@ export class LoginComponent implements OnInit {
     localStorage.setItem('token', data.token);
     this.toastService.showSuccess("Vous êtes maintenant connecté.");
     this.router.navigate(['/adminpanel']);
-    // this.presentSuccessToast("Connexion réussie !");
   }
 
   handleError(error) {

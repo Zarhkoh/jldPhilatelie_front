@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user';
+import { CONFIG } from 'src/CONFIG';
 
 
 
@@ -8,7 +9,7 @@ import { User } from '../models/user';
   providedIn: 'root'
 })
 export class LoginService {
-  url = 'https://jld-philatelieapi.navillus.kim';
+  url = CONFIG.service_url;
 
   constructor(private http: HttpClient) { }
 

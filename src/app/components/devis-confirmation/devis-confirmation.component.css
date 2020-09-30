@@ -1,0 +1,99 @@
+:host {
+  width: 100%;
+}
+
+::ng-deep .textModal .p-dialog-content,
+::ng-deep .textModal .p-dialog-footer {
+  padding: 0;
+}
+
+::ng-deep .p-inputtextarea {
+  width: 26em !important;
+}
+
+::ng-deep .p-inputtext {
+  width: 15rem;
+}
+
+.invisible-button {
+  padding: 0;
+  border: none;
+  background: none;
+}
+.img {
+  max-height: 3.5rem;
+}
+
+::ng-deep .p-datatable .p-datatable-tbody > tr > .imgTd {
+  padding: 0;
+}
+
+.qtés {
+  width: 4em;
+}
+
+.qteBtn {
+  color: white;
+  border: none;
+  background: #4492af;
+  height: 1.35em;
+}
+
+.qteBtn:disabled {
+  opacity: 50%;
+}
+
+.qteBtn span {
+  align-self: center;
+}
+
+.deleteBtn {
+  border: none;
+  padding: 0 0.5rem;
+  border-radius: 3px;
+}
+button:focus {
+  outline: none;
+}
+.deleteBtn p {
+  margin: 0;
+}
+
+#total-articles,
+#livraison,
+#email,
+#optionalMessage {
+  padding: 1em;
+  border-bottom: 1px solid #e9ecef;
+}
+
+#total {
+  padding: 1em;
+  background-color: #e9ecef;
+}
+
+#total-articles {
+  border-top: 1px solid #cfd3d6;
+}
+
+#prix-unitaire {
+  font-size: 0.8em;
+}
+
+#sendBtn {
+  background-color: #226089;
+  color: white;
+  font-family: "Montserrat";
+  border: none;
+  padding: 1em;
+  width: 100%;
+  margin-top: 0.8em;
+}
+
+#totalPrice {
+  font-size: 1.4em;
+  font-family: "Roboto_Condensed";
+}
+
+/* EVENT BINDING */
+/* Output()!!! */

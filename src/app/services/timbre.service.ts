@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { CONFIG } from 'src/CONFIG';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class TimbreService {
-  url = 'https://jld-philatelieapi.navillus.kim/';
-  // url = 'http://localhost:3000';
+  url = CONFIG.service_url;
 
 
   constructor(private http: HttpClient) { }

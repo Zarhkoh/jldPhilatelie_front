@@ -1,0 +1,97 @@
+<div class="container mt-5">
+  <h5 class="mb-2">VOTRE PANIER</h5>
+  <div class="row">
+    <div class="basket" class="col-7">
+      <p-table [value]="basketList">
+        <ng-template pTemplate="body" let-timbre>
+          <tr>
+            <!-- IMAGE -->
+            <td class="imgTd">
+              <button (click)="showTimbreImgDialog(timbre)" class="invisible-button">
+                <img class="img" [src]="timbre.imageTimbreUrl">
+              </button>
+            </td>
+            <!--  NUMERO -->
+            <td>
+              <div class="d-flex justify-content-center">
+                <p class="mb-0 font-weight-bold" *ngIf="timbre.catTimbre=='tas'">{{timbre.tasType}}</p>
+                <p *ngIf="timbre.numeroTimbre !== 0" class="text-center mb-0 font-weight-bold">N°{{timbre.numeroTimbre}}
+                </p>
+                <p class="mb-0" *ngIf="timbre.etatTimbre=='occas'">*</p>
+                <p class="mb-0" *ngIf="timbre.etatTimbre=='sg'">SG</p>
+                <p class="mb-0" *ngIf="timbre.catTimbre=='cd'">({{timbre.anneeCoinDate}})</p>
+                <p class="mb-0" *ngIf="timbre.catTimbre == 'obl' || timbre.catTimbre == 'spe'">{{timbre.optionalInfos}}
+                </p>
+              </div>
+            </td>
+            <!-- PRIX -->
+            <td id="prix-unitaire" class="font-weight-light">PU: {{timbre.prixTimbre}}€</td>
+            <td>
+              <div class=" qtés d-flex justify-content-between">
+                <button [disabled]="1>=timbre.quantite" class="qteBtn d-flex align-items-center" type="button"
+                  (click)='adjustQuantity(timbre, "minus")'><span>-</span></button>
+                <div class="qte">{{timbre.quantite}}</div>
+                <button [disabled]="timbre.quantite >=timbre.maxQuantite" class="qteBtn d-flex align-items-center"
+                  type="button" (click)='adjustQuantity(timbre,"plus")'><span>+</span></button>
+              </div>
+            </td>
+            <td><button type="button" (click)="deleteTimbreFromBasket(timbre)" class="deleteBtn btn btn-outline-danger">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd"
+                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                </svg>
+              </button>
+            </td>
+            <td>{{timbre.quantite*timbre.prixTimbre|number:'1.2'}}€</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+    <div class="col-5">
+      <form name="devisForm">
+        <!-- SOUS TOTAL -->
+        <div id="total-articles" class="d-flex justify-content-between">
+          <span>Total articles </span>
+          <span>{{totalArticles|number:'1.2'}}€</span>
+        </div>
+        <!-- CHOIX LIVRAISON -->
+        <div id="livraison" class="d-flex justify-content-between">
+          <span class="align-self-center">Livraison <span style="color:red">*</span></span>
+          <p-dropdown [options]="livraisons" [(ngModel)]="livraison"></p-dropdown>
+        </div>
+        <!-- INPUT EMAIL -->
+        <div id="email" class="d-flex justify-content-between">
+          <span class="align-self-center">Email <span style="color:red">*</span></span>
+          <input name="email" required placeholder="adresse@email.fr" id="emailInput" type="email" pInputText
+            [(ngModel)]="email">
+        </div>
+        <div id="optionalMessage">
+          <div>
+            <span>Ajouter un commentaire</span>
+            <input class="align-self-center ml-4" type="checkbox" [(ngModel)]="addMessage">
+          </div>
+          <textarea *ngIf="addMessage" placeholder="Votre message" [rows]="5" id="msgInput" pInputTextarea
+            [(ngModel)]="message"></textarea>
+        </div>
+        <div id="total">
+          <div class="d-flex justify-content-between">
+            <span class="font-weight-bold align-self-center">Total</span>
+            <span class="font-weight-bold" id="totalPrice">{{totalArticles+livraison.prix|number:'1.2'}}€</span>
+          </div>
+          <button disabled="" id="sendBtn" type="button" (click)='sendDevis()'>ENVOYER LE DEVIS</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal pour l'affichage de l'image du timbre -->
+<p-dialog [dismissableMask]="true" [modal]="true" header="Timbre N°{{selectedTimbre.numeroTimbre}}"
+  [(visible)]="displayTimbreModal">
+  <div class="d-flex justify-content-center">
+    <img class="focusedStampImg" src="{{selectedTimbre.imageTimbreUrl}}">
+  </div>
+</p-dialog>

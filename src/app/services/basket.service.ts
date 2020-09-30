@@ -1,13 +1,19 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TimbreService } from './timbre.service';
+import { CONFIG } from 'src/CONFIG';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class BasketService {
+  url = CONFIG.service_url;
+
   displayBasket: boolean = false;
   timbreList = [];
-  constructor(private timbreService: TimbreService) {
+  constructor(private http: HttpClient, private timbreService: TimbreService) {
+    this.checkBasketValidity();
     this.getBasket();
   }
   addTimbreToBasket(timbre) {
@@ -21,12 +27,14 @@ export class BasketService {
         "etatTimbre": timbre.etatTimbre,
         "prixTimbre": timbre.prixTimbre,
         "imageTimbreUrl": timbre.imageTimbreUrl,
-        "quantite": 1
+        "quantite": 1,
+        "maxQuantite": timbre.quantiteTimbre
       };
       foundMatchInBasket = this.timbreList.find(t => t.catTimbre + t.numeroTimbre + t.optionalInfos + t.etatTimbre == savedTimbre.catTimbre + savedTimbre.numeroTimbre + savedTimbre.optionalInfos + savedTimbre.etatTimbre);
 
       if (foundMatchInBasket) {
-        this.timbreList[this.timbreList.indexOf(foundMatchInBasket)].quantite += 1;
+        let idx = this.timbreList.findIndex(t => t.timbreId === foundMatchInBasket.timbreId);
+        this.timbreList[idx].quantite += 1;
       } else {
         this.timbreList.push(savedTimbre);
       }
@@ -35,19 +43,21 @@ export class BasketService {
       return error;
     }
     return true;
-
   }
 
   getBasket() {
-    this.timbreList = JSON.parse(localStorage.getItem('basket'));
-    if (this.timbreList === null) {
+    try {
+      const actualLS = JSON.parse(localStorage.getItem('basket'));
+      this.timbreList = actualLS.timbres;
+    } catch (error) {
       this.timbreList = [];
     }
     return (this.timbreList);
   }
 
   deleteTimbreFromBasket(timbre) {
-    this.timbreList.splice(this.timbreList.indexOf(timbre), 1);
+    let idx = this.timbreList.findIndex(t => t.timbreId === timbre.timbreId);
+    this.timbreList.splice(idx, 1);
     this.refreshLocalStorageBasket();
   }
 
@@ -57,7 +67,8 @@ export class BasketService {
   }
 
   refreshLocalStorageBasket() {
-    localStorage.setItem('basket', JSON.stringify(this.timbreList));
+    const lsList = { timbres: this.timbreList, expire: new Date().getTime() };
+    localStorage.setItem('basket', JSON.stringify(lsList));
   }
 
   get totalArticlesNumber() {
@@ -68,13 +79,35 @@ export class BasketService {
     return numberArticles;
   }
 
-
   adjustQuantity(timbre, operator) {
     if (operator === 'minus' && timbre.quantite > 1) {
-      this.timbreList[this.timbreList.indexOf(timbre)].quantite -= 1;
+      let idx = this.timbreList.findIndex(t => t.timbreId === timbre.timbreId);
+      this.timbreList[idx].quantite -= 1;
     } else if (operator === 'plus' && timbre.quantite >= 1) {
-      this.timbreList[this.timbreList.indexOf(timbre)].quantite += 1;
+      let idx = this.timbreList.findIndex(t => t.timbreId === timbre.timbreId);
+      this.timbreList[idx].quantite += 1;
     }
     this.refreshLocalStorageBasket();
+  }
+
+  sendBasketToDevis(mail, message, livraison) {
+    console.log('mail:' + mail, 'message' + message, 'livraison:' + JSON.stringify(livraison));
+    const params = {
+      email: mail,
+      optionalMessage: message,
+      timbres: this.timbreList,
+      envoi: livraison
+    };
+    return this.http.post(this.url + "/sendDevis", { params });
+  }
+
+  checkBasketValidity() {
+    console.log('on check la validité du panier');
+    if (localStorage.getItem('basket')) {
+      const diffInHours = new Date().getTime() - JSON.parse(localStorage.getItem('basket')).expire;
+      if (diffInHours > (2 * 1000 * 60 * 60)) {
+        this.emptyBasket();
+      }
+    }
   }
 }

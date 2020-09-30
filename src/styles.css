@@ -4,3 +4,16 @@ body {
   padding: 0;
   /* background-color: #333333; */
 }
+
+@font-face {
+  font-family: "Montserrat";
+  src: local("Montserrat"), url(./assets/fonts/Montserrat/Montserrat-Regular.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Roboto_Condensed";
+  src: local("Roboto_Condensed"), url(./assets/fonts/Roboto_Condensed/RobotoCondensed-Regular.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Montserrat_bold";
+  src: local("Montserrat"), url(./assets/fonts/Montserrat/Montserrat-Bold.ttf) format("truetype");
+}

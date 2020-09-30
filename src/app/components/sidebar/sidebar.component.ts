@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { UserInformationsService } from 'src/app/services/user-informations.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -22,12 +23,19 @@ export class SidebarComponent implements OnInit {
     { "start": 3001, "end": 3200 },
     { "start": 3201, "end": 4000 }
   ];
+  totalVisits;
 
-  constructor(public location: Location) {
+  constructor(public location: Location, private userInformationsService: UserInformationsService) {
 
   }
 
   ngOnInit(): void {
+    this.getTotalVisits();
   }
+
+  getTotalVisits() {
+    this.userInformationsService.getTotalVisits().subscribe(data => this.totalVisits = data);
+  }
+
 
 }
