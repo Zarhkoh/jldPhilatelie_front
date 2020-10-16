@@ -10,8 +10,8 @@ import { BasketService } from 'src/app/services/basket.service';
   styleUrls: ['./timbre-list.component.css']
 })
 export class TimbreListComponent implements OnInit {
-  display: boolean = false;
-  selectedTimbre = new Timbre;
+  display = false;
+  selectedTimbre = new Timbre();
   timbreList = [];
   filteredTimbreList = [];
   basketList = [];
@@ -28,16 +28,23 @@ export class TimbreListComponent implements OnInit {
   constructor(private basketService: BasketService, private timbreService: TimbreService, private route: ActivatedRoute) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    if (this.basketService.subsBar === undefined) {
+      this.basketService.subsBar = this.basketService.
+        invokeFirstComponentFunction.subscribe((basketLine: string) => {
+          this.releaseTimbreDeletedFromBasket(basketLine);
+        });
+    }
+    // affiche ou non le gif de chargement
     this.loading = false;
     // Setup le rangement de la liste a num ascendant
     this.sortFilter = 'NumAsc';
-    this.basketList = this.basketService.timbreList;
+    // récupère les paramètres de l'URL
     this.route.queryParams.subscribe(params => {
-      this.timbreStart = params['start'];
-      this.timbreEnd = params['end'];
-      this.timbreSearch = params['search'];
-      this.timbreCat = params['category'];
+      this.timbreStart = params.start;
+      this.timbreEnd = params.end;
+      this.timbreSearch = params.search;
+      this.timbreCat = params.category;
       if (this.timbreSearch) {
         this.getTimbreByNumber(this.timbreSearch);
       } else if (this.timbreStart && this.timbreEnd) {
@@ -46,20 +53,31 @@ export class TimbreListComponent implements OnInit {
         this.getTimbreCat(this.timbreCat);
       }
       else {
-        this.error = 'On dirait que vous jouez avec l\'URL. Utilisez la barre de recherchee ou le menu latéral. ;)'
+        this.error = 'On dirait que vous jouez avec l\'URL. Utilisez la barre de recherche ou le menu latéral. ;)';
       }
     });
   }
 
-  adjustQtyWithBasket() {
-    console.log('on adjust');
+  adjustQtyWithBasket(): void {
     this.basketList.forEach(element => {
-      console.log(element)
-      let timbre = this.timbreList.find(t => t.timbreId === element.timbreId).quantiteTimbre -= element.quantite;
+      try {
+        this.timbreList.find(t => t.timbreId === element.timbreId).quantiteTimbre -= element.quantite;
+
+      } catch (error) {
+      }
     });
   }
 
-  getAllTimbres() {
+  releaseTimbreDeletedFromBasket(basketLine) {
+    try {
+      basketLine.forEach(element => {
+        this.timbreList.find(t => t.timbreId === element.timbreId).quantiteTimbre += element.quantite;
+      });
+    } catch (error) {
+    }
+  }
+
+  getAllTimbres(): void {
     this.loading = true;
     this.timbreService.getAllTimbres().subscribe(data => {
       this.timbreList = data as Timbre[];
@@ -67,13 +85,13 @@ export class TimbreListComponent implements OnInit {
     });
   }
 
-  getTimbreByNumber(number) {
-    if (Number(number) && number % 1 === 0 && number > 0) {
+  getTimbreByNumber(num: any): void {
+    if (Number(num) && num % 1 === 0 && num > 0) {
       this.loading = true;
-      this.timbreService.getTimbreByNumero(number).subscribe(data => {
+      this.timbreService.getTimbreByNumero(num).subscribe(data => {
         this.timbreList = data as Timbre[];
         if (this.timbreList.length === 0) {
-          this.error = 'Le timbre n°' + number + ' n\'est pas disponible sur ce site.';
+          this.error = 'Le timbre n°' + num + ' n\'est pas disponible sur ce site.';
         }
         this.loading = false;
       });
@@ -82,21 +100,21 @@ export class TimbreListComponent implements OnInit {
     }
   }
 
-  get filteredList() {
+  get filteredList(): Array<any> {
     // Reset de la liste
     this.filteredTimbreList = this.timbreList;
 
     // Trier la liste
     switch (this.sortFilter) {
-      case "NumDesc": {
+      case 'NumDesc': {
         this.filteredTimbreList.sort(this.timbreService.sortByNumDesc);
         break;
       }
-      case "PriceAsc": {
+      case 'PriceAsc': {
         this.filteredTimbreList.sort(this.timbreService.sortByPriceAsc);
         break;
       }
-      case "PriceDesc": {
+      case 'PriceDesc': {
         this.filteredTimbreList.sort(this.timbreService.sortByPriceDesc);
         break;
       }
@@ -107,11 +125,11 @@ export class TimbreListComponent implements OnInit {
     }
     // Application des filtres selon état
     switch (this.etatFilter) {
-      case "alt": {
+      case 'alt': {
         this.filteredTimbreList = this.timbreList.filter(timbre => timbre.etatTimbre === 'occas');
         break;
       }
-      case "sg": {
+      case 'sg': {
         this.filteredTimbreList = this.timbreList.filter(timbre => timbre.etatTimbre === 'sg');
         break;
       }
@@ -125,19 +143,19 @@ export class TimbreListComponent implements OnInit {
     }
     // Affichage de l'erreur si la liste est vide
     if (this.filteredTimbreList.length === 0) {
-      this.error = "Pas de timbre disponible pour cette catégorie";
+      this.error = 'Pas de timbre disponible pour cette catégorie';
     }
     return this.filteredTimbreList;
   }
 
-  getTimbreCat(cat) {
+  getTimbreCat(cat): void {
     try {
       this.loading = true;
       this.timbreService.getTimbresByCat(cat).subscribe(data => {
         this.timbreList = data as Timbre[];
         this.adjustQtyWithBasket();
         this.timbreList.sort(this.timbreService.sortByNumAsc);
-        if (this.timbreList && this.timbreList != null && this.timbreList.length == 0) {
+        if (this.timbreList && this.timbreList != null && this.timbreList.length === 0) {
           this.error = 'Aucun timbre n\'existe pour cette catégorie';
         }
         this.loading = false;
@@ -149,7 +167,7 @@ export class TimbreListComponent implements OnInit {
     }
   }
 
-  getTimbreRange(start, end) {
+  getTimbreRange(start, end): void {
     this.loading = true;
     if ((Number(start) && Number(end)) && (start > 0 && end > 0) && (start % 1 === 0 && end % 1 === 0)) {
       try {
@@ -158,7 +176,7 @@ export class TimbreListComponent implements OnInit {
           this.adjustQtyWithBasket();
           this.filteredTimbreList = this.timbreList;
           this.timbreList.sort(this.timbreService.sortByNumAsc);
-          if (this.timbreList && this.timbreList != null && this.timbreList.length == 0) {
+          if (this.timbreList && this.timbreList != null && this.timbreList.length === 0) {
             this.error = 'Aucun timbre n\'existe entre ' + start + ' et ' + end;
           }
           this.loading = false;
@@ -170,30 +188,35 @@ export class TimbreListComponent implements OnInit {
       this.error = 'Les paramètres doivent être des chiffres entiers positifs.';
     }
   }
-  showDialog(timbre) {
-    this.display = true;
+  showDialog(timbre): void {
+    this.basketConfirmation = false,
+      this.display = true;
     this.selectedTimbre = timbre as Timbre;
   }
 
-  addToBasket(timbre) {
-    if (timbre.quantiteTimbre == 0) {
+  addToBasket(timbre): void {
+    if (timbre.quantiteTimbre === 0) {
       throw new Error('000');
     }
     else {
       try {
         this.basketService.addTimbreToBasket(timbre);
         this.timbreList[this.timbreList.indexOf(timbre)].quantiteTimbre -= 1;
+        this.display = false;
+        this.basketService.displayBasket = true;
       } catch (error) {
       }
       this.displayBasketConfirmation();
     }
   }
 
-  displayBasketConfirmation() {
+  displayBasketConfirmation(): void {
     this.basketConfirmation = true;
     this.basketList = this.basketService.timbreList;
-    setTimeout(() => {
-      this.basketConfirmation = false;
-    }, 1500);
   }
+
+  firstFunction() {
+    alert('Hello ' + '\nWelcome to C# Corner \nFunction in First Component');
+  }
+
 }
