@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { TimbreService } from './timbre.service';
 import { CONFIG } from 'src/CONFIG';
+import { Subscription } from 'rxjs';
 
 
 @Injectable({
@@ -10,25 +11,30 @@ import { CONFIG } from 'src/CONFIG';
 export class BasketService {
   url = CONFIG.service_url;
 
-  displayBasket: boolean = false;
+  displayBasket = false;
   timbreList = [];
+
+  invokeFirstComponentFunction = new EventEmitter();
+  subsBar: Subscription;
+
   constructor(private http: HttpClient, private timbreService: TimbreService) {
     this.checkBasketValidity();
     this.getBasket();
   }
-  addTimbreToBasket(timbre) {
+
+  addTimbreToBasket(timbre): boolean {
     let foundMatchInBasket;
     try {
       const savedTimbre = {
-        "timbreId": timbre.timbreId,
-        "catTimbre": timbre.catTimbre,
-        "numeroTimbre": timbre.numeroTimbre,
-        "optionalInfos": timbre.optionalInfos,
-        "etatTimbre": timbre.etatTimbre,
-        "prixTimbre": timbre.prixTimbre,
-        "imageTimbreUrl": timbre.imageTimbreUrl,
-        "quantite": 1,
-        "maxQuantite": timbre.quantiteTimbre
+        timbreId: timbre.timbreId,
+        catTimbre: timbre.catTimbre,
+        numeroTimbre: timbre.numeroTimbre,
+        optionalInfos: timbre.optionalInfos,
+        etatTimbre: timbre.etatTimbre,
+        prixTimbre: timbre.prixTimbre,
+        imageTimbreUrl: timbre.imageTimbreUrl,
+        quantite: 1,
+        maxQuantite: timbre.quantiteTimbre
       };
       foundMatchInBasket = this.timbreList.find(t => t.catTimbre + t.numeroTimbre + t.optionalInfos + t.etatTimbre == savedTimbre.catTimbre + savedTimbre.numeroTimbre + savedTimbre.optionalInfos + savedTimbre.etatTimbre);
 
@@ -58,12 +64,15 @@ export class BasketService {
   deleteTimbreFromBasket(timbre) {
     let idx = this.timbreList.findIndex(t => t.timbreId === timbre.timbreId);
     this.timbreList.splice(idx, 1);
+    this.invokeFirstComponentFunction.emit([timbre]);
     this.refreshLocalStorageBasket();
   }
 
   emptyBasket() {
+    this.invokeFirstComponentFunction.emit(this.timbreList);
     this.timbreList = [];
     localStorage.removeItem('basket');
+    this.displayBasket = false;
   }
 
   refreshLocalStorageBasket() {
@@ -98,7 +107,7 @@ export class BasketService {
       timbres: this.timbreList,
       envoi: livraison
     };
-    return this.http.post(this.url + "/sendDevis", { params });
+    return this.http.post(this.url + '/sendDevis', { params });
   }
 
   checkBasketValidity() {
