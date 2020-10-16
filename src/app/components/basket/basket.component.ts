@@ -27,7 +27,6 @@ export class BasketComponent implements OnInit {
   deleteTimbreFromBasket(timbre) {
     try {
       this.basketService.deleteTimbreFromBasket(timbre);
-      // this.getBasketList();
     } catch (error) {
       console.log(error);
 
@@ -36,7 +35,6 @@ export class BasketComponent implements OnInit {
 
   emptyBasket() {
     this.basketService.emptyBasket();
-    // this.getBasketList();
     this.displayEmptyBasket = false;
   }
 
@@ -64,8 +62,8 @@ export class BasketComponent implements OnInit {
     this.basketService.displayBasket = !this.display;
   }
   ngOnInit(): void {
-    // this.getBasketList();
   }
+
   showTimbreImgDialog(timbre) {
     this.displayTimbreModal = true;
     this.selectedTimbre = timbre;
