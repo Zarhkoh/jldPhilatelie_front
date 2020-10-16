@@ -18,18 +18,17 @@ export class DevisConfirmationComponent implements OnInit {
   message = '';
   totalArticles = 0;
   addMessage: boolean = false;
-  livraisons = [{ value: { type: 'ES', prix: 1.90, denomination: 'Envoi Simple - 1.90€' }, label: 'Envoi Simple - 1.90€' },
-  { value: { type: 'LS', prix: 2.39, denomination: 'Lettre Suivie - 2.39€' }, label: 'Lettre Suivie - 2.39€' },
-  { value: { type: 'ER', prix: 5.50, denomination: 'Envoi Recommandé - 5.50€' }, label: 'Envoi Recommandé - 5.50€' }];
-  livraison;
-
+  livraisons = [{ type: 'ES', prix: 1.90, label: 'Envoi Simple - 1.90€' },
+  { type: 'LS', prix: 2.39, label: 'Lettre Suivie - 2.39€' },
+  { type: 'ER', prix: 5.50, label: 'Envoi Recommandé - 5.50€' }];
+  livraison: number;
   constructor(private basketService: BasketService, private loadingService: LoadingService, private router: Router) { }
 
   ngOnInit(): void {
     this.getBasketList();
     this.totalArticlesCalcul();
     this.basketService.displayBasket = false;
-    this.livraison = this.livraisons[0].value;
+    this.livraison = 1.90;
   }
 
   getBasketList() {
@@ -66,10 +65,21 @@ export class DevisConfirmationComponent implements OnInit {
 
   sendDevis() {
     try {
+      if (this.totalArticles === 0) {
+        return alert('Vous ne pouvez pas envoyer une commande sans timbres dans le panier.');
+      }
+      if (this.email.length <= 10) {
+        return alert('merci de rentrer une adresse mail valide. (ex: martin@gmail.com');
+      }
       this.loadingService.isLoading = true;
-      // const envoi = this.livraisons[this.livraisons.findIndex(l => l.prix = this.livraison)];
-      this.basketService.sendBasketToDevis(this.email, this.message, this.livraison).subscribe(data => { this.basketService.emptyBasket(); this.router.navigate(['/merci']) }, error => console.log(error));
+      const envoi = this.livraisons[this.livraisons.findIndex(l => l.prix == this.livraison)];
+      this.basketService.sendBasketToDevis(this.email, this.message, envoi).subscribe(data => { this.basketService.emptyBasket(); this.router.navigate(['/merci']) }, error => console.log(error));
     } catch (error) {
+      console.log('Une erreur est survenue: ', error);
     }
+  }
+
+  get total() {
+    return this.totalArticles + Number(this.livraison);
   }
 }
