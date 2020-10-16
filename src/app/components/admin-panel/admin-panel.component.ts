@@ -13,8 +13,8 @@ import { FileUploadService } from 'src/app/services/file-upload.service';
   styleUrls: ['./admin-panel.component.css']
 })
 export class AdminPanelComponent implements OnInit {
-  display: boolean = false;
-  selectedTimbre = new Timbre;
+  display = false;
+  selectedTimbre = new Timbre();
   cols;
   timbreList = [];
   selectedImage;
@@ -25,7 +25,10 @@ export class AdminPanelComponent implements OnInit {
   timbreForEdition;
   reader;
   responseImageUploadUrl;
-  constructor(private fileUploadService: FileUploadService, private toastService: ToastService, private timbreService: TimbreService, private formBuilder: FormBuilder) { }
+  constructor(private fileUploadService: FileUploadService,
+    private toastService: ToastService,
+    private timbreService: TimbreService,
+    private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.reader = new FileReader();
@@ -35,7 +38,7 @@ export class AdminPanelComponent implements OnInit {
     this.setupForm();
   }
 
-  setupForm() {
+  setupForm(): void {
     this.timbreForm = this.formBuilder.group({
       numero: [],
       prix: [],
@@ -48,7 +51,7 @@ export class AdminPanelComponent implements OnInit {
       tasType: []
     });
   }
-  getAllTimbres() {
+  getAllTimbres(): void {
     this.loading = true;
     this.timbreService.getAllTimbres().subscribe(data => {
       this.timbreList = data as Timbre[];
@@ -56,7 +59,7 @@ export class AdminPanelComponent implements OnInit {
     });
   }
 
-  async addTimbre() {
+  async addTimbre(): Promise<any> {
     try {
       this.responseImageUploadUrl = await this.uploadImg();
       this.timbreForm.patchValue({ image: this.responseImageUploadUrl.url });
@@ -67,12 +70,10 @@ export class AdminPanelComponent implements OnInit {
       });
     } catch (error) {
       this.toastService.showDanger(error);
-      return;
     }
-
   }
 
-  async uploadImg() {
+  async uploadImg(): Promise<any> {
     return await this.fileUploadService.upload(this.selectedImage, this.imageFile.name.split('.').slice(0, -1)[0]);
   }
 
