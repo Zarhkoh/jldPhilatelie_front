@@ -4,9 +4,24 @@
       <img id="headerLogo" src="../../../assets/img/logo_white.png">
     </a>
   </div>
-  <div
-    [ngClass]="{'justify-content-between': isAuth() , 'justify-content-end': !isAuth(), 'widthAdjustment' : router.url == '/adminpanel'}"
+  <!-- SEARCHBAR -->
+  <div *ngIf="!location.isCurrentPathEqualTo('/adminpanel') && !location.isCurrentPathEqualTo('/admin')" id="searchBar">
+    <form [formGroup]="searchForm" (ngSubmit)="searchTimbre()">
+      <div class="searchBar d-flex">
+        <input id="searchInput" formControlName="numero_timbre" type="text" placeholder="N° timbre">
+        <button class="searchBtn"><svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-search"
+            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+            <path fill-rule="evenodd"
+              d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+          </svg></button>
+      </div>
+    </form>
+  </div>
+  <div [ngClass]="{'justify-content-between': isAuth() , 'justify-content-end': !isAuth()}"
     class="widgets d-flex flex-column">
+    <!-- Login name -->
     <div id="loginTxt" *ngIf="isAuth()" class="authText d-flex align-self-end font-weight-bold text-light">
       <a routerLink="/adminpanel" id="welcomeText">Bonjour Papa. :)</a>
       <button class="logoutBtn" (click)="logout()">
@@ -18,7 +33,8 @@
       </button>
     </div>
     <!-- PANIER -->
-    <div class="buttonDiv"><button class="mb-2 d-flex" (click)="displayBasket()" id="basket-button" type="button">
+    <div *ngIf="!location.isCurrentPathEqualTo('/adminpanel') && !location.isCurrentPathEqualTo('/admin')"
+      class="buttonDiv"><button class="d-flex" (click)="displayBasket()" id="basket-button" type="button">
         <svg *ngIf="basketItemsNumber===0" width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-bag-dash"
           fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd"
@@ -36,20 +52,5 @@
         <p *ngIf="basketItemsNumber===1">Panier: {{basketItemsNumber}} article</p>
         <p *ngIf="basketItemsNumber>1">Panier: {{basketItemsNumber}} articles</p>
       </button></div>
-    <!-- BARRE DE RECHERCHE -->
-    <div id="searchBar">
-      <form [formGroup]="searchForm" (ngSubmit)="searchTimbre()">
-        <div *ngIf="!location.isCurrentPathEqualTo('/adminpanel')" class="searchBar d-flex">
-          <input id="searchInput" formControlName="numero_timbre" type="text" placeholder="N° timbre">
-          <button class="searchBtn"><svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-search"
-              fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd"
-                d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
-              <path fill-rule="evenodd"
-                d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
-            </svg></button>
-        </div>
-      </form>
-    </div>
   </div>
 </div>
