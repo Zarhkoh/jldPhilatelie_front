@@ -2,7 +2,7 @@
 </app-header>
 <div class="d-flex">
   <app-sidebar
-    *ngIf="!location.isCurrentPathEqualTo('/admin') && !location.isCurrentPathEqualTo('/adminpanel')&& !location.isCurrentPathEqualTo('/devis')&& !location.isCurrentPathEqualTo('/merci')">
+    *ngIf="!location.isCurrentPathEqualTo('/admin') && !location.isCurrentPathEqualTo('/adminpanel')&& !location.isCurrentPathEqualTo('/commande')&& !location.isCurrentPathEqualTo('/merci')">
   </app-sidebar>
   <router-outlet (activate)="isLoading=false"></router-outlet>
   <app-basket></app-basket>
