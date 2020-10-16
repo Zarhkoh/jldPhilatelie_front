@@ -31,6 +31,10 @@ import { DevisConfirmationComponent } from './components/devis-confirmation/devi
 import { DropdownModule } from 'primeng/dropdown';
 import { LoadingComponent } from './components/loading/loading.component';
 import { MerciComponent } from './components/merci/merci.component';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { KeyFilterModule } from 'primeng/keyfilter';
+import { TooltipModule } from 'primeng/tooltip';
+
 
 
 
@@ -89,7 +93,10 @@ export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
     SidebarModule,
     InputTextModule,
     InputTextareaModule,
-    DropdownModule
+    DropdownModule,
+    RadioButtonModule,
+    KeyFilterModule,
+    TooltipModule
 
   ],
   providers: [{
