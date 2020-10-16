@@ -15,6 +15,10 @@
   width: 15rem;
 }
 
+::ng-deep .p-radiobutton-label {
+  margin-bottom: 0;
+}
+
 .invisible-button {
   padding: 0;
   border: none;
@@ -95,5 +99,6 @@ button:focus {
   font-family: "Roboto_Condensed";
 }
 
-/* EVENT BINDING */
-/* Output()!!! */
+.home-button {
+  width: 18em;
+}
