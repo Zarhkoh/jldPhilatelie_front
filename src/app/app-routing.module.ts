@@ -11,15 +11,15 @@ import { MerciComponent } from './components/merci/merci.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'timbres', component: TimbreListComponent },
+  { path: 'timbres', component: TimbreListComponent, runGuardsAndResolvers: 'always' },
   { path: 'admin', component: LoginComponent },
   { path: 'adminpanel', canActivate: [AuthGuard], component: AdminPanelComponent },
-  { path: 'devis', component: DevisConfirmationComponent },
+  { path: 'commande', component: DevisConfirmationComponent },
   { path: 'merci', component: MerciComponent },
   { path: '**', component: FourOFourComponent }
 ];
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled', onSameUrlNavigation: 'reload' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
