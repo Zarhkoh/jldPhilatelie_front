@@ -62,7 +62,8 @@ export class AdminPanelComponent implements OnInit {
   async addTimbre(): Promise<any> {
     try {
       this.responseImageUploadUrl = await this.uploadImg();
-      this.timbreForm.patchValue({ image: this.responseImageUploadUrl.url });
+      console.log(this.responseImageUploadUrl);
+      this.timbreForm.patchValue({ image: this.responseImageUploadUrl.secure_url });
       this.timbreService.addTimbre(this.timbreForm.value).subscribe(data => {
         this.toastService.showSuccess(`Timbre n°${this.timbreForm.value.numero} créé`);
         this.setupForm();
