@@ -1,73 +1,81 @@
 #headerContent {
-  padding: 1em;
-  background-color: #226089;
+    padding: 1em;
+    background-image: url('../../../assets/img/header.png');
+    /* background-color: #226089; */
 }
+
 button,
 input {
-  outline: none;
+    outline: none;
 }
 
 #headerLogo,
 .widgets {
-  height: 7em;
+    height: 7em;
 }
 
 .searchBar input {
-  border: none;
-  width: 12em;
-  height: 2.4em;
-  border-radius: 10px 0 0 10px;
-  padding-left: 1em;
-  background-color: #e2e2e2;
-  text-align: left;
+    border: none;
+    width: 12em;
+    height: 2.4em;
+    border-radius: 10px 0 0 10px;
+    padding-left: 1em;
+    background-color: #e2e2e2;
+    text-align: left;
 }
 
 .searchBtn {
-  height: 2.4em;
-  border: none;
-  border-radius: 0 10px 10px 0;
-  color: white;
-  background-color: #4592af;
+    height: 2.4em;
+    border: none;
+    border-radius: 0 10px 10px 0;
+    color: white;
+    background-color: #4592af;
 }
+
 .searchBtn svg {
-  margin-top: -0.3em;
+    margin-top: -0.3em;
 }
 
 .logoutBtn {
-  margin-left: 0.5em;
-  border-radius: 20px;
-  padding: 0;
-  border: 1px solid #dd3444;
-  background: #dd3444;
-  font-size: 1.3em;
-  color: white;
-  height: 1.5em;
-  width: 1.5em;
+    margin-left: 0.5em;
+    border-radius: 20px;
+    padding: 0;
+    border: 1px solid #dd3444;
+    background: #dd3444;
+    font-size: 1.3em;
+    color: white;
+    height: 1.5em;
+    width: 1.5em;
 }
+
 .logoutBtn svg {
-  margin-top: -0.4em;
+    margin-top: -0.4em;
 }
 
 .widthAdjustment {
-  width: 14.4%;
+    width: 14.4%;
 }
 
 #welcomeText {
-  color: white;
-  text-decoration: none;
+    color: white;
+    text-decoration: none;
 }
+
 #welcomeText:hover {
-  color: white;
-  text-decoration: none;
+    color: white;
+    text-decoration: none;
 }
+
 .buttonDiv {
-  width: 10.5em;
+    width: 10.5em;
 }
+
 #basket-button {
-  background-color: transparent;
-  border: none;
-  color: white;
+    background-color: transparent;
+    border: none;
+    color: white;
 }
+
 #basket-button p {
-  margin: 0.15rem 0 0 0;
+    margin: 0.15rem 0 0 0;
 }
