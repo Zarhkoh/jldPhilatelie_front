@@ -13,6 +13,7 @@ export class DevisConfirmationComponent implements OnInit {
 
   displayTimbreModal: boolean = false;
   selectedTimbre = new Timbre;
+  selectedTimbreNumber = '';
   email = '';
   basketList = [];
   message = '';
@@ -45,6 +46,23 @@ export class DevisConfirmationComponent implements OnInit {
   showTimbreImgDialog(timbre) {
     this.displayTimbreModal = true;
     this.selectedTimbre = timbre;
+    this.selectedTimbreNumber = '';
+    if(timbre.tasType){
+      this.selectedTimbreNumber+=timbre.tasType;
+    }
+    this.selectedTimbreNumber+=timbre.numeroTimbre;
+    if(timbre.etatTimbre=='occas'){
+      this.selectedTimbreNumber+= '*';
+    }
+    if(timbre.etatTimbre=='sg'){
+      this.selectedTimbreNumber+= 'SG';
+    }
+    if(timbre.optionalInfos){
+      this.selectedTimbreNumber+= timbre.optionalInfos;
+    }
+    if(timbre.catTimbre=='cd'){
+      this.selectedTimbreNumber+= "("+timbre.anneeCoinDate+')';
+    }
   }
 
   adjustQuantity(timbre, operator) {
