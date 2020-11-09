@@ -1,56 +1,52 @@
 <!-- FILTERS -->
 <div class="filters d-flex align-items-center justify-content-around">
-  <div>
-    <label for="filtreInput">TRIER PAR: </label>
-    <select id="filtreInput" class="custom-select input-sm" [(ngModel)]="sortFilter">
+    <div>
+        <label for="filtreInput">TRIER PAR: </label>
+        <select id="filtreInput" class="custom-select input-sm" [(ngModel)]="sortFilter">
       <option value="NumAsc">NUMÉRO CROISSANT</option>
       <option value="NumDesc">NUMÉRO DÉCROISSANT</option>
       <option value="PriceAsc">PRIX CROISSANT</option>
       <option value="PriceDesc">PRIX DÉCROISSANT</option>
     </select>
-  </div>
-
-  <div class="custom-control custom-switch">
-    <input [(ngModel)]="dispoFilter" type="checkbox" class="custom-control-input" id="dispoSwitch">
-    <label class="custom-control-label" for="dispoSwitch">DISPONIBLE SEULEMENT</label>
-  </div>
-  <div>
-    <label for="etatFiltre"> AFFICHAGE: </label>
-    <div id="etatFiltre" class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-      <button id="btnGroup1" [ngClass]="{'btnActive': etatFilter === 'all'}" (click)="etatFilter='all'" type="button"
-        class="btn btn-secondary">TOUS</button>
-      <button id="btnGroup2" [ngClass]="{'btnActive': etatFilter === 'alt'}" (click)="etatFilter='alt'" type="button"
-        class="btn btn-secondary">CHARNIÈRES</button>
-      <button id="btnGroup3" [ngClass]="{'btnActive': etatFilter === 'sg'}" (click)="etatFilter='sg'" type="button"
-        class="btn btn-secondary">SANS GOMME</button>
     </div>
-  </div>
+
+    <div class="custom-control custom-switch">
+        <input [(ngModel)]="dispoFilter" type="checkbox" class="custom-control-input" id="dispoSwitch">
+        <label class="custom-control-label" for="dispoSwitch">DISPONIBLE SEULEMENT</label>
+    </div>
+    <div>
+        <label for="etatFiltre"> AFFICHAGE: </label>
+        <div id="etatFiltre" class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+            <button id="btnGroup1" [ngClass]="{'btnActive': etatFilter === 'all'}" (click)="etatFilter='all'" type="button" class="btn btn-secondary">TOUS</button>
+            <button id="btnGroup2" [ngClass]="{'btnActive': etatFilter === 'alt'}" (click)="etatFilter='alt'" type="button" class="btn btn-secondary">CHARNIÈRES</button>
+            <button id="btnGroup3" [ngClass]="{'btnActive': etatFilter === 'sg'}" (click)="etatFilter='sg'" type="button" class="btn btn-secondary">SANS GOMME</button>
+        </div>
+    </div>
 </div>
 
 <!-- LOADING GIF -->
 <div *ngIf="loading" id="loading">
-  <img src="../../../assets/img/loading.gif">
+    <img src="../../../assets/img/loading.gif">
 </div>
 
 <!-- TIMBRE LIST -->
-<div class="d-flex"
-  *ngIf="error!= null && timbreList && timbreList !== null && timbreList.length ==0 || filteredList.length == 0">
-  <p class="d-inline-block alert alert-danger">{{error}}</p>
+<div class="d-flex" *ngIf="error!= null && timbreList && timbreList !== null && timbreList.length ==0 || filteredList.length == 0">
+    <p class="d-inline-block alert alert-danger">{{error}}</p>
 </div>
 
 <div *ngIf="timbreList && timbreList !== null &&timbreList.length > 0" class="grille">
-  <div *ngIf="filteredList.length > 0" class="liste d-flex flex-wrap">
-    <div [ngClass]="{'low-opacity': timbre.quantiteTimbre <=0}"
-      class="p-2 timbreCard d-flex flex-column justify-content-between" *ngFor="let timbre of filteredList">
-      <div class="d-flex justify-content-center">
-        <p class="mb-0 font-weight-bold" *ngIf="timbre.catTimbre=='tas'">{{timbre.tasType}}</p>
-        <p *ngIf="timbre.numeroTimbre !== 0" class="text-center mb-0 font-weight-bold">{{timbre.numeroTimbre}}</p>
-        <p class="mb-0" *ngIf="timbre.etatTimbre=='occas'">*</p>
-        <p class="mb-0" *ngIf="timbre.etatTimbre=='sg'">SG</p>
-        <p class="mb-0" *ngIf="timbre.catTimbre=='cd'">({{timbre.anneeCoinDate}})</p>
-        <p class="mb-0" *ngIf="timbre.catTimbre == 'obl' || timbre.catTimbre == 'spe'">{{timbre.optionalInfos}}</p>
-      </div>
-      <button class="invisible-button" (click)="showDialog(timbre)">
+    <div *ngIf="filteredList.length > 0" class="liste d-flex flex-wrap">
+        <div [ngClass]="{'low-opacity': timbre.quantiteTimbre <=0}" class="p-2 timbreCard d-flex flex-column justify-content-between" *ngFor="let timbre of filteredList">
+            <div class="d-flex justify-content-center">
+                <p class="mb-0 font-weight-bold" *ngIf="timbre.catTimbre=='tas'">{{timbre.tasType}}</p>
+                <p *ngIf="timbre.numeroTimbre !== 0" class="text-center mb-0 font-weight-bold">{{timbre.numeroTimbre}}</p>
+                <p class="mb-0" *ngIf="timbre.etatTimbre=='occas'">*</p>
+                <p class="mb-0" *ngIf="timbre.etatTimbre=='sg'">SG</p>
+                <p class="mb-0 font-weight-bold" *ngIf="timbre.optionalInfos">{{timbre.optionalInfos}}</p>
+                <p class="mb-0" *ngIf="timbre.catTimbre=='cd'">({{timbre.anneeCoinDate}})</p>
+
+            </div>
+            <button class="invisible-button" (click)="showDialog(timbre)">
         <div
           [ngClass]="{'timbreImg': timbre.catTimbre != 'cd' && timbre.catTimbre !=='spe', 'cdImg': timbre.catTimbre == 'cd','speImg': timbre.catTimbre == 'spe'}"
           [ngStyle]="{ 'background-image': 'url(' + timbre.imageTimbreUrl + ')'}"
@@ -61,21 +57,19 @@
         </div>
       </button>
 
-      <p class="text-center mb-0">{{timbre.prixTimbre}}€</p>
+            <p class="text-center mb-0">{{timbre.prixTimbre}}€</p>
+        </div>
     </div>
-  </div>
 </div>
 
-<p-dialog [dismissableMask]="true" [modal]="true" header="Timbre N°{{selectedTimbre.numeroTimbre}}"
-  [(visible)]="display">
-  <div class="d-flex justify-content-center">
-    <img class="focusedStampImg" src="{{selectedTimbre.imageTimbreUrl}}">
-  </div>
+<p-dialog [dismissableMask]="true" [modal]="true" header="Timbre N°{{this.selectedTimbreNumber}}" [(visible)]="display">
+    <div class="d-flex justify-content-center">
+        <img class="focusedStampImg" src="{{selectedTimbre.imageTimbreUrl}}">
+    </div>
 
-  <div class="d-flex justify-content-center">
-    <!-- BOUTONS AJOUTER AU PANIER -->
-    <button [disabled]="selectedTimbre.quantiteTimbre <=0 " [ngClass]="{'confirmBasketBtn': basketConfirmation}"
-      type="button" class="addBasketButton" (click)="addToBasket(selectedTimbre)">
+    <div class="d-flex justify-content-center">
+        <!-- BOUTONS AJOUTER AU PANIER -->
+        <button [disabled]="selectedTimbre.quantiteTimbre <=0 " [ngClass]="{'confirmBasketBtn': basketConfirmation}" type="button" class="addBasketButton" (click)="addToBasket(selectedTimbre)">
       <svg *ngIf="!basketConfirmation" width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-bag-plus-fill"
         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd"
@@ -91,6 +85,6 @@
       <span *ngIf="basketConfirmation">AJOUTÉ</span>
     </button>
 
-  </div>
+    </div>
 
 </p-dialog>

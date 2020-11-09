@@ -12,6 +12,7 @@ import { BasketService } from 'src/app/services/basket.service';
 export class TimbreListComponent implements OnInit {
   display = false;
   selectedTimbre = new Timbre();
+  selectedTimbreNumber = '';
   timbreList = [];
   filteredTimbreList = [];
   basketList = [];
@@ -192,6 +193,23 @@ export class TimbreListComponent implements OnInit {
     this.basketConfirmation = false,
       this.display = true;
     this.selectedTimbre = timbre as Timbre;
+    this.selectedTimbreNumber = '';
+    if(timbre.tasType){
+      this.selectedTimbreNumber+=timbre.tasType;
+    }
+    this.selectedTimbreNumber+=timbre.numeroTimbre;
+    if(timbre.etatTimbre=='occas'){
+      this.selectedTimbreNumber+= '*';
+    }
+    if(timbre.etatTimbre=='sg'){
+      this.selectedTimbreNumber+= 'SG';
+    }
+    if(timbre.optionalInfos){
+      this.selectedTimbreNumber+= timbre.optionalInfos;
+    }
+    if(timbre.catTimbre=='cd'){
+      this.selectedTimbreNumber+= "("+timbre.anneeCoinDate+')';
+    }
   }
 
   addToBasket(timbre): void {
