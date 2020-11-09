@@ -12,13 +12,11 @@ export class BasketComponent implements OnInit {
 
   mailLink;
   displayTimbreModal: boolean = false;
-  displayEmptyBasket: boolean = false;
   displayDevisModal: boolean = false;
   displayBasketList: boolean = false;
   basketDevisList = '';
 
-  selectedTimbre = new Timbre;
-  constructor(private basketService: BasketService, private timbreService: TimbreService) { }
+  constructor(private basketService: BasketService) { }
 
   get basketList() {
     return this.basketService.getBasket();
@@ -31,11 +29,6 @@ export class BasketComponent implements OnInit {
       console.log(error);
 
     }
-  }
-
-  emptyBasket() {
-    this.basketService.emptyBasket();
-    this.displayEmptyBasket = false;
   }
 
   adjustQuantity(timbre, operator) {
@@ -61,12 +54,8 @@ export class BasketComponent implements OnInit {
   set display(value: boolean) {
     this.basketService.displayBasket = !this.display;
   }
-  ngOnInit(): void {
-  }
 
-  showTimbreImgDialog(timbre) {
-    this.displayTimbreModal = true;
-    this.selectedTimbre = timbre;
+  ngOnInit(): void {
   }
 
   constructBasketList() {

@@ -1,37 +1,35 @@
 <p-sidebar [(visible)]="display" position="right">
-  <p-table [value]="basketList" [scrollable]="true" scrollHeight="flex">
-    <ng-template pTemplate="header">
-      <tr>
-        <th>Qté.</th>
-        <th>Numéro</th>
-        <th>Prix</th>
-        <th></th>
-      </tr>
-    </ng-template>
-    <ng-template class="overflow-auto" pTemplate="body" let-timbre>
-      <tr>
-        <td>
-          <div class=" qtés d-flex justify-content-between">
-            <button [disabled]="1>=timbre.quantite" class="qteBtn d-flex align-items-center" type="button"
-              (click)='adjustQuantity(timbre, "minus")'><span>-</span></button>
-            <div class="qte">{{timbre.quantite}}</div>
-            <button [disabled]="timbre.quantite >=timbre.maxQuantite" class="qteBtn d-flex align-items-center"
-              type="button" (click)='adjustQuantity(timbre,"plus")'><span>+</span></button>
-          </div>
-        </td>
+    <p-table [value]="basketList" [scrollable]="true" scrollHeight="flex">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Qté.</th>
+                <th>Numéro</th>
+                <th>Prix</th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template class="overflow-auto" pTemplate="body" let-timbre>
+            <tr>
+                <td>
+                    <div class=" qtés d-flex justify-content-between">
+                        <button [disabled]="1>=timbre.quantite" class="qteBtn d-flex align-items-center" type="button" (click)='adjustQuantity(timbre, "minus")'><span>-</span></button>
+                        <div class="qte">{{timbre.quantite}}</div>
+                        <button [disabled]="timbre.quantite >=timbre.maxQuantite" class="qteBtn d-flex align-items-center" type="button" (click)='adjustQuantity(timbre,"plus")'><span>+</span></button>
+                    </div>
+                </td>
 
-        <td>
-          <div class="d-flex justify-content-center">
-            <p class="mb-0 font-weight-bold" *ngIf="timbre.catTimbre=='tas'">{{timbre.tasType}}</p>
-            <p *ngIf="timbre.numeroTimbre !== 0" class="text-center mb-0 font-weight-bold">{{timbre.numeroTimbre}}</p>
-            <p class="mb-0" *ngIf="timbre.etatTimbre=='occas'">*</p>
-            <p class="mb-0" *ngIf="timbre.etatTimbre=='sg'">SG</p>
-            <p class="mb-0" *ngIf="timbre.catTimbre=='cd'">({{timbre.anneeCoinDate}})</p>
-            <p class="mb-0" *ngIf="timbre.catTimbre == 'obl' || timbre.catTimbre == 'spe'">{{timbre.optionalInfos}}</p>
-          </div>
-        </td>
-        <td>{{timbre.prixTimbre}}€</td>
-        <td><button type="button" (click)="deleteTimbreFromBasket(timbre)" class="deleteBtn btn btn-outline-danger">
+                <td>
+                    <div class="d-flex justify-content-center">
+                        <p class="mb-0 font-weight-bold" *ngIf="timbre.catTimbre=='tas'">{{timbre.tasType}}</p>
+                        <p *ngIf="timbre.numeroTimbre !== 0" class="text-center mb-0 font-weight-bold">{{timbre.numeroTimbre}}</p>
+                        <p class="mb-0" *ngIf="timbre.etatTimbre=='occas'">*</p>
+                        <p class="mb-0" *ngIf="timbre.etatTimbre=='sg'">SG</p>
+                        <p class="mb-0" *ngIf="timbre.catTimbre=='cd'">({{timbre.anneeCoinDate}})</p>
+                        <p class="mb-0" *ngIf="timbre.catTimbre == 'obl' || timbre.catTimbre == 'spe'">{{timbre.optionalInfos}}</p>
+                    </div>
+                </td>
+                <td>{{timbre.prixTimbre}}€</td>
+                <td><button type="button" (click)="deleteTimbreFromBasket(timbre)" class="deleteBtn btn btn-outline-danger">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor"
               xmlns="http://www.w3.org/2000/svg">
               <path
@@ -39,39 +37,20 @@
               <path fill-rule="evenodd"
                 d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
             </svg> </button>
-        </td>
-      </tr>
-    </ng-template>
+                </td>
+            </tr>
+        </ng-template>
 
-  </p-table>
-  <div class=" ml-4 d-flex justify-content-between tableFooter">
-    <div *ngIf="basketItemsNumber !== 1">{{basketItemsNumber}} Articles</div>
-    <div *ngIf="basketItemsNumber === 1">{{basketItemsNumber}} Article</div>
-    <div class="mr-4">Total: {{basketTotal| number:'1.2-2'}}€</div>
-  </div>
-  <div class="d-flex buttons">
-    <button id="cancelBtn" [disabled]="basketList.length===0" (click)="displayEmptyBasket=true" type="button"
-      class="basketBtn">Vider le
-      panier</button>
-    <button id="okBtn" [disabled]="basketList.length===0" routerLink="/commande" type="button" class="basketBtn">Valider
+    </p-table>
+    <div class=" ml-4 d-flex justify-content-between tableFooter">
+        <div *ngIf="basketItemsNumber !== 1">{{basketItemsNumber}} Articles</div>
+        <div *ngIf="basketItemsNumber === 1">{{basketItemsNumber}} Article</div>
+        <div class="mr-4">Total: {{basketTotal| number:'1.2-2'}}€</div>
+    </div>
+    <div class="d-flex buttons">
+        <button id="cancelBtn" (click)="display=false" type="button" class="basketBtn">Continuer les achats</button>
+        <button id="okBtn" [disabled]="basketList.length===0" routerLink="/commande" type="button" class="basketBtn">Valider
       la
       commande</button>
-  </div>
-</p-sidebar>
-
-<!-- Modal confirmation vidage panier -->
-<p-dialog id="EmptyBasketModal" class="textModal" [(visible)]="displayEmptyBasket">
-  <p-header>
-    Suppression panier
-  </p-header>
-  <div class="px-4 py-4">
-    Souhaitez-vous vraiment vider votre panier?
-  </div>
-
-  <p-footer>
-    <div class="d-flex">
-      <button id="cancelEmptyBtn" (click)="displayEmptyBasket = false" type="button" class="basketBtn">Non</button>
-      <button id="okEmptyBtn" (click)="emptyBasket()" type="button" class="basketBtn">Oui</button>
     </div>
-  </p-footer>
-</p-dialog>
+</p-sidebar>
