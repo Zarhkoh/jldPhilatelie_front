@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { UserInformationsService } from 'src/app/services/user-informations.service';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { trigger, style, animate, transition } from '@angular/animations';
 import { LoadingService } from './services/loading.service';
 
 @Component({
