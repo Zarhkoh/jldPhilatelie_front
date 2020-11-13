@@ -34,7 +34,11 @@ import { MerciComponent } from './components/merci/merci.component';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { TooltipModule } from 'primeng/tooltip';
-
+import {TabViewModule} from 'primeng/tabview';
+import { AdminGestionTimbresComponent } from './components/admin-gestion-timbres/admin-gestion-timbres.component';
+import { AdminGestionNewsComponent } from './components/admin-gestion-news/admin-gestion-news.component';
+import {EditorModule} from 'primeng/editor';
+import { AdminLivraisonsComponent } from './components/admin-livraisons/admin-livraisons.component';
 
 
 
@@ -72,7 +76,10 @@ export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
     BasketComponent,
     DevisConfirmationComponent,
     LoadingComponent,
-    MerciComponent],
+    MerciComponent,
+    AdminGestionTimbresComponent,
+    AdminGestionNewsComponent,
+    AdminLivraisonsComponent],
   imports: [
     JwtModule.forRoot({
       config: {
@@ -96,7 +103,9 @@ export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
     DropdownModule,
     RadioButtonModule,
     KeyFilterModule,
-    TooltipModule
+    TooltipModule,
+    TabViewModule,
+    EditorModule
 
   ],
   providers: [{
