@@ -1,31 +1,42 @@
 :host {
-  width: 100%;
+    width: 100%;
 }
+
 .bloc {
-  margin: 5em auto;
-  width: 86%;
-  background-color: #c2c2c279;
-  border-radius: 4px;
-  border: 1px #c2c2c2bd solid;
+    margin: 5em auto;
+    width: 86%;
+    background-color: #c2c2c279;
+    border-radius: 4px;
+    border: 1px #c2c2c2bd solid;
 }
 
 .title {
-  height: 3em;
-  padding-left: 1em;
-  border-radius: 4px 4px 0 0;
-  color: white;
-  background-color: #4592af;
-  margin-bottom: 1em;
+    height: 3em;
+    padding-left: 1em;
+    border-radius: 4px 4px 0 0;
+    color: white;
+    background-color: #4592af;
+    margin-bottom: 1em;
 }
 
 .content {
-  padding: 1em;
+    padding: 1em;
+}
+
+.newsContent {
+    padding-bottom: 0.3em;
 }
 
 a {
-  color: #226089;
-  text-decoration: none;
+    color: #226089;
+    text-decoration: none;
 }
+
 p {
-  margin: 0.2em;
+    margin: 0.2em;
+}
+
+#newsStamp {
+    font-size: 0.6em;
+    color: #464646;
 }

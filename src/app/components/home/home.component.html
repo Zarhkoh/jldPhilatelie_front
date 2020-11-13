@@ -1,58 +1,53 @@
 <div class="bloc">
-  <div class="title d-flex align-items-center justify-content-center">
-    <h4>Présentation du site</h4>
-  </div>
-  <div class="content">
-    <p>Vous trouverez dans ces pages une partie des timbres que je mets en vente (photos non contractuelles).</p>
-    <p>Les timbres sont vendus <strong>jusqu'à 80 % de remise</strong> sur la côte Yvert et Tellier.</p>
+    <div class="title d-flex align-items-center justify-content-center">
+        <h4>Présentation du site</h4>
+    </div>
+    <div class="content">
+        <p>Vous trouverez dans ces pages une partie des timbres que je mets en vente (photos non contractuelles).</p>
+        <p>Les timbres sont vendus <strong>jusqu'à 80 % de remise</strong> sur la côte Yvert et Tellier.</p>
 
-    <p>Les timbres neufs avec gomme altérée, avec charnière ou 2ème choix sont repérés par <strong>*</strong> après le
-      numéro du timbre.</p>
-    <p>Les timbres neufs sans gomme sont repérés par <strong>sg</strong> après le numéro du timbre.</p>
+        <p>Les timbres neufs avec gomme altérée, avec charnière ou 2ème choix sont repérés par <strong>*</strong> après le numéro du timbre.</p>
+        <p>Les timbres neufs sans gomme sont repérés par <strong>sg</strong> après le numéro du timbre.</p>
 
-    <p>Pour tout renseignement vous pouvez m'écrire en cliquant sur <a
-        href="mailto:jld_philatelie@laposte.net"><strong>écrivez-moi.</strong></a></p>
+        <p>Pour tout renseignement vous pouvez m'écrire en cliquant sur <a href="mailto:jld_philatelie@laposte.net"><strong>écrivez-moi.</strong></a></p>
 
-    <p>Si vous désirez être tenu au courant des mises à jour, veuillez me le demander.</p>
+        <p>Si vous désirez être tenu au courant des mises à jour, veuillez me le demander.</p>
 
-    <p>(si vous constatez une erreur, n'hésitez pas à me la signaler)</p>
-  </div>
+        <p>(si vous constatez une erreur, n'hésitez pas à me la signaler)</p>
+    </div>
 </div>
 
 <div class="bloc">
-  <div class="title d-flex align-items-center justify-content-center">
-    <h4>Commande, paiement et livraison</h4>
-  </div>
-  <div class="content">
-    <h5>Commande</h5>
-    <p class="mb-4">Pour passer commande, il vous suffit de m'envoyer un mail avec la liste des timbres demandés. Une
-      fois la
-      vérification de disponibilité des timbres faite de mon côté, je vous envoie un mail avec les détails de la
-      commande ainsi que le montant total.</p>
+    <div class="title d-flex align-items-center justify-content-center">
+        <h4>Commande, paiement et livraison</h4>
+    </div>
+    <div class="content">
+        <h5>Commande</h5>
+        <p class="mb-4">Pour passer commande, il vous suffit de m'envoyer un mail avec la liste des timbres demandés. Une fois la vérification de disponibilité des timbres faite de mon côté, je vous envoie un mail avec les détails de la commande ainsi que le montant
+            total.
+        </p>
 
-    <h5>Règlement</h5>
-    <p class="mb-4">Le réglement s'effectue par chèque. <strong>(affranchissement philatélique réciproque)</strong></p>
+        <h5>Règlement</h5>
+        <p class="mb-4">Le réglement s'effectue par chèque <strong>(affranchissement philatélique réciproque)</strong>.</p>
 
-    <h5>Frais de ports</h5>
-    <p>Pour la France, les frais de port au 01/01/20 sont de 1,90€ (envoi simple), 2,39€ (lettre suivie) ou 5,50€
-      (recommandé) à préciser lors de votre commande.</p>
-    <p>Je décline toute responsabilité quant à l'envoi en tarif courrier</p>
-  </div>
+        <h5>Frais de ports</h5>
+        <p>Pour la France, les moyens de livraisons disponibles au 01/01/20 sont les suivants:</p>
+        <ul>
+            <li *ngFor="let livraison of livraisons">
+                {{livraison.nomLivraison}} - {{livraison.prixLivraison}}€
+            </li>
+        </ul>
+        <!-- de 1,90€ (envoi simple), 2,39€ (lettre suivie) ou 5,50€ (recommandé) à préciser lors de votre commande.</p> -->
+        <p>Je décline toute responsabilité quant à l'envoi en tarif courrier</p>
+    </div>
 </div>
 
 <div class="bloc">
-  <div class="title d-flex align-items-center justify-content-center">
-    <h4>Nouveautés</h4>
-  </div>
-  <div class="content">
-    <p>Visitez régulièrement le site afin de découvrir toutes les nouveautés.</p>
-    <p>Page oblitérés mise à jour le 10/09/20</p>
-    <p>Pages 7, 8, 9, 10, 11, 12, 13, 16 mises à jour le 14/04/20 Page 1 mise à jour le 04/01/20</p>
-    <p>Page 2 mise à jour le 06/01/20</p>
-    <br />
-    <p>NOUVEAUTÉ:</p>
-    <p>Bientôt mise en vente de timbres de Polynésie Française. Si vous êtes intêressé, n'hésitez pas en m'envoyer un
-      mail, je
-      vous préviendrai de la mise à disposition de la page.</p>
-  </div>
+    <div class="title d-flex align-items-center justify-content-center">
+        <h4>Nouveautés</h4>
+    </div>
+    <div class="content newsContent">
+        <div [innerHTML]="news.textNews"></div>
+        <p id="newsStamp">Mis à jour le {{news.dateEditionNews| date:'dd/MM/yyyy'}}</p>
+    </div>
 </div>
