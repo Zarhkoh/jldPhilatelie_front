@@ -31,7 +31,7 @@
         <p class="mb-4">Le réglement s'effectue par chèque <strong>(affranchissement philatélique réciproque)</strong>.</p>
 
         <h5>Frais de ports</h5>
-        <p>Pour la France, les moyens de livraisons disponibles au 01/01/20 sont les suivants:</p>
+        <p>Pour la France, les moyens de livraisons disponibles au {{changementLivraisonDate| date: 'dd/MM/yy'}} sont les suivants:</p>
         <ul>
             <li *ngFor="let livraison of livraisons">
                 {{livraison.nomLivraison}} - {{livraison.prixLivraison}}€

@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   constructor(private newsService: NewsService, private livraisonService: LivraisonService) { }
   news;
   livraisons;
+  changementLivraisonDate = new Date("01/01/1900");
   ngOnInit(): void {
     this.getNews();
     this.getLivraisons();
@@ -28,6 +29,12 @@ export class HomeComponent implements OnInit {
   getLivraisons(){
     this.livraisonService.getAllLivraisons().subscribe(data => {
       this.livraisons = data;
+      this.livraisons.forEach(livraison => {
+        let date = new Date(livraison.dateEditionLivraison);
+        if(date > this.changementLivraisonDate){
+          this.changementLivraisonDate = date;
+        }
+            });
     })
   }
 }
