@@ -145,7 +145,7 @@
                     <!-- TABLE TIMBRE NUMERO -->
                     <td>
                         <div class="d-flex justify-content-center" *ngIf="editableTimbreId !== timbre.timbreId">
-                            <p class="mb-0" *ngIf="timbre.catTimbre=='tas'">timbre.tasType</p>
+                            <p class="mb-0" *ngIf="timbre.catTimbre=='tas'">{{timbre.tasType}}</p>
                             <p class=" mb-0 font-weight-bold">
                                 {{timbre.numeroTimbre}}</p>
                             <p class=" mb-0 font-weight-bold">{{timbre.optionalInfos}}</p>
