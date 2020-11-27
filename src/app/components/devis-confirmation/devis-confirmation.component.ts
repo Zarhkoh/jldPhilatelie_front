@@ -19,9 +19,9 @@ export class DevisConfirmationComponent implements OnInit {
   message = '';
   totalArticles = 0;
   addMessage: boolean = false;
-  livraisons = [{ type: 'ES', prix: 1.90, label: 'Envoi Simple - 1.90€' },
-  { type: 'LS', prix: 2.39, label: 'Lettre Suivie - 2.39€' },
-  { type: 'ER', prix: 5.50, label: 'Envoi Recommandé - 5.50€' }];
+  livraisons = [{prix: 1.90, label: 'Envoi Simple' },
+  { prix: 2.39, label: 'Lettre Suivie' },
+  { prix: 5.50, label: 'Envoi Recommandé' }];
   livraison: number;
   constructor(private basketService: BasketService, private loadingService: LoadingService, private router: Router) { }
 
