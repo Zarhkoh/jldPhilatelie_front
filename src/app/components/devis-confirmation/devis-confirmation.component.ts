@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Timbre } from 'src/app/models/timbre';
 import { BasketService } from 'src/app/services/basket.service';
 import { LoadingService } from 'src/app/services/loading.service';
+import { LogService } from 'src/app/services/log.service';
 
 @Component({
   selector: 'app-devis-confirmation',
@@ -23,7 +24,7 @@ export class DevisConfirmationComponent implements OnInit {
   { prix: 2.39, label: 'Lettre Suivie' },
   { prix: 5.50, label: 'Envoi Recommandé' }];
   livraison: number;
-  constructor(private basketService: BasketService, private loadingService: LoadingService, private router: Router) { }
+  constructor(private basketService: BasketService, private loadingService: LoadingService, private router: Router, private logger:LogService) { }
 
   ngOnInit(): void {
     this.getBasketList();
@@ -33,7 +34,11 @@ export class DevisConfirmationComponent implements OnInit {
   }
 
   getBasketList() {
-    this.basketList = this.basketService.getBasket();
+    try {
+      this.basketList = this.basketService.getBasket();
+    } catch (error) {
+      this.logger.error(error,"devis-confirmation.component");
+    }
   }
 
   totalArticlesCalcul() {
@@ -66,7 +71,12 @@ export class DevisConfirmationComponent implements OnInit {
   }
 
   adjustQuantity(timbre, operator) {
-    this.basketService.adjustQuantity(timbre, operator);
+    try {
+      this.basketService.adjustQuantity(timbre, operator);
+    } catch (error) {
+      this.logger.error(error,"devis-confirmation.component");
+
+    }
     this.getBasketList();
     this.totalArticlesCalcul();
   }
@@ -76,7 +86,7 @@ export class DevisConfirmationComponent implements OnInit {
       this.basketService.deleteTimbreFromBasket(timbre);
       this.totalArticlesCalcul();
     } catch (error) {
-      console.log(error);
+      this.logger.error(error,"devis-confirmation.component");
     }
     this.getBasketList();
   }
@@ -93,7 +103,7 @@ export class DevisConfirmationComponent implements OnInit {
       const envoi = this.livraisons[this.livraisons.findIndex(l => l.prix == this.livraison)];
       this.basketService.sendBasketToDevis(this.email, this.message, envoi).subscribe(data => { this.basketService.emptyBasket(); this.router.navigate(['/merci']) }, error => console.log(error));
     } catch (error) {
-      console.log('Une erreur est survenue: ', error);
+      this.logger.error(error,"devis-confirmation.component");
     }
   }
 

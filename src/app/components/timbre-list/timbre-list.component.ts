@@ -3,6 +3,7 @@ import { TimbreService } from '../../services/timbre.service';
 import { Timbre } from '../../models/timbre';
 import { ActivatedRoute } from '@angular/router';
 import { BasketService } from 'src/app/services/basket.service';
+import { LogService } from 'src/app/services/log.service';
 
 @Component({
   selector: 'app-timbre-list',
@@ -26,15 +27,19 @@ export class TimbreListComponent implements OnInit {
   sortFilter;
   loading: boolean;
   basketConfirmation;
-  constructor(private basketService: BasketService, private timbreService: TimbreService, private route: ActivatedRoute) {
+  constructor(private basketService: BasketService, private timbreService: TimbreService, private route: ActivatedRoute, private logger:LogService) {
   }
 
   ngOnInit(): void {
     if (this.basketService.subsBar === undefined) {
-      this.basketService.subsBar = this.basketService.
+      try {
+        this.basketService.subsBar = this.basketService.
         invokeFirstComponentFunction.subscribe((basketLine: string) => {
           this.releaseTimbreDeletedFromBasket(basketLine);
         });
+      } catch (error) {
+        this.logger.error(error,"timbre-list.component");
+      }
     }
     // affiche ou non le gif de chargement
     this.loading = false;
@@ -65,6 +70,7 @@ export class TimbreListComponent implements OnInit {
         this.timbreList.find(t => t.timbreId === element.timbreId).quantiteTimbre -= element.quantite;
 
       } catch (error) {
+        
       }
     });
   }
@@ -80,22 +86,32 @@ export class TimbreListComponent implements OnInit {
 
   getAllTimbres(): void {
     this.loading = true;
-    this.timbreService.getAllTimbres().subscribe(data => {
-      this.timbreList = data as Timbre[];
-      this.loading = false;
-    });
+    try {
+      this.timbreService.getAllTimbres().subscribe(data => {
+        this.timbreList = data as Timbre[];
+        this.loading = false;
+      });
+    } catch (error) {
+      this.logger.error(error,"timbre-list.component");
+    }
+
   }
 
   getTimbreByNumber(num: any): void {
     if (Number(num) && num % 1 === 0 && num > 0) {
       this.loading = true;
-      this.timbreService.getTimbreByNumero(num).subscribe(data => {
-        this.timbreList = data as Timbre[];
-        if (this.timbreList.length === 0) {
-          this.error = 'Le timbre n°' + num + ' n\'est pas disponible sur ce site.';
-        }
-        this.loading = false;
-      });
+      try {
+        this.timbreService.getTimbreByNumero(num).subscribe(data => {
+          this.timbreList = data as Timbre[];
+          if (this.timbreList.length === 0) {
+            this.error = 'Le timbre n°' + num + ' n\'est pas disponible sur ce site.';
+          }
+          this.loading = false;
+        });
+      } catch (error) {
+        this.logger.error(error,"timbre-list.component");
+      }
+
     } else {
       this.error = 'La recherche doit comporter un chiffre entier et positif.';
     }
@@ -163,6 +179,7 @@ export class TimbreListComponent implements OnInit {
       });
 
     } catch (error) {
+      this.logger.error(error,"timbre-list.component");
       this.error = error;
 
     }

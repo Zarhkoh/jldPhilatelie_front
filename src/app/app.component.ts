@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { UserInformationsService } from 'src/app/services/user-informations.service';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { LoadingService } from './services/loading.service';
+import { LogService } from './services/log.service';
 
 @Component({
   selector: 'app-root',
@@ -33,11 +34,15 @@ import { LoadingService } from './services/loading.service';
   ]
 })
 export class AppComponent {
-  constructor(public location: Location, private userInformationsService: UserInformationsService, private loadingService: LoadingService) {
+  constructor(public location: Location, private userInformationsService: UserInformationsService, private loadingService: LoadingService, private logService: LogService) {
     this.addVisit(window.navigator.userAgent);
   }
   addVisit(browser) {
-    this.userInformationsService.addVisit(browser);
+    try {
+      this.userInformationsService.addVisit(browser);
+    } catch (error) {
+      this.logService.error(error, "app.component");
+    }
   }
 
   get isLoading() {

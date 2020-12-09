@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BasketService } from 'src/app/services/basket.service';
-import { Timbre } from 'src/app/models/timbre';
-import { TimbreService } from 'src/app/services/timbre.service';
+import { LogService } from 'src/app/services/log.service';
 
 @Component({
   selector: 'app-basket',
@@ -16,7 +15,7 @@ export class BasketComponent implements OnInit {
   displayBasketList: boolean = false;
   basketDevisList = '';
 
-  constructor(private basketService: BasketService) { }
+  constructor(private basketService: BasketService, private logger: LogService) { }
 
   get basketList() {
     return this.basketService.getBasket();
@@ -26,13 +25,18 @@ export class BasketComponent implements OnInit {
     try {
       this.basketService.deleteTimbreFromBasket(timbre);
     } catch (error) {
-      console.log(error);
-
+      this.logger.error(error,"basket.component");
     }
   }
 
   adjustQuantity(timbre, operator) {
-    this.basketService.adjustQuantity(timbre, operator);
+    try {
+      this.basketService.adjustQuantity(timbre, operator);
+
+    } catch (error) {
+      this.logger.error(error,"basket.component");
+
+    }
   }
 
   get basketTotal() {

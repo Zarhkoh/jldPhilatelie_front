@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LivraisonService } from 'src/app/services/livraison.service';
 import { Livraison } from 'src/app/models/livraison';
 import { ToastService } from 'src/app/services/toast.service';
+import { LogService } from 'src/app/services/log.service';
 
 @Component({
   selector: 'app-admin-livraisons',
@@ -15,20 +16,31 @@ export class AdminLivraisonsComponent implements OnInit {
   livraisonForEdition: Livraison;
   idLivraisonEdition;
   
-  constructor(private livraisonService: LivraisonService, private toastService: ToastService) { }
+  constructor(private livraisonService: LivraisonService, private toastService: ToastService, private logger: LogService) { }
 
   ngOnInit(): void {
     this.getLivraisons();
   }
 
   getLivraisons(){
-    this.livraisonService.getAllLivraisons().subscribe(data => {
-      this.livraisons = data as Livraison[];
-    })
+    try {
+      this.livraisonService.getAllLivraisons().subscribe(data => {
+        this.livraisons = data as Livraison[];
+      })
+    } catch (error) {
+      this.logger.error(error,"admin-livraisons.component");
+      this.toastService.showDanger(error);
+    }
+
   }
 
   addLivraison(){
-    this.livraisonService.addLivraison(this.newLivraison);
+    try {
+      this.livraisonService.addLivraison(this.newLivraison);
+    } catch (error) {
+      this.logger.error(error,"admin-livraisons.component");
+      this.toastService.showDanger(error);
+    }
   }
 
   allowLivraisonEdition(livraison){
@@ -37,21 +49,32 @@ export class AdminLivraisonsComponent implements OnInit {
   }
 
   updateLivraison(livraison) {
-    this.livraisonService.updateLivraison(livraison).subscribe(data => {
-      livraison.dateEditionLivraison = new Date();
-      this.livraisons.splice(this.livraisons.indexOf(this.livraisons.find(x => x.livraisonId == this.livraisonForEdition.livraisonId)), 1, this.livraisonForEdition);
-      this.idLivraisonEdition = 0;
-      this.toastService.showSuccess(livraison.nomLivraison + ' mis à jour.');
-    }), error => console.log(error);
+    try {
+      this.livraisonService.updateLivraison(livraison).subscribe(data => {
+        livraison.dateEditionLivraison = new Date();
+        this.livraisons.splice(this.livraisons.indexOf(this.livraisons.find(x => x.livraisonId == this.livraisonForEdition.livraisonId)), 1, this.livraisonForEdition);
+        this.idLivraisonEdition = 0;
+        this.toastService.showSuccess(livraison.nomLivraison + ' mis à jour.');
+      })
+    } catch (error) {
+      this.logger.error(error,"admin-livraisons.component");
+      this.toastService.showDanger(error);
+    }
   }
 
   deleteLivraisonById(livraison){
-    this.livraisonService.deleteLivraisonById(livraison.livraisonId).subscribe(data => {
-      if (data === 1) {
-        this.livraisons.splice(this.livraisons.indexOf(livraison), 1);
-        this.toastService.showSuccess(`${livraison.nomLivraison} supprimé`);
-      }
-        });
+    try {
+      this.livraisonService.deleteLivraisonById(livraison.livraisonId).subscribe(data => {
+        if (data === 1) {
+          this.livraisons.splice(this.livraisons.indexOf(livraison), 1);
+          this.toastService.showSuccess(`${livraison.nomLivraison} supprimé`);
+        }
+          });
+    } catch (error) {
+      this.logger.error(error,"admin-livraisons.component");
+      this.toastService.showDanger(error);
+    }
+
   }
 
   abortEdition() {

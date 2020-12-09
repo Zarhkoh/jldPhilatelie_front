@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Timbre } from 'src/app/models/timbre';
 import { FileUploadService } from 'src/app/services/file-upload.service';
+import { LogService } from 'src/app/services/log.service';
 import { TimbreService } from 'src/app/services/timbre.service';
 import { ToastService } from 'src/app/services/toast.service';
 
@@ -27,7 +28,8 @@ export class AdminGestionTimbresComponent implements OnInit {
   constructor(private fileUploadService: FileUploadService,
     private toastService: ToastService,
     private timbreService: TimbreService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private logger: LogService) { }
 
   ngOnInit(): void {
     this.reader = new FileReader();
@@ -37,7 +39,7 @@ export class AdminGestionTimbresComponent implements OnInit {
     this.setupForm();
   }
 
-  
+
   setupForm(): void {
     this.timbreForm = this.formBuilder.group({
       numero: [],
@@ -50,40 +52,76 @@ export class AdminGestionTimbresComponent implements OnInit {
       optionalInfos: [],
       tasType: []
     });
+    this.selectedImage = null;
   }
   getAllTimbres(): void {
     this.loading = true;
-    this.timbreService.getAllTimbres().subscribe(data => {
-      this.timbreList = data as Timbre[];
-      this.loading = false;
-    });
+    try {
+      this.timbreService.getAllTimbres().subscribe(data => {
+        this.timbreList = data as Timbre[];
+        this.loading = false;
+      });
+
+    } catch (error) {
+      this.logger.error(error, "admin-gestion-timbres.component");
+      this.toastService.showDanger(error);
+    }
   }
 
   async addTimbre(): Promise<any> {
     try {
-      this.responseImageUploadUrl = await this.uploadImg();
-      this.timbreForm.patchValue({ image: this.responseImageUploadUrl.secure_url });
-      this.timbreService.addTimbre(this.timbreForm.value).subscribe(data => {
-        this.toastService.showSuccess(`Timbre n°${this.timbreForm.value.numero} créé`);
-        this.setupForm();
-        this.getAllTimbres();
-      });
+      // Lance une erreur s'il manque le numéro du timbre
+      if ((this.timbreForm.value.numero === null || this.timbreForm.value.numero === '')) {
+        throw new Error('Merci de renseigner le numéro du timbre.');
+        // Lance une erreur si le prix est incohérent
+      } else if (this.timbreForm.value.prix <= 0) {
+        throw new Error('Merci de renseigner le prix du timbre.');
+      } else if (this.timbreForm.value.quantite == null) {
+        throw new Error('Merci de renseigner la quantité du timbre.');
+      } else if (this.selectedImage == null) {
+        throw new Error('Merci de mettre l\'image du timbre.');
+      } else if (this.timbreForm.value.categorie == 'tas' && this.timbreForm.value.tasType === null) {
+        throw new Error('Merci de renseigner le type de TAS.');
+      } else if (this.timbreForm.value.categorie == 'cd' && (this.timbreForm.value.anneeCoinDate === null || this.timbreForm.value.anneeCoinDate === '')) {
+        throw new Error('Merci de renseigner l\'année du timbre.');
+      }
+      else {
+        this.responseImageUploadUrl = await this.uploadImg();
+        this.timbreForm.patchValue({ image: this.responseImageUploadUrl.secure_url });
+        this.timbreService.addTimbre(this.timbreForm.value).subscribe(data => {
+          this.toastService.showSuccess(`Timbre n°${this.timbreForm.value.numero} créé`);
+          this.setupForm();
+          this.getAllTimbres();
+        });
+      }
+
     } catch (error) {
+      this.logger.error(error, "admin-gestion-timbres.component");
       this.toastService.showDanger(error);
     }
   }
 
   async uploadImg(): Promise<any> {
-    return await this.fileUploadService.upload(this.selectedImage, this.imageFile.name.split('.').slice(0, -1)[0]);
+    try {
+      return await this.fileUploadService.upload(this.selectedImage, this.imageFile.name.split('.').slice(0, -1)[0]);
+    } catch (error) {
+      this.logger.error(error, "admin-gestion-timbres.component");
+      this.toastService.showDanger(error);
+    }
   }
 
   deleteTimbreById(timbre) {
-    this.timbreService.deleteTimbreById(timbre.timbreId).subscribe(data => {
-      if (data === 1) {
-        this.timbreList.splice(this.timbreList.indexOf(timbre), 1);
-        this.toastService.showSuccess(`Timbre n°${timbre.numeroTimbre} supprimé`);
-      }
-    });
+    try {
+      this.timbreService.deleteTimbreById(timbre.timbreId).subscribe(data => {
+        if (data === 1) {
+          this.timbreList.splice(this.timbreList.indexOf(timbre), 1);
+          this.toastService.showSuccess(`Timbre n°${timbre.numeroTimbre} supprimé`);
+        }
+      });
+    } catch (error) {
+      this.logger.error(error, "admin-gestion-timbres.component");
+      this.toastService.showDanger(error);
+    }
   }
 
   changeTimbreQte(timbre, operation) {
@@ -96,11 +134,16 @@ export class AdminGestionTimbresComponent implements OnInit {
   }
 
   updateTimbre(timbre) {
-    this.timbreService.updateTimbre(timbre).subscribe(data => {
-      this.timbreList.splice(this.timbreList.indexOf(this.timbreList.find(x => x.timbreId == this.timbreForEdition.timbreId)), 1, this.timbreForEdition);
-      this.editableTimbreId = 0;
-      this.toastService.showSuccess('Timbre n°' + timbre.numeroTimbre + ' mis à jour.');
-    }), error => console.log(error);
+    try {
+      this.timbreService.updateTimbre(timbre).subscribe(data => {
+        this.timbreList.splice(this.timbreList.indexOf(this.timbreList.find(x => x.timbreId == this.timbreForEdition.timbreId)), 1, this.timbreForEdition);
+        this.editableTimbreId = 0;
+        this.toastService.showSuccess('Timbre n°' + timbre.numeroTimbre + ' mis à jour.');
+      })
+    } catch (error) {
+      this.logger.error(error, "admin-gestion-timbres.component");
+      this.toastService.showDanger(error);
+    }
   }
 
   setCat(cat) {
