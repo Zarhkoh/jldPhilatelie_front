@@ -46,7 +46,7 @@
     <div class="title d-flex align-items-center justify-content-center">
         <h4>Nouveautés</h4>
     </div>
-    <div class="content newsContent">
+    <div *ngIf="news!= undefined" class="content newsContent">
         <div [innerHTML]="news.textNews"></div>
         <p id="newsStamp">Mis à jour le {{news.dateEditionNews| date:'dd/MM/yyyy'}}</p>
     </div>

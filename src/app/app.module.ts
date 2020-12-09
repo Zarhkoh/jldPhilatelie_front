@@ -39,6 +39,7 @@ import { AdminGestionTimbresComponent } from './components/admin-gestion-timbres
 import { AdminGestionNewsComponent } from './components/admin-gestion-news/admin-gestion-news.component';
 import {EditorModule} from 'primeng/editor';
 import { AdminLivraisonsComponent } from './components/admin-livraisons/admin-livraisons.component';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -111,7 +112,7 @@ export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
   providers: [{
     provide: UrlSerializer,
     useClass: LowerCaseUrlSerializer
-  }],
+  },DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
