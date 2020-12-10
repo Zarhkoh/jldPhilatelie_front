@@ -82,10 +82,28 @@ export class TimbreService {
   }
 
   sortByNumAsc(a, b) {
-    return a.numeroTimbre - b.numeroTimbre;
+    let aFormatted = String(a.tasType + a.numeroTimbre);
+    let bFormatted = String(b.tasType + b.numeroTimbre);
+    if (a.optionalInfos) {
+      aFormatted += a.optionalInfos;
+    }
+    if (b.optionalInfos) {
+      bFormatted += b.optionalInfos;
+    }
+    console.log(aFormatted, bFormatted);
+    return aFormatted > bFormatted ? 1 : -1;
   }
   sortByNumDesc(a, b) {
-    return b.numeroTimbre - a.numeroTimbre;
+    let aFormatted = String(a.tasType + a.numeroTimbre);
+    let bFormatted = String(b.tasType + b.numeroTimbre);
+    if (a.optionalInfos) {
+      aFormatted += a.optionalInfos;
+    }
+    if (b.optionalInfos) {
+      bFormatted += b.optionalInfos;
+    }
+    console.log(aFormatted, bFormatted);
+    return aFormatted > bFormatted ? -1 : 1;
   }
   sortByPriceAsc(a, b) {
     return a.prixTimbre - b.prixTimbre;
