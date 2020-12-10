@@ -171,7 +171,6 @@ export class TimbreListComponent implements OnInit {
       this.timbreService.getTimbresByCat(cat).subscribe(data => {
         this.timbreList = data as Timbre[];
         this.adjustQtyWithBasket();
-        this.timbreList.sort(this.timbreService.sortByNumAsc);
         if (this.timbreList && this.timbreList != null && this.timbreList.length === 0) {
           this.error = 'Aucun timbre n\'existe pour cette catégorie';
         }
@@ -248,10 +247,6 @@ export class TimbreListComponent implements OnInit {
   displayBasketConfirmation(): void {
     this.basketConfirmation = true;
     this.basketList = this.basketService.timbreList;
-  }
-
-  firstFunction() {
-    alert('Hello ' + '\nWelcome to C# Corner \nFunction in First Component');
   }
 
 }
