@@ -29,12 +29,12 @@
     <img src="../../../assets/img/loading.gif">
 </div>
 
-<!-- TIMBRE LIST -->
-<div class="d-flex" *ngIf="error!= null && timbreList && timbreList !== null && timbreList.length ==0 || filteredList.length == 0">
+<!-- DISPLAY IF ERROR -->
+<div class="d-flex" *ngIf="!loading && error && error.length > 0 && timbreList && timbreList.length == 0">
     <p class="d-inline-block alert alert-danger">{{error}}</p>
 </div>
-
-<div *ngIf="timbreList && timbreList !== null &&timbreList.length > 0" class="grille">
+<!-- TIMBRE LIST -->
+<div *ngIf="!loading && timbreList && timbreList.length > 0" class="grille">
     <div *ngIf="filteredList.length > 0" class="liste d-flex flex-wrap">
         <div [ngClass]="{'low-opacity': timbre.quantiteTimbre <=0}" class="p-2 timbreCard d-flex flex-column justify-content-between" *ngFor="let timbre of filteredList">
             <div class="d-flex justify-content-center">
