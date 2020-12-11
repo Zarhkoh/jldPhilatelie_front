@@ -158,10 +158,6 @@ export class TimbreListComponent implements OnInit {
     if (this.dispoFilter) {
       this.filteredTimbreList = this.filteredTimbreList.filter(timbre => timbre.quantiteTimbre > 0);
     }
-    // Affichage de l'erreur si la liste est vide
-    if (this.filteredTimbreList.length === 0) {
-      this.error = 'Pas de timbre disponible pour cette catégorie';
-    }
     return this.filteredTimbreList;
   }
 
