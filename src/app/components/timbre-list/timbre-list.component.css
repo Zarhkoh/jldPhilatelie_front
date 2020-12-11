@@ -1,200 +1,223 @@
 :host {
-  width: 100%;
+    width: 100%;
 }
 
 ::ng-deep .p-dialog-header-close-icon {
-  color: white;
-  background-color: rgb(250, 87, 87);
-  border-radius: 15px;
-  padding: 0.2em;
+    color: white;
+    background-color: rgb(250, 87, 87);
+    border-radius: 15px;
+    padding: 0.2em;
 }
 
 .filters {
-  padding: 0.5% 0;
-  font-size: 0.8em;
-  margin: 2% auto 0;
-  color: white;
-  width: 85%;
-  background-color: #4592af;
-  border-radius: 4px;
+    padding: 0.5% 0;
+    font-size: 0.8em;
+    margin: 2% auto 0;
+    color: white;
+    width: 85%;
+    background-color: #4592af;
+    border-radius: 4px;
 }
 
 #loading {
-  width: 20%;
-  margin: 5em auto;
+    width: 20%;
+    margin: 5em auto;
 }
+
 .alert {
-  margin: 3% auto;
+    margin: 3% auto;
 }
 
 #loading img {
-  width: 4em;
+    height: 4em;
+    padding-left: 30%;
 }
 
 .grille {
-  width: 85%;
-  margin: 1% auto;
-  border-radius: 3px;
+    width: 85%;
+    margin: 1% auto;
+    border-radius: 3px;
 }
+
 .liste {
-  background-color: #e4e3e3;
-  padding: 0.5em 0.5em 0.5em 0;
+    background-color: #e4e3e3;
+    padding: 0.5em 0.5em 0.5em 0;
 }
 
 .timbreCard {
-  background-color: #262c2c;
-  color: white;
-  border-radius: 4px;
-  margin: 0.5em 0 0 0.5em;
+    background-color: #262c2c;
+    color: white;
+    border-radius: 4px;
+    margin: 0.5em 0 0 0.5em;
 }
+
 
 /* CSS TIMBRES IMAGES */
 
 .img-container {
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .timbreImg {
-  width: 4em;
-  height: 5em;
-  border-radius: 2px;
-  color: rgb(85, 85, 85);
-  text-align: center;
+    width: 4em;
+    height: 5em;
+    border-radius: 2px;
+    color: rgb(85, 85, 85);
+    text-align: center;
 }
+
 .cdImg {
-  height: 17em;
-  border-radius: 2px;
-  color: rgb(85, 85, 85);
-  text-align: center;
+    height: 17em;
+    border-radius: 2px;
+    color: rgb(85, 85, 85);
+    text-align: center;
 }
 
 .speImg {
-  height: 12em;
-  border-radius: 2px;
-  color: rgb(85, 85, 85);
-  text-align: center;
+    height: 12em;
+    border-radius: 2px;
+    color: rgb(85, 85, 85);
+    text-align: center;
 }
 
+
 /* CSS SI EPUISE */
+
 .low-opacity {
-  opacity: 45%;
+    opacity: 45%;
 }
 
 .sold-out-container {
-  border-radius: 2px;
+    border-radius: 2px;
 }
+
 .epuise {
-  padding: 1%;
-  color: white;
-  text-align: center;
-  min-width: 4em;
-  margin: 0;
-  border: 1px white solid;
-  border-radius: 2px;
+    padding: 1%;
+    color: white;
+    text-align: center;
+    min-width: 4em;
+    margin: 0;
+    border: 1px white solid;
+    border-radius: 2px;
 }
 
 button:focus {
-  outline: none;
+    outline: none;
 }
 
 .filterBtn {
-  background-color: #4492af;
-  color: white;
-  border-radius: 15px;
-  border: 1px solid #3a7d96;
+    background-color: #4492af;
+    color: white;
+    border-radius: 15px;
+    border: 1px solid #3a7d96;
 }
 
 .btnActive {
-  background-color: #3c7f97;
-  border: 1px solid #285768bb;
-  -webkit-box-shadow: inset 0px 0px 3px #285768bb;
-  -moz-box-shadow: inset 0px 0px 3px #285768bb;
-  box-shadow: inset 0px 0px 3px #285768bb;
+    background-color: #3c7f97;
+    border: 1px solid #285768bb;
+    -webkit-box-shadow: inset 0px 0px 3px #285768bb;
+    -moz-box-shadow: inset 0px 0px 3px #285768bb;
+    box-shadow: inset 0px 0px 3px #285768bb;
 }
+
 .custom-select {
-  width: 70%;
+    width: 70%;
 }
 
-.custom-control-input ~ .custom-control-label::before {
-  background-color: rgb(173, 173, 173);
-}
-.custom-control-input:checked ~ .custom-control-label::before {
-  background-color: rgb(138, 194, 85);
-  border-color: rgb(138, 194, 85);
+.custom-control-input~.custom-control-label::before {
+    background-color: rgb(173, 173, 173);
 }
 
-.custom-control-input ~ .custom-control-label::after {
-  background-color: rgb(255, 255, 255);
+.custom-control-input:checked~.custom-control-label::before {
+    background-color: rgb(138, 194, 85);
+    border-color: rgb(138, 194, 85);
 }
+
+.custom-control-input~.custom-control-label::after {
+    background-color: rgb(255, 255, 255);
+}
+
 label {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 #btnGroup2,
 #btnGroup3 {
-  border-left: 1px rgb(92, 92, 92) solid;
+    border-left: 1px rgb(92, 92, 92) solid;
 }
 
 #filtreInput {
-  font-size: 0.8em;
+    font-size: 0.8em;
 }
 
 a:hover {
-  text-decoration: none;
-}
-.invisible-button {
-  border: none;
-  background: none;
+    text-decoration: none;
 }
 
-/* MODAL CSS */
-::ng-deep .p-dialog {
-  background: #262c2c;
-  border-radius: 5px;
+.invisible-button {
+    border: none;
+    background: none;
 }
+
+
+/* MODAL CSS */
+
+::ng-deep .p-dialog {
+    background: #262c2c;
+    border-radius: 5px;
+}
+
 ::ng-deep .p-dialog .p-dialog-header,
 ::ng-deep .p-dialog .p-dialog-content {
-  color: white;
-  background: none;
+    color: white;
+    background: none;
 }
+
 ::ng-deep .p-dialog .p-dialog-header {
-  padding: 0.5rem 0.5rem 0 0.8rem;
+    padding: 0.5rem 0.5rem 0 0.8rem;
 }
 
 .focusedStampImg {
-  max-height: 20rem;
+    max-height: 20rem;
 }
 
 .addBasketButton {
-  background-color: #4492af;
-  color: white;
-  width: 12.8em;
-  margin-top: 0.8rem;
-  border-radius: 3px;
-  border: 1px solid white;
+    background-color: #4492af;
+    color: white;
+    width: 12.8em;
+    margin-top: 0.8rem;
+    border-radius: 3px;
+    border: 1px solid white;
 }
+
 .addBasketButton svg {
-  margin-bottom: 0.3rem;
+    margin-bottom: 0.3rem;
 }
+
 .addBasketButton span {
-  padding-left: 0.4rem;
-  margin-left: 0.4rem;
-  border-left: 1px solid white;
+    padding-left: 0.4rem;
+    margin-left: 0.4rem;
+    border-left: 1px solid white;
 }
+
 .addBasketButton:enabled:hover {
-  background-color: #3b7e96;
+    background-color: #3b7e96;
 }
+
 .addBasketButton:disabled {
-  opacity: 30%;
+    opacity: 30%;
 }
+
 .addBasketButton:disabled:hover {
-  opacity: 30%;
+    opacity: 30%;
 }
+
 .confirmBasketBtn {
-  background-color: rgb(76, 161, 76);
+    background-color: rgb(76, 161, 76);
 }
+
 .confirmBasketBtn:hover {
-  background-color: rgb(76, 161, 76) !important;
+    background-color: rgb(76, 161, 76) !important;
 }
