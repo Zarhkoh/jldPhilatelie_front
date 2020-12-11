@@ -53,6 +53,7 @@ export class TimbreService {
   }
 
   addTimbre(newTimbre) {
+    newTimbre.optionalInfos = newTimbre.optionalInfos.toUpperCase();
     const params = {
       newTimbre
     };
@@ -60,6 +61,7 @@ export class TimbreService {
   }
 
   updateTimbre(newTimbre) {
+    newTimbre.optionalInfos = newTimbre.optionalInfos.toUpperCase();
     const params = {
       newTimbre
     };
