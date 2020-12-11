@@ -88,27 +88,73 @@ export class TimbreService {
   }
 
   sortByNumAsc(a, b) {
-    let aFormatted = String(a.tasType + a.numeroTimbre);
-    let bFormatted = String(b.tasType + b.numeroTimbre);
+    let aFormatted;
+    let bFormatted;
+
+    switch (String(a.numeroTimbre).length) {
+      case 2:
+        aFormatted = "00" + String(a.numeroTimbre);
+        break;
+      case 3:
+        aFormatted = "0" + String(a.numeroTimbre);
+      default:
+        break;
+    }
+
+    switch (String(b.numeroTimbre).length) {
+      case 2:
+        bFormatted = "00" + String(b.numeroTimbre);
+        break;
+      case 3:
+        bFormatted = "0" + String(b.numeroTimbre);
+      default:
+        break;
+    }
+
+    aFormatted = a.tasType + aFormatted;
+    bFormatted = b.tasType + bFormatted;
     if (a.optionalInfos) {
       aFormatted += a.optionalInfos;
     }
     if (b.optionalInfos) {
       bFormatted += b.optionalInfos;
     }
-    console.log(aFormatted, bFormatted);
     return aFormatted > bFormatted ? 1 : -1;
   }
+
+
   sortByNumDesc(a, b) {
-    let aFormatted = String(a.tasType + a.numeroTimbre);
-    let bFormatted = String(b.tasType + b.numeroTimbre);
+    let aFormatted;
+    let bFormatted;
+
+    switch (String(a.numeroTimbre).length) {
+      case 2:
+        aFormatted = "00" + String(a.numeroTimbre);
+        break;
+      case 3:
+        aFormatted = "0" + String(a.numeroTimbre);
+      default:
+        break;
+    }
+
+    switch (String(b.numeroTimbre).length) {
+      case 2:
+        bFormatted = "00" + String(b.numeroTimbre);
+        break;
+      case 3:
+        bFormatted = "0" + String(b.numeroTimbre);
+      default:
+        break;
+    }
+
+    aFormatted = a.tasType + aFormatted;
+    bFormatted = b.tasType + bFormatted;
     if (a.optionalInfos) {
       aFormatted += a.optionalInfos;
     }
     if (b.optionalInfos) {
       bFormatted += b.optionalInfos;
     }
-    console.log(aFormatted, bFormatted);
     return aFormatted > bFormatted ? -1 : 1;
   }
   sortByPriceAsc(a, b) {
