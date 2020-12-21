@@ -91,7 +91,7 @@ export class AdminGestionTimbresComponent implements OnInit {
         this.timbreService.addTimbre(this.timbreForm.value).subscribe(data => {
           this.toastService.showSuccess(`Timbre n°${this.timbreForm.value.numero} créé`);
           this.setupForm();
-          this.getAllTimbres();
+          // this.getAllTimbres();
         });
       }
 
