@@ -188,7 +188,7 @@ export class TimbreListComponent implements OnInit {
           this.timbreList = data as Timbre[];
           this.adjustQtyWithBasket();
           this.filteredTimbreList = this.timbreList;
-          this.timbreList.sort(this.timbreService.sortByNumAsc);
+          this.filteredTimbreList.sort(this.timbreService.sortByNumAsc);
           if (this.timbreList && this.timbreList != null && this.timbreList.length === 0) {
             this.error = 'Aucun timbre n\'existe entre ' + start + ' et ' + end;
           }
