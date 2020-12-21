@@ -1,7 +1,7 @@
 <!-- FILTERS -->
 <div class="filters d-flex align-items-center justify-content-around">
     <div>
-        <label for="filtreInput">TRIER PAR: </label>
+        <label style="margin-right:0.65em;" for="filtreInput">TRIER PAR </label>
         <select id="filtreInput" class="custom-select input-sm" [(ngModel)]="sortFilter">
       <option value="NumAsc">NUMÉRO CROISSANT</option>
       <option value="NumDesc">NUMÉRO DÉCROISSANT</option>
@@ -15,7 +15,7 @@
         <label class="custom-control-label" for="dispoSwitch">DISPONIBLE SEULEMENT</label>
     </div>
     <div>
-        <label for="etatFiltre"> AFFICHAGE: </label>
+        <label for="etatFiltre" style="margin-right:0.65em;"> AFFICHAGE </label>
         <div id="etatFiltre" class="btn-group btn-group-sm" role="group" aria-label="Basic example">
             <button id="btnGroup1" [ngClass]="{'btnActive': etatFilter === 'all'}" (click)="etatFilter='all'" type="button" class="btn btn-secondary">TOUS</button>
             <button id="btnGroup2" [ngClass]="{'btnActive': etatFilter === 'alt'}" (click)="etatFilter='alt'" type="button" class="btn btn-secondary">CHARNIÈRES</button>
