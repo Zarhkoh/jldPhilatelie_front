@@ -54,7 +54,6 @@ export class TimbreService {
 
   addTimbre(newTimbre) {
     if (newTimbre.optionalInfos) {
-      newTimbre.optionalInfos = newTimbre.optionalInfos.toUpperCase();
     }
     const params = {
       newTimbre
@@ -64,7 +63,6 @@ export class TimbreService {
 
   updateTimbre(newTimbre) {
     if (newTimbre.optionalInfos) {
-      newTimbre.optionalInfos = newTimbre.optionalInfos.toUpperCase();
     }
     const params = {
       newTimbre
