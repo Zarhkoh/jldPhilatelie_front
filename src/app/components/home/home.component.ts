@@ -33,9 +33,6 @@ export class HomeComponent implements OnInit {
   
   getLivraisons(){
     try {
-      
-    } catch (error) {
-      this.logger.error(error,"home.component");
       this.livraisonService.getAllLivraisons().subscribe(data => {
         this.livraisons = data;
         this.livraisons.forEach(livraison => {
@@ -45,6 +42,8 @@ export class HomeComponent implements OnInit {
           }
               });
       })
+    } catch (error) {
+      this.logger.error(error, "home.component");
     }
 
   }
