@@ -44,7 +44,12 @@
 }
 
 .basket-list {
-    max-height: 85vh;
+    max-height: 84vh;
+    overflow-y: auto;
+}
+
+.basket-footer {
+    max-height: 16vh;
 }
 
 #cancelEmptyBtn {
