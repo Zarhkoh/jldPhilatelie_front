@@ -51,7 +51,6 @@ export class AdminLivraisonsComponent implements OnInit {
   updateLivraison(livraison) {
     try {
       this.livraisonService.updateLivraison(livraison).subscribe(data => {
-        livraison.dateEditionLivraison = new Date();
         this.livraisons.splice(this.livraisons.indexOf(this.livraisons.find(x => x.livraisonId == this.livraisonForEdition.livraisonId)), 1, this.livraisonForEdition);
         this.idLivraisonEdition = 0;
         this.toastService.showSuccess(livraison.nomLivraison + ' mis à jour.');
