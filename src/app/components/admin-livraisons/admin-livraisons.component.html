@@ -40,7 +40,8 @@
                 <!-- Date édition livraison -->
                 <td class="px-0">
                     <div class="d-flex justify-content-center">
-                        <p>{{livraison.dateEditionLivraison | date:'dd/MM/yyyy HH:mm'}}</p>
+                        <input type="date" class="form-control table-input" [(ngModel)]="livraisonForEdition.dateEditionLivraison" *ngIf="idLivraisonEdition === livraison.livraisonId" />
+                        <p *ngIf="idLivraisonEdition !== livraison.livraisonId">{{livraison.dateEditionLivraison | date:'dd/MM/yyyy'}}</p>
                     </div>
                 </td>
                 <!-- BOUTON EDITION -->
