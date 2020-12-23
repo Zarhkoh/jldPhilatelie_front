@@ -71,7 +71,7 @@
             <div id="livraison" class="d-flex justify-content-between">
                 <span class="align-self-center">Livraison <span style="color:red">*</span></span>
                 <div style="width:14.4em">
-                    <p-radioButton *ngFor="let option of livraisons" name="livraisons" value="{{option.prix}}" label="{{option.label}}" [(ngModel)]="livraison"></p-radioButton>
+                    <p-radioButton *ngFor="let option of livraisons" name="livraisons" value="{{option.prixLivraison}}" label="{{option.nomLivraison+' - '+option.prixLivraison+'€'}}" [(ngModel)]="livraison"></p-radioButton>
                 </div>
             </div>
             <!-- INPUT EMAIL -->
