@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Timbre } from 'src/app/models/timbre';
 import { BasketService } from 'src/app/services/basket.service';
+import { LivraisonService } from 'src/app/services/livraison.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { LogService } from 'src/app/services/log.service';
 
@@ -20,17 +21,15 @@ export class DevisConfirmationComponent implements OnInit {
   message = '';
   totalArticles = 0;
   addMessage: boolean = false;
-  livraisons = [{prix: 1.90, label: 'Envoi Simple' },
-  { prix: 2.39, label: 'Lettre Suivie' },
-  { prix: 5.50, label: 'Envoi Recommandé' }];
+  livraisons = [];
   livraison: number;
-  constructor(private basketService: BasketService, private loadingService: LoadingService, private router: Router, private logger:LogService) { }
+  constructor(private basketService: BasketService, private loadingService: LoadingService, private livraisonService: LivraisonService, private router: Router, private logger: LogService) { }
 
   ngOnInit(): void {
     this.getBasketList();
     this.totalArticlesCalcul();
+    this.getLivraisons();
     this.basketService.displayBasket = false;
-    this.livraison = 1.90;
   }
 
   getBasketList() {
@@ -39,6 +38,18 @@ export class DevisConfirmationComponent implements OnInit {
     } catch (error) {
       this.logger.error(error,"devis-confirmation.component");
     }
+  }
+
+  getLivraisons() {
+    try {
+      this.livraisonService.getAllLivraisons().subscribe(data => {
+        this.livraisons = data as [];
+        this.livraison = this.livraisons[0].prixLivraison;
+      })
+    } catch (error) {
+      this.logger.error(error, "home.component");
+    }
+
   }
 
   totalArticlesCalcul() {
