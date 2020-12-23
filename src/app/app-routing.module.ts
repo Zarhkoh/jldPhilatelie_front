@@ -16,6 +16,8 @@ const routes: Routes = [
   { path: 'adminpanel', canActivate: [AuthGuard], component: AdminPanelComponent },
   { path: 'commande', component: DevisConfirmationComponent },
   { path: 'merci', component: MerciComponent },
+  { path: '%23', redirectTo: '', pathMatch: 'full' },
+  { path: '#', redirectTo: '', pathMatch: 'full' },
   { path: '**', component: FourOFourComponent }
 ];
 @NgModule({
