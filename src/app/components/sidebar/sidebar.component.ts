@@ -9,19 +9,19 @@ import { UserInformationsService } from 'src/app/services/user-informations.serv
 })
 export class SidebarComponent implements OnInit {
   limits = [
-    { "start": 100, "end": 1000 },
-    { "start": 1001, "end": 1200 },
-    { "start": 1201, "end": 1400 },
-    { "start": 1401, "end": 1600 },
-    { "start": 1601, "end": 1800 },
-    { "start": 1801, "end": 2000 },
-    { "start": 2001, "end": 2200 },
-    { "start": 2201, "end": 2400 },
-    { "start": 2401, "end": 2600 },
-    { "start": 2601, "end": 2800 },
-    { "start": 2801, "end": 3000 },
-    { "start": 3001, "end": 3200 },
-    { "start": 3201, "end": 4000 }
+    { "start": 100, "end": 999 },
+    { "start": 1000, "end": 1199 },
+    { "start": 1200, "end": 1399 },
+    { "start": 1400, "end": 1599 },
+    { "start": 1600, "end": 1799 },
+    { "start": 1800, "end": 1999 },
+    { "start": 2000, "end": 2199 },
+    { "start": 2200, "end": 2399 },
+    { "start": 2400, "end": 2599 },
+    { "start": 2600, "end": 2799 },
+    { "start": 2800, "end": 2999 },
+    { "start": 3000, "end": 3199 },
+    { "start": 3200, "end": 4000 }
   ];
   totalVisits;
 
