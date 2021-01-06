@@ -127,15 +127,19 @@ export class AdminGestionTimbresComponent implements OnInit {
   changeTimbreQte(timbre, operation) {
     if (operation === 'plus') {
       timbre.quantiteTimbre += 1;
+      this.timbreService.incrementTimbreQuantity(timbre.timbreId, 1).subscribe(data => {
+      });
     } else if (operation === 'minus') {
+      this.timbreService.decrementTimbreQuantity(timbre.timbreId, 1).subscribe(data => {
+      });
       timbre.quantiteTimbre -= 1;
     }
-    this.updateTimbre(timbre);
   }
 
   updateTimbre(timbre) {
     try {
       this.timbreService.updateTimbre(timbre).subscribe(data => {
+        console.log(data);
         this.timbreList.splice(this.timbreList.indexOf(this.timbreList.find(x => x.timbreId == this.timbreForEdition.timbreId)), 1, this.timbreForEdition);
         this.editableTimbreId = 0;
         this.toastService.showSuccess('Timbre n°' + timbre.numeroTimbre + ' mis à jour.');
