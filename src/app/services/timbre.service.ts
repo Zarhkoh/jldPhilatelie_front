@@ -96,6 +96,7 @@ export class TimbreService {
       case 3:
         aFormatted = "0" + String(a.numeroTimbre);
       default:
+        aFormatted = String(a.numeroTimbre);
         break;
     }
 
@@ -106,11 +107,13 @@ export class TimbreService {
       case 3:
         bFormatted = "0" + String(b.numeroTimbre);
       default:
+        bFormatted = String(b.numeroTimbre);
         break;
     }
 
     aFormatted = a.tasType + aFormatted;
     bFormatted = b.tasType + bFormatted;
+
     if (a.optionalInfos) {
       aFormatted += a.optionalInfos;
     }
@@ -132,6 +135,7 @@ export class TimbreService {
       case 3:
         aFormatted = "0" + String(a.numeroTimbre);
       default:
+        aFormatted = String(a.numeroTimbre);
         break;
     }
 
@@ -142,9 +146,9 @@ export class TimbreService {
       case 3:
         bFormatted = "0" + String(b.numeroTimbre);
       default:
+        bFormatted = String(b.numeroTimbre);
         break;
     }
-
     aFormatted = a.tasType + aFormatted;
     bFormatted = b.tasType + bFormatted;
     if (a.optionalInfos) {
