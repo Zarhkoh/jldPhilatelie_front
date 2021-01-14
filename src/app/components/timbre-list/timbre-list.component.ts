@@ -142,20 +142,6 @@ export class TimbreListComponent implements OnInit {
         break;
       }
     }
-    // Application des filtres selon état
-    switch (this.etatFilter) {
-      case 'alt': {
-        this.filteredTimbreList = this.timbreList.filter(timbre => timbre.etatTimbre === 'occas');
-        break;
-      }
-      case 'sg': {
-        this.filteredTimbreList = this.timbreList.filter(timbre => timbre.etatTimbre === 'sg');
-        break;
-      }
-      default: {
-        break;
-      }
-    }
     // Application du filtre de quantité
     if (this.dispoFilter) {
       this.filteredTimbreList = this.filteredTimbreList.filter(timbre => timbre.quantiteTimbre > 0);
