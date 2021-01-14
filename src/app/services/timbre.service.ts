@@ -37,10 +37,11 @@ export class TimbreService {
     return this.http.get(this.url + "/deleteTimbreById", { params });
   }
 
-  getTimbresByRange(debut, fin) {
+  getTimbresByRange(debut, fin, etat) {
     const params = {
       start: debut,
-      end: fin
+      end: fin,
+      condition: etat
     };
     return this.http.get(this.url + "/timbresByRange", { params });
   }
