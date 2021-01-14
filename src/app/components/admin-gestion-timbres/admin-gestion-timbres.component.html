@@ -76,7 +76,7 @@
 
     <!-- TABLE TIMBRES -->
     <div class="table table-striped">
-        <p-table #tt [value]="timbreList" *ngIf="timbreList.length>0">
+        <p-table [paginator]="true" [rows]="50" #tt [value]="timbreList" *ngIf="timbreList.length>0" [loading]="loading">
             <ng-template pTemplate="caption">
                 <div class="d-flex justify-content-between">
                     <p class="mb-0">LISTE DES TIMBRES</p>
