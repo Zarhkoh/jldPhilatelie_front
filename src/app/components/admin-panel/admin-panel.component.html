@@ -16,9 +16,13 @@
         <app-admin-gestion-news></app-admin-gestion-news>
     </p-tabPanel>
     <p-tabPanel header="Livraisons">
-        <app-admin-livraisons></app-admin-livraisons>
+        <ng-template pTemplate="content">
+            <app-admin-livraisons></app-admin-livraisons>
+        </ng-template>
     </p-tabPanel>
     <p-tabPanel header="Timbres">
-        <app-admin-gestion-timbres></app-admin-gestion-timbres>
+        <ng-template pTemplate="content">
+            <app-admin-gestion-timbres></app-admin-gestion-timbres>
+        </ng-template>
     </p-tabPanel>
 </p-tabView>
