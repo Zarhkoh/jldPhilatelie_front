@@ -1,8 +1,14 @@
 #footerContent {
-  background-color: rgb(63, 63, 63);
+    background-color: rgb(63, 63, 63);
 }
+
 p,
 a {
-  color: white;
-  margin: 0;
+    color: white;
+    margin: 0;
+}
+
+#heart {
+    /* font-size: 1.1em; */
+    color: #c00000;
 }
