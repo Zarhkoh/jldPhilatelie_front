@@ -16,6 +16,10 @@ export class TimbreService {
     return this.http.get(this.url + '/timbres');
   }
 
+  getTimbresQty() {
+    return this.http.get(this.url + '/timbresQty');
+  }
+
   getTimbreByNumero(numeroTimbre) {
     const params = {
       numero_timbre: numeroTimbre
