@@ -15,11 +15,10 @@
         <label class="custom-control-label" for="dispoSwitch">DISPONIBLE SEULEMENT</label>
     </div>
     <div>
-        <label for="etatFiltre" style="margin-right:0.65em;"> AFFICHAGE </label>
+        <label for="etatFiltre" style="margin-right:0.65em;"> SÉLECTION </label>
         <div id="etatFiltre" class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-            <button id="btnGroup1" [ngClass]="{'btnActive': etatFilter === 'all'}" (click)="etatFilter='all'" type="button" class="btn btn-secondary">TOUS</button>
-            <button id="btnGroup2" [ngClass]="{'btnActive': etatFilter === 'alt'}" (click)="etatFilter='alt'" type="button" class="btn btn-secondary">CHARNIÈRES</button>
-            <button id="btnGroup3" [ngClass]="{'btnActive': etatFilter === 'sg'}" (click)="etatFilter='sg'" type="button" class="btn btn-secondary">SANS GOMME</button>
+            <button id="btnGroup1" [disabled]="timbreEtat==='neuf'" [ngClass]="{'btnActive': timbreEtat === 'neuf'}" (click)="getNeufs()" type="button" class="btn btn-secondary">NEUFS</button>
+            <button id="btnGroup2" [disabled]="timbreEtat==='obl'" [ngClass]="{'btnActive': timbreEtat === 'obl'}" (click)="getObliteres()" type="button" class="btn btn-secondary">OBLITÉRÉS</button>
         </div>
     </div>
 </div>
@@ -39,6 +38,7 @@
         <div [ngClass]="{'low-opacity': timbre.quantiteTimbre <=0}" class="p-2 timbreCard d-flex flex-column justify-content-between" *ngFor="let timbre of filteredList">
             <div class="d-flex justify-content-center">
                 <p class="mb-0 font-weight-bold" *ngIf="timbre.catTimbre=='tas'">{{timbre.tasType}}</p>
+                <p class="mb-0 font-weight-bold" *ngIf="timbre.catTimbre=='classic' && timbre.tasType=='Paire'">P</p>
                 <p *ngIf="timbre.numeroTimbre !== 0" class="text-center mb-0 font-weight-bold">{{timbre.numeroTimbre}}</p>
                 <p class="mb-0 font-weight-bold" *ngIf="timbre.optionalInfos">{{timbre.optionalInfos}}</p>
                 <p class="mb-0" *ngIf="timbre.etatTimbre=='occas'">*</p>
