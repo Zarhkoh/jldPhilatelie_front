@@ -86,19 +86,6 @@ export class TimbreListComponent implements OnInit {
     }
   }
 
-  getAllTimbres(): void {
-    this.loading = true;
-    try {
-      this.timbreService.getAllTimbres().subscribe(data => {
-        this.timbreList = data as Timbre[];
-        this.loading = false;
-      });
-    } catch (error) {
-      this.logger.error(error,"timbre-list.component");
-    }
-
-  }
-
   getTimbreByNumber(num: any): void {
     if (Number(num) && num % 1 === 0 && num > 0) {
       this.loading = true;
