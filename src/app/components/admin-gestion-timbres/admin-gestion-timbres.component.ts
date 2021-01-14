@@ -46,6 +46,7 @@ export class AdminGestionTimbresComponent implements OnInit {
       prix: [],
       image: [],
       quantite: [],
+      isPaire: false,
       categorie: [],
       etat: ['neuf'],
       anneeCoinDate: [],
@@ -88,6 +89,9 @@ export class AdminGestionTimbresComponent implements OnInit {
       else {
         this.responseImageUploadUrl = await this.uploadImg();
         this.timbreForm.patchValue({ image: this.responseImageUploadUrl.secure_url });
+        if (this.timbreForm.value.categorie == 'classic' && this.timbreForm.value.isPaire == true) {
+          this.timbreForm.patchValue({ tasType: "Paire" });
+        }
         this.timbreService.addTimbre(this.timbreForm.value).subscribe(data => {
           this.toastService.showSuccess(`Timbre n°${this.timbreForm.value.numero} créé`);
           this.setupForm();
