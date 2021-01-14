@@ -19,6 +19,7 @@ export class TimbreListComponent implements OnInit {
   basketList = [];
   timbreStart;
   timbreEnd;
+  timbreEtat;
   timbreSearch;
   timbreCat;
   error;
@@ -51,6 +52,7 @@ export class TimbreListComponent implements OnInit {
       this.timbreEnd = params.end;
       this.timbreSearch = params.search;
       this.timbreCat = params.category;
+      this.timbreEtat = "neuf";
       if (this.timbreSearch) {
         this.getTimbreByNumber(this.timbreSearch);
       } else if (this.timbreStart && this.timbreEnd) {
@@ -179,12 +181,22 @@ export class TimbreListComponent implements OnInit {
 
     }
   }
+  
+  getNeufs() {
+    this.timbreEtat = "neuf";
+    this.getTimbreRange(this.timbreStart, this.timbreEnd);
+  }
+
+  getObliteres() {
+    this.timbreEtat = "obl";
+    this.getTimbreRange(this.timbreStart, this.timbreEnd);
+  }
 
   getTimbreRange(start, end): void {
     this.loading = true;
     if ((Number(start) && Number(end)) && (start > 0 && end > 0) && (start % 1 === 0 && end % 1 === 0)) {
       try {
-        this.timbreService.getTimbresByRange(start, end).subscribe(data => {
+        this.timbreService.getTimbresByRange(start, end, this.timbreEtat).subscribe(data => {
           this.timbreList = data as Timbre[];
           this.adjustQtyWithBasket();
           this.filteredTimbreList = this.timbreList;
