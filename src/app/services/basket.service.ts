@@ -29,11 +29,13 @@ export class BasketService {
         timbreId: timbre.timbreId,
         catTimbre: timbre.catTimbre,
         numeroTimbre: timbre.numeroTimbre,
+        anneeCoinDate: timbre.anneeCoinDate,
         optionalInfos: timbre.optionalInfos,
         etatTimbre: timbre.etatTimbre,
         prixTimbre: timbre.prixTimbre,
         imageTimbreUrl: timbre.imageTimbreUrl,
         quantite: 1,
+        tasType: timbre.tasType,
         maxQuantite: timbre.quantiteTimbre
       };
       foundMatchInBasket = this.timbreList.find(t => t.catTimbre + t.numeroTimbre + t.optionalInfos + t.etatTimbre == savedTimbre.catTimbre + savedTimbre.numeroTimbre + savedTimbre.optionalInfos + savedTimbre.etatTimbre);
