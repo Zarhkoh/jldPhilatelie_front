@@ -50,9 +50,10 @@ export class TimbreService {
     return this.http.get(this.url + "/timbresByRange", { params });
   }
 
-  getTimbresByCat(timbreCat) {
+  getTimbresByCat(timbreCat, timbreEtat) {
     const params = {
       categorie: timbreCat,
+      condition: timbreEtat
     };
     return this.http.get(this.url + "/timbresByCat", { params });
   }
