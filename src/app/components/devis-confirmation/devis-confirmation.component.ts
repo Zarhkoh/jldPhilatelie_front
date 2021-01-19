@@ -5,6 +5,8 @@ import { BasketService } from 'src/app/services/basket.service';
 import { LivraisonService } from 'src/app/services/livraison.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { LogService } from 'src/app/services/log.service';
+import { DomSanitizer } from "@angular/platform-browser"
+import { SecurityContext } from "@angular/core";
 
 @Component({
   selector: 'app-devis-confirmation',
@@ -23,7 +25,7 @@ export class DevisConfirmationComponent implements OnInit {
   addMessage: boolean = false;
   livraisons = [];
   livraison: number;
-  constructor(private basketService: BasketService, private loadingService: LoadingService, private livraisonService: LivraisonService, private router: Router, private logger: LogService) { }
+  constructor(private sanitizer: DomSanitizer, private basketService: BasketService, private loadingService: LoadingService, private livraisonService: LivraisonService, private router: Router, private logger: LogService) { }
 
   ngOnInit(): void {
     this.getBasketList();
@@ -111,7 +113,8 @@ export class DevisConfirmationComponent implements OnInit {
         return alert('merci de rentrer une adresse mail valide. (ex: martin@gmail.com');
       }
       this.loadingService.isLoading = true;
-      const envoi = this.livraisons[this.livraisons.findIndex(l => l.prix == this.livraison)];
+      const envoi = this.livraisons[this.livraisons.findIndex(l => l.prixLivraison == this.livraison)];
+      this.message = this.sanitizer.sanitize(SecurityContext.HTML, this.message);
       this.basketService.sendBasketToDevis(this.email, this.message, envoi).subscribe(data => { this.basketService.emptyBasket(); this.router.navigate(['/merci']) }, error => console.log(error));
     } catch (error) {
       this.logger.error(error,"devis-confirmation.component");
