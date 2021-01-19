@@ -7,16 +7,24 @@
                 <!-- CATEGORIE DU TIMBRE -->
                 <div class="btn-group col-12" role="group" aria-label="Basic example">
                     <button type="button" (click)="timbreForm.controls['categorie'].setValue('classic')" [ngClass]="{'active': timbreForm.value.categorie == 'classic'}" class="btn btn-secondary">Classique</button>
+                    <button type="button" (click)="timbreForm.controls['categorie'].setValue('bloc')" [ngClass]="{'active': timbreForm.value.categorie == 'bloc'}" class="btn btn-secondary">Bloc/Bande/Carnet</button>
                     <button type="button" (click)="timbreForm.controls['categorie'].setValue('tas')" [ngClass]="{'active': timbreForm.value.categorie == 'tas'}" class="btn btn-secondary">Taxe Av Serv</button>
                     <button type="button" (click)="timbreForm.controls['categorie'].setValue('cd')" [ngClass]="{'active': timbreForm.value.categorie == 'cd'}" class="btn btn-secondary">Coin
               Daté</button>
                 </div>
 
-                <div *ngIf="timbreForm.value.categorie =='tas'" class="btn-group btn-group-sm col-6 mt-1 mx-auto" role="group" aria-label="Basic example">
+                <div *ngIf="timbreForm.value.categorie =='tas'" class="btn-group btn-group-sm col-6 mt-1 mx-auto" role="group" aria-label="Type TAS">
                     <button type="button" (click)="timbreForm.controls['tasType'].setValue('PA')" [ngClass]="{'active': timbreForm.value.tasType == 'PA'}" value="PA" class="btn btn-secondary">PA</button>
                     <button type="button" (click)="timbreForm.controls['tasType'].setValue('Serv')" [ngClass]="{'active': timbreForm.value.tasType == 'Serv'}" value="Serv" class="btn btn-secondary">Serv</button>
                     <button type="button" (click)="timbreForm.controls['tasType'].setValue('Taxe')" [ngClass]="{'active': timbreForm.value.tasType == 'Taxe'}" value="PA" class="btn btn-secondary">Taxe</button>
                     <button type="button" (click)="timbreForm.controls['tasType'].setValue('PR')" [ngClass]="{'active': timbreForm.value.tasType == 'PR'}" value="PR" class="btn btn-secondary">PR</button>
+                </div>
+
+                <div *ngIf="timbreForm.value.categorie =='bloc'" class="btn-group btn-group-sm col-6 mt-1 mx-auto" role="group" aria-label="Type Bloc">
+                    <button type="button" (click)="timbreForm.controls['tasType'].setValue('F')" [ngClass]="{'active': timbreForm.value.tasType == 'F'}" value="Feuillet" class="btn btn-secondary">Feuillet</button>
+                    <button type="button" (click)="timbreForm.controls['tasType'].setValue('B')" [ngClass]="{'active': timbreForm.value.tasType == 'B'}" value="Bloc" class="btn btn-secondary">Bloc</button>
+                    <button type="button" (click)="timbreForm.controls['tasType'].setValue('BC')" [ngClass]="{'active': timbreForm.value.tasType == 'BC'}" value="Bande Carnet" class="btn btn-secondary">Bande Carnet</button>
+                    <button type="button" (click)="timbreForm.controls['tasType'].setValue('CR')" [ngClass]="{'active': timbreForm.value.tasType == 'CR'}" value="Carnet Croix Rouge" class="btn btn-secondary">Carnet Croix Rouge</button>
                 </div>
 
                 <div class="form-content row mx-auto col-12 p-0 my-2 justify-content-md-center" *ngIf="timbreForm.value.categorie">
@@ -39,7 +47,7 @@
                         <input id="anneeCoinDateInput" type="number" min="0" max="2999" placeholder="Année coin daté" aria-label="Année coin daté" class="form-control" formControlName="anneeCoinDate">
                     </div>
                     <!-- INFOS SUPP -->
-                    <div *ngIf="timbreForm.value.categorie == 'classic' || timbreForm.value.categorie == 'tas'" class="col-4">
+                    <div *ngIf="timbreForm.value.categorie == 'classic' || timbreForm.value.categorie == 'tas' || timbreForm.value.categorie == 'bloc'" class="col-4">
                         <input id="optionalInfosInput" type="text" placeholder="Infos supp. (a,b..)" aria-label="infos supp." class="form-control" formControlName="optionalInfos">
                     </div>
                     <!-- PAIRE ? -->
@@ -147,6 +155,7 @@
                     <td>
                         <div class="d-flex justify-content-center" *ngIf="editableTimbreId !== timbre.timbreId">
                             <p class="mb-0" *ngIf="timbre.catTimbre=='tas'">{{timbre.tasType}}</p>
+                            <p class="mb-0" *ngIf="timbre.catTimbre=='bloc'">{{timbre.tasType}}</p>
                             <p class=" mb-0 font-weight-bold">
                                 {{timbre.numeroTimbre}}</p>
                             <p class=" mb-0 font-weight-bold">{{timbre.optionalInfos}}</p>
@@ -193,6 +202,8 @@
                             <p class="mb-0" *ngIf="timbre.etatTimbre=='neuf'">Neuf</p>
                             <p class="mb-0" *ngIf="timbre.etatTimbre=='occas'">Charnière</p>
                             <p class="mb-0" *ngIf="timbre.etatTimbre=='sg'">Sans Gomme</p>
+                            <p class="mb-0" *ngIf="timbre.etatTimbre=='obl'">Oblitéré</p>
+
                         </div>
 
                         <div *ngIf="editableTimbreId === timbre.timbreId">

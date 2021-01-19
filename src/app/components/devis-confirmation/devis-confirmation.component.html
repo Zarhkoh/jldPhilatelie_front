@@ -26,14 +26,14 @@
                         </td>
                         <!--  NUMERO -->
                         <td>
-                            <div class="d-flex justify-content-center">
+                            <div class="d-flex justify-content-center" [ngClass]="{'underline': timbre.etatTimbre=='obl'}">
                                 <p class="mb-0 font-weight-bold" *ngIf="timbre.catTimbre=='tas'">{{timbre.tasType}}</p>
-                                <p *ngIf="timbre.numeroTimbre !== 0" class="text-center mb-0 font-weight-bold">N°{{timbre.numeroTimbre}}
+                                <p *ngIf="timbre.numeroTimbre !== 0" class="text-center mb-0 font-weight-bold">{{timbre.numeroTimbre}}
                                 </p>
                                 <p class="mb-0" *ngIf="timbre.etatTimbre=='occas'">*</p>
                                 <p class="mb-0" *ngIf="timbre.etatTimbre=='sg'">SG</p>
                                 <p class="mb-0" *ngIf="timbre.catTimbre=='cd'">({{timbre.anneeCoinDate}})</p>
-                                <p class="mb-0" *ngIf="timbre.catTimbre == 'obl' || timbre.catTimbre == 'spe'">{{timbre.optionalInfos}}
+                                <p class="mb-0">{{timbre.optionalInfos}}
                                 </p>
                             </div>
                         </td>

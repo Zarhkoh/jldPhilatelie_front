@@ -90,7 +90,7 @@ export class AdminGestionTimbresComponent implements OnInit {
         this.responseImageUploadUrl = await this.uploadImg();
         this.timbreForm.patchValue({ image: this.responseImageUploadUrl.secure_url });
         if (this.timbreForm.value.categorie == 'classic' && this.timbreForm.value.isPaire == true) {
-          this.timbreForm.patchValue({ tasType: "Paire" });
+          this.timbreForm.patchValue({ tasType: "P" });
         }
         this.timbreService.addTimbre(this.timbreForm.value).subscribe(data => {
           this.toastService.showSuccess(`Timbre n°${this.timbreForm.value.numero} créé`);

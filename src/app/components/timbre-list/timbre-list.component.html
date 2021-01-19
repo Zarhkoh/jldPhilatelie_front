@@ -36,8 +36,9 @@
 <div *ngIf="!loading && timbreList && timbreList.length > 0" class="grille">
     <div *ngIf="filteredList.length > 0" class="liste d-flex flex-wrap">
         <div [ngClass]="{'low-opacity': timbre.quantiteTimbre <=0}" class="p-2 timbreCard d-flex flex-column justify-content-between" *ngFor="let timbre of filteredList">
-            <div class="d-flex justify-content-center">
+            <div [ngClass]="{'underline': timbre.etatTimbre=='obl'}" class="d-flex justify-content-center">
                 <p class="mb-0 font-weight-bold" *ngIf="timbre.catTimbre=='tas'">{{timbre.tasType}}</p>
+                <p class="mb-0 font-weight-bold" *ngIf="timbre.catTimbre=='bloc'">{{timbre.tasType}}</p>
                 <p class="mb-0 font-weight-bold" *ngIf="timbre.catTimbre=='classic' && timbre.tasType=='Paire'">P</p>
                 <p *ngIf="timbre.numeroTimbre !== 0" class="text-center mb-0 font-weight-bold">{{timbre.numeroTimbre}}</p>
                 <p class="mb-0 font-weight-bold" *ngIf="timbre.optionalInfos">{{timbre.optionalInfos}}</p>
@@ -63,8 +64,8 @@
 </div>
 
 <p-dialog [dismissableMask]="true" [modal]="true" header="Timbre N°{{this.selectedTimbreNumber}}" [(visible)]="display">
-    <div class="d-flex justify-content-center">
-        <img class="focusedStampImg" src="{{selectedTimbre.imageTimbreUrl}}">
+    <div class="d-flex flex-column justify-content-around">
+        <img class="focusedStampImg align-self-center" src="{{selectedTimbre.imageTimbreUrl}}">
     </div>
 
     <div class="d-flex justify-content-center">

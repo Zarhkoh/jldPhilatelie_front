@@ -139,6 +139,10 @@ button:focus {
     border-radius: 3px;
 }
 
+.underline p {
+    text-decoration: underline;
+}
+
 #closeBasketListModal {
     border: none;
     color: white;

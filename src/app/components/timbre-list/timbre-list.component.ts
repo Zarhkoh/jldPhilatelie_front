@@ -139,7 +139,7 @@ export class TimbreListComponent implements OnInit {
   getTimbreCat(cat): void {
     try {
       this.loading = true;
-      this.timbreService.getTimbresByCat(cat).subscribe(data => {
+      this.timbreService.getTimbresByCat(cat, this.timbreEtat).subscribe(data => {
         this.timbreList = data as Timbre[];
         this.adjustQtyWithBasket();
         if (this.timbreList && this.timbreList != null && this.timbreList.length === 0) {
@@ -157,12 +157,20 @@ export class TimbreListComponent implements OnInit {
   
   getNeufs() {
     this.timbreEtat = "neuf";
-    this.getTimbreRange(this.timbreStart, this.timbreEnd);
+    if (this.timbreStart == undefined) {
+      this.getTimbreCat(this.timbreCat);
+    } else {
+      this.getTimbreRange(this.timbreStart, this.timbreEnd);
+    }
   }
 
   getObliteres() {
     this.timbreEtat = "obl";
-    this.getTimbreRange(this.timbreStart, this.timbreEnd);
+    if (this.timbreStart == undefined) {
+      this.getTimbreCat(this.timbreCat);
+    } else {
+      this.getTimbreRange(this.timbreStart, this.timbreEnd);
+    }
   }
 
   getTimbreRange(start, end): void {
@@ -190,6 +198,7 @@ export class TimbreListComponent implements OnInit {
     this.basketConfirmation = false,
       this.display = true;
     this.selectedTimbre = timbre as Timbre;
+    console.log(this.selectedTimbre.etatTimbre);
     this.selectedTimbreNumber = '';
     if(timbre.tasType){
       this.selectedTimbreNumber+=timbre.tasType;
@@ -206,6 +215,9 @@ export class TimbreListComponent implements OnInit {
     }
     if(timbre.catTimbre=='cd'){
       this.selectedTimbreNumber+= "("+timbre.anneeCoinDate+')';
+    }
+    if (timbre.etatTimbre == 'obl') {
+      this.selectedTimbreNumber += " oblitéré"
     }
   }
 
